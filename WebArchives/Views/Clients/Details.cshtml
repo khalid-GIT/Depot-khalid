@@ -1,0 +1,106 @@
+﻿@model WebArchives.Models.Clients.VMListeClient
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Details Client</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Adresse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Adresse)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.telephone1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telephone1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DatedeCreation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DatedeCreation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idf)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idf)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cnss)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cnss)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gsm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gsm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Teleph)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Teleph)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

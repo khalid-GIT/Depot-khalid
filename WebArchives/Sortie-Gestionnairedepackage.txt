@@ -1,0 +1,56 @@
+﻿Tentative de collecte d'informations de dépendance pour plusieurs packages du projet 'DAL', ciblant '.NETFramework,Version=v4.5.2'
+Tentative de résolution de dépendances pour plusieurs packages.
+Actions en cours de résolution pour installer plusieurs packages
+Tentative de collecte d'informations de dépendance pour plusieurs packages du projet 'WebArchives', ciblant '.NETFramework,Version=v4.5.2'
+Tentative de résolution de dépendances pour plusieurs packages.
+Actions en cours de résolution pour installer plusieurs packages
+Package 'EntityFramework.fr 6.1.2' supprimé de 'packages.config'
+Désinstallation réussie de « EntityFramework.fr 6.1.2 » de DAL
+Package 'EntityFramework 6.1.2' supprimé de 'packages.config'
+Désinstallation réussie de « EntityFramework 6.1.2 » de DAL
+Le package 'EntityFramework.6.2.0' existe déjà dans le dossier 'D:\Projets web\ASPMvc\packages'
+Package 'EntityFramework.6.2.0' ajouté à 'packages.config'
+Exécution du fichier de script 'D:\Projets web\ASPMvc\packages\EntityFramework.6.2.0\tools\install.ps1'...
+& : Impossible de charger le fichier D:\Projets web\ASPMvc\packages\EntityFramework.6.2.0\tools\install.ps1, car 
+l’exécution de scripts est désactivée sur ce système. Pour plus d’informations, consultez about_Execution_Policies à 
+l’adresse https://go.microsoft.com/fwlink/?LinkID=135170.
+Au caractère Ligne:1 : 45
++ ... rgs+=$_}; & 'D:\Projets web\ASPMvc\packages\EntityFramework.6.2.0\too ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : Erreur de sécurité : (:) [], PSSecurityException
+    + FullyQualifiedErrorId : UnauthorizedAccess
+Installation réussie de « EntityFramework 6.2.0 » sur DAL
+Ajout du package 'EntityFramework.fr.6.2.0' au dossier 'D:\Projets web\ASPMvc\packages'
+Package 'EntityFramework.fr.6.2.0' ajouté au dossier 'D:\Projets web\ASPMvc\packages'
+Package 'EntityFramework.fr.6.2.0' ajouté à 'packages.config'
+Installation réussie de « EntityFramework.fr 6.2.0 » sur DAL
+Suppression du package 'EntityFramework.fr 6.1.2' du dossier 'D:\Projets web\ASPMvc\packages'
+Package 'EntityFramework.fr 6.1.2' supprimé du dossier 'D:\Projets web\ASPMvc\packages'
+Suppression du package 'EntityFramework 6.1.2' du dossier 'D:\Projets web\ASPMvc\packages'
+Package 'EntityFramework 6.1.2' supprimé du dossier 'D:\Projets web\ASPMvc\packages'
+Package 'EntityFramework.fr 6.1.3' supprimé de 'packages.config'
+Désinstallation réussie de « EntityFramework.fr 6.1.3 » de WebArchives
+Package 'EntityFramework 6.1.3' supprimé de 'packages.config'
+Désinstallation réussie de « EntityFramework 6.1.3 » de WebArchives
+Le package 'EntityFramework.6.2.0' existe déjà dans le dossier 'D:\Projets web\ASPMvc\packages'
+Package 'EntityFramework.6.2.0' ajouté à 'packages.config'
+Exécution du fichier de script 'D:\Projets web\ASPMvc\packages\EntityFramework.6.2.0\tools\install.ps1'...
+& : Impossible de charger le fichier D:\Projets web\ASPMvc\packages\EntityFramework.6.2.0\tools\install.ps1, car 
+l’exécution de scripts est désactivée sur ce système. Pour plus d’informations, consultez about_Execution_Policies à 
+l’adresse https://go.microsoft.com/fwlink/?LinkID=135170.
+Au caractère Ligne:1 : 45
++ ... rgs+=$_}; & 'D:\Projets web\ASPMvc\packages\EntityFramework.6.2.0\too ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : Erreur de sécurité : (:) [], PSSecurityException
+    + FullyQualifiedErrorId : UnauthorizedAccess
+Installation réussie de « EntityFramework 6.2.0 » sur WebArchives
+Le package 'EntityFramework.fr.6.2.0' existe déjà dans le dossier 'D:\Projets web\ASPMvc\packages'
+Package 'EntityFramework.fr.6.2.0' ajouté à 'packages.config'
+Installation réussie de « EntityFramework.fr 6.2.0 » sur WebArchives
+Suppression du package 'EntityFramework.fr 6.1.3' du dossier 'D:\Projets web\ASPMvc\packages'
+Package 'EntityFramework.fr 6.1.3' supprimé du dossier 'D:\Projets web\ASPMvc\packages'
+Suppression du package 'EntityFramework 6.1.3' du dossier 'D:\Projets web\ASPMvc\packages'
+L'accès au chemin d'accès 'D:\Projets web\ASPMvc\packages\EntityFramework.6.1.3\tools\EntityFramework.PowerShell.Utility.dll' est refusé.
+L'accès au chemin d'accès 'EntityFramework.PowerShell.Utility.dll' est refusé.
+Package 'EntityFramework 6.1.3' supprimé du dossier 'D:\Projets web\ASPMvc\packages'
+========== Fin ==========

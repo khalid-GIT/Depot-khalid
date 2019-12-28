@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <!--CSS-->
+    @Styles.Render("~/Content/bootstrap/css")
+    @Styles.Render("~/Content/metisMenu/css")
+    @Styles.Render("~/Content/timeline/css")
+    @Styles.Render("~/Content/startmin/css")
+    @Styles.Render("~/Content/morris/css")
+    @Styles.Render("~/Content/fontawesome/css")
+    <!--JS-->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/raphael/js")
+    @Scripts.Render("~/bundles/metisMenu/js")
+    @Scripts.Render("~/bundles/startmin/js")
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">@*<i class="fa fa-truck"></i>*@Gestion des risques</a>
+            </div>
+
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Top Navigation: Left Menu -->
+
+
+            <ul class="nav navbar-nav navbar-right navbar-top-links">
+                <li><a href="@Url.Action("Signout", "Home") "><i class="fa fa-sign-out fa-fw"></i> Deconnexion</a></li>
+            </ul>
+
+            <!-- Top Navigation: Right Menu -->
+            <ul class="nav navbar-right navbar-top-links">
+                @*<li class="dropdown navbar-inverse">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-bell fa-fw"></i> <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu dropdown-alerts">
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-comment fa-fw"></i> New Comment
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a class="text-center" href="#">
+                                    <strong>See All Alerts</strong>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>*@
+
+
+
+                @*<li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user fa-fw"></i> Compte <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li>
+                                <a href="#"><i class="fa fa-user fa-fw"></i>Profile Utilisateur</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-gear fa-fw"></i> Paramétres</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#"><i class="fa fa-sign-out fa-fw"></i> Se déconnecter</a>
+                            </li>
+                        </ul>
+                    </li>*@
+            </ul>
+
+            <!-- Sidebar -->
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Rechercher...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+
+
+
+
+                        <li>
+                            <a href="#"><i class="fa fas fa-database"></i> Gestion de base de données<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+
+
+                                <li class="navigation__active"><a href="@Url.Action("CreateEntite", "Risk") "> Décrire l'entité</a></li>
+                                <li><a href="@Url.Action("ListerSites", "Risk") "> Décrire les sites</a></li>
+                                <li><a href="@Url.Action("CreateNiveau", "Risk") "> Niveaux de responsabilité</a></li>
+                                @*<li><a href="@Url.Action("Area", "ChartTypes") "> Traiter les risques</a></li>*@
+
+
+
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fas fa-sitemap"></i> Description de l'organisation<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+
+
+                                <li class="navigation__active"><a href="@Url.Action("SaisirOrganigramme", "Risk") "> Saisir l'organigramme</a></li>
+                                <li><a href="@Url.Action("ListerActeurs", "Risk") "> Saisir les acteurs</a></li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fas fa-exclamation-circle"></i> Gestion des risques<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li class="navigation__active"><a href="@Url.Action("Cartographie", "Risk") "> Cartographie des processus</a></li>
+                                <li class="navigation__active"><a href="@Url.Action("ListerRisques", "Risk") "> Description des risques</a></li>
+                                @if (Helper.UserConnected().IdRole == 1)
+                                {
+                                    <li><a href="@Url.Action("CreateSession", "Risk") "> Créer une session d'évaluation</a></li>
+                                }
+                                <li><a href="@Url.Action("Historique", "Risk") "> Historique</a></li>
+                                @*<li><a href="@Url.Action("Historique", "Risk") "> Statistiques</a></li>*@
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fas fa-list"></i> Tableau indicatif des codes<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li class="navigation__active"><a href="@Url.Action("IndicatifCodesProcessus", "Risk") "> Tableau des processus</a></li>
+                                <li class="navigation__active"><a href="@Url.Action("IndicatifCodesSousProcessus", "Risk") "> Tableau des sous processus</a></li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+                        <li>
+                            <a href="#"><i class="fa fas fa-print"></i> Edition des états<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li class="navigation__active"><a href="@Url.Action("FicheSousProcessus", "Risk") "> Fiche Sous Processus</a></li>
+                                <li class="navigation__active"><a href="@Url.Action("FicheRisque", "Risk") "> Fiche Risque</a></li>
+                                <li class="navigation__active"><a href="@Url.Action("PlanActions", "Risk") "> Plan d'actions</a></li>
+                                <li class="navigation__active"><a href="@Url.Action("RisquesParProcessus", "Risk") "> Risques par processus</a></li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+                        <li>
+                            @*<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Edition des états<span class="fa arrow"></span></a>*@
+                            <ul class="nav nav-second-level">
+                                @*<li class="navigation__active"><a href="@Url.Action("Cartographie", "Risk") "> Fiche de risques</a></li>
+                <li class="navigation__active"><a href="@Url.Action("ListerRisques", "Risk") "> Fiche sous processus</a></li>
+                <li><a href="@Url.Action("Historique", "Risk") "> Liste des risques par processus</a></li>
+                <li><a href="@Url.Action("Historique", "Risk") "> Plan d'action</a></li>*@
+                                @*<li><a href="@Url.Action("Historique", "Risk") "> Statistiques</a></li>*@
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+</div>
+            </div>
+        </nav>
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+</body>
+</html>

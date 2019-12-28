@@ -1,0 +1,45 @@
+﻿Tentative de collecte d'informations de dépendance pour le package 'EntityFramework.6.1.2' du projet 'DAL', ciblant '.NETFramework,Version=v4.5.2'
+Tentative de résolution de dépendances pour le package 'EntityFramework.6.1.2' avec DependencyBehavior 'Lowest'
+Actions en cours de résolution pour installer le package 'EntityFramework.6.1.2'
+Actions résolues pour installer le package 'EntityFramework.6.1.2'
+Package 'EntityFramework.6.1.0' supprimé de 'packages.config'
+Désinstallation réussie de « EntityFramework.6.1.0 » de DAL
+Package 'EntityFramework.fr.6.1.0' supprimé de 'packages.config'
+Désinstallation réussie de « EntityFramework.fr.6.1.0 » de DAL
+  GET https://api.nuget.org/v3-flatcontainer/entityframework/6.1.2/entityframework.6.1.2.nupkg
+  OK https://api.nuget.org/v3-flatcontainer/entityframework/6.1.2/entityframework.6.1.2.nupkg 63ms
+Installation de EntityFramework 6.1.2.
+Ajout du package 'EntityFramework.6.1.2' au dossier 'D:\Projets web\ASPMvc\packages'
+Package 'EntityFramework.6.1.2' ajouté au dossier 'D:\Projets web\ASPMvc\packages'
+Package 'EntityFramework.6.1.2' ajouté à 'packages.config'
+Exécution du fichier de script 'D:\Projets web\ASPMvc\packages\EntityFramework.6.1.2\tools\init.ps1'...
+& : Impossible de charger le fichier D:\Projets web\ASPMvc\packages\EntityFramework.6.1.2\tools\init.ps1, car 
+l’exécution de scripts est désactivée sur ce système. Pour plus d’informations, consultez about_Execution_Policies à 
+l’adresse https://go.microsoft.com/fwlink/?LinkID=135170.
+Au caractère Ligne:1 : 45
++ ... rgs+=$_}; & 'D:\Projets web\ASPMvc\packages\EntityFramework.6.1.2\too ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : Erreur de sécurité : (:) [], PSSecurityException
+    + FullyQualifiedErrorId : UnauthorizedAccess
+Exécution du fichier de script 'D:\Projets web\ASPMvc\packages\EntityFramework.6.1.2\tools\install.ps1'...
+& : Impossible de charger le fichier D:\Projets web\ASPMvc\packages\EntityFramework.6.1.2\tools\install.ps1, car 
+l’exécution de scripts est désactivée sur ce système. Pour plus d’informations, consultez about_Execution_Policies à 
+l’adresse https://go.microsoft.com/fwlink/?LinkID=135170.
+Au caractère Ligne:1 : 45
++ ... rgs+=$_}; & 'D:\Projets web\ASPMvc\packages\EntityFramework.6.1.2\too ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : Erreur de sécurité : (:) [], PSSecurityException
+    + FullyQualifiedErrorId : UnauthorizedAccess
+Installation réussie de « EntityFramework 6.1.2 » sur DAL
+  GET https://api.nuget.org/v3-flatcontainer/entityframework.fr/6.1.2/entityframework.fr.6.1.2.nupkg
+  OK https://api.nuget.org/v3-flatcontainer/entityframework.fr/6.1.2/entityframework.fr.6.1.2.nupkg 54ms
+Installation de EntityFramework.fr 6.1.2.
+Ajout du package 'EntityFramework.fr.6.1.2' au dossier 'D:\Projets web\ASPMvc\packages'
+Package 'EntityFramework.fr.6.1.2' ajouté au dossier 'D:\Projets web\ASPMvc\packages'
+Package 'EntityFramework.fr.6.1.2' ajouté à 'packages.config'
+Installation réussie de « EntityFramework.fr 6.1.2 » sur DAL
+Suppression du package 'EntityFramework.6.1.0' du dossier 'D:\Projets web\ASPMvc\packages'
+Package 'EntityFramework.6.1.0' supprimé du dossier 'D:\Projets web\ASPMvc\packages'
+Suppression du package 'EntityFramework.fr.6.1.0' du dossier 'D:\Projets web\ASPMvc\packages'
+Package 'EntityFramework.fr.6.1.0' supprimé du dossier 'D:\Projets web\ASPMvc\packages'
+========== Fin ==========
