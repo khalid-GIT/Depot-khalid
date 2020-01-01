@@ -2,71 +2,38 @@
     alert("ddddd");
         //$('#idTableClients').DataTable().destroy();
     let table = $('#idTableClients').DataTable({
-        //"ajax": {
-        //    "url": "/Clients/Index",
-        //    "type": "Get",
-        //    "datatype": "json"
-        //},
+        
         "columns": [
-          
+                
             { "title": "Nom" },
-            { "title": "Adresse" },
+            { "title": "Adresse", "width": "40%" },
             { "title": "Famille" },
             { "title": "Ville" },
-            { "title": "Contact" },
+            { "title": "contact" },
             { "title": "Mail" },
-            { "title": "Téléphone" },
-            { "title": "Fax" },
-            { "title": "Date de Creation" },
-            { "title": "I.D.F." },
-            { "title": "CNSS." },
-            { "title": "ICE." },
-            { "title": "GSM." },
-            { "title": "Téléphone" },
+            { "title": "Mail" },
+       
+            //{ "title": "DatedeCreation" },
+            { "title": "GSM" },
+
             {
+                //"targets": 14,
                 "title": "Actions",
-                "width": "80%",
+                "data": "id",
+                "width": "20%",
+                "text-align": "center",
                 "orderable": false,
-                "class": "center",
-                //"render": function (data, type, full, meta) {
-                //    return "<a  style='width:40px' class='btn btn-success' ><i class='far fa-edit'></i></a><a  style= 'margin-left: 5px;width:40px' class='btn btn-danger'><i class='fas fa-trash-alt'></i></a><a  style= 'margin-left: 5px;width:40px' class='btn btn-outline-dark'><i class='fas fa-info'></i></a>";
-                //},
-
-
-            }
-            
+                "text-align": "center",
+                "render": function (data, type, full, meta) {
+                    return "<a   style='width:40px' class='btn btn-success' onclick=PopupForm('@Url.Action("Edit", "Client")/" + data + "') ><i class='far fa-edit'></i></a><a onclick=Delete('" + data + "') style= 'margin-left: 5px;width:40px' class='btn btn-danger'><i class='fas fa-trash-alt'></i></a><a  style= 'margin-left: 5px;width:40px' class='btn btn-outline-dark'><i class='fas fa-info'></i></a>";
+                    }
+                }
         ],
-        //"columnDefs": [
-        //  //  { "width": "150%", "targets": "_all" },
-        //    { "width": "20%", "targets": 0 },
-        //    { "width": "15%", "targets": 1 },
-        //    { "width": "60%", "targets": 2 },
-        //    { "width": "80%", "targets": 14 },
-        //    // { "width": "60%", "targets": 0 },
-            
-        //        "targets": 14,
-        //           "width": "80%",
-        //    },
-        //],
-        //fixedColumns: {
-        //    leftColumns: 1,
-        //    rightColumns: 1
-        //},
-       // exemple 
-        //columnDefs: [
-        //    { "width": "20%", "targets": 0, "responsivePriority": 1, },
-        //    { "width": "15%", "targets": 1 },
-        //    {
-        //        "width": "30%", "targets": 2, "render": function (data, type, row, meta) {
-        //            return '<a href="monLien/' + idVile + '"+>Localiser ma ville</a>';
-        //        }
-        //    },
-        "searching": true,
-        scrollX: true,
-        scrollCollapse: true,
-        autoWidth: true,
-        colReorder: true,
-        
+       "searching": true,
+        // "scrollX": true,
+        "scrollCollapse": true,
+        //"autoWidth": false,
+        //"colReorder": true,
         "language": {
             "info": "Afficher _END_ sur _TOTAL_ ",
             "lengthMenu": "Afficher _MENU_ par page",
@@ -81,9 +48,48 @@
             select: {
                 style: 'multi'
             },
-            
         }
-
-
     });
+
+
+
+
+
+
 });
+
+
+function PopupForm(url) {
+    var formDiv = $('<div/>');
+    $.get(url)
+        .done(function (response) {
+            formDiv.html(response);
+            Popup = formDiv.dialog({
+                autoOpen: true,
+                height: 550,
+                width: 700,
+                resizable: false,
+                title: 'Fiche client',
+                close: function () {
+                   Popup.dialog('destory').remove();
+                }
+            });
+        });
+}
+    function Delete(id) {
+        if (confirm("Etes-vous sur de vouloir supprimer ce client")) {
+            $.ajax({
+                type: "Post",
+                url: "@Url.Action("Delete","Clients")/" + id ,
+                success: function (data) {
+                    if (data.success) {
+                        dataTables.ajax.reload(),
+                            $.notify(data.message, {
+                                globalPosition: "top center",
+                                className: "success",
+                            })
+                    }
+                }
+            });
+        }
+    }

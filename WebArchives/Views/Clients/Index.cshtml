@@ -20,8 +20,8 @@
 @TempData["SuccessMessage"]
 
 @*<p>
-        @Html.ActionLink("Create New", "Create")
-</p>*@
+            @Html.ActionLink("Create New", "Create")
+    </p>*@
 <a class="btn btn-success" style="margin:10px auto" onclick="@Url.Action("Create", "Clients")"><i class="fas fa-plus">Ajouter</i></a>
 <table id="idTableClients" class="table table-bordered" width="100%" cellspacing="0">
     <thead>
@@ -48,32 +48,34 @@
             <th>
                 @Html.DisplayNameFor(model => model.telephone1)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.fax)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DatedeCreation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.idf)
-            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.fax)
+                </th>*@
+            @*<th>
+                    @Html.DisplayNameFor(model => model.DatedeCreation)
+                </th>*@
+            @*<th>
+                    @Html.DisplayNameFor(model => model.idf)
+                </th>
 
-            <th>
-                @Html.DisplayNameFor(model => model.Cnss)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ice)
-            </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cnss)
+                </th>*@
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Ice)
+                </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Gsm)
             </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Teleph)
+                </th>*@
+            @*<th colspan="3">
+                    Action
+                </th>*@
             <th>
-                @Html.DisplayNameFor(model => model.Teleph)
-            </th>
-            <th >
                 Action
             </th>
-
         </tr>
     </thead>
     <tbody>
@@ -101,33 +103,36 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.telephone1)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.fax)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DatedeCreation)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.idf)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cnss)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Ice)
-                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.fax)
+                    </td>*@
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.DatedeCreation)
+                    </td>*@
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.idf)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cnss)
+                    </td>*@
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Ice)
+                    </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.Gsm)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Teleph)
-                </td>
-                <td style="width:auto">
-                    <a  style= "margin-left: 5px;width:40px" class="DeleteClient btn btn-danger" href="/Clients/Delete/@item.id"><i class='fas fa-trash-alt'></i></a>
-                    <a  style= "margin-left: 5px;width:40px" class="btn btn-success" href="/Clients/Edit/@item.id"><i class='far fa-edit'></i></a>
-                    <a style="margin-left: 5px;width:40px" class="btn btn-outline-dark" href="/Clients/Details/@item.id"> <i class='fas fa-info'></i></a>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Teleph)
+                    </td>*@
 
+
+                <td>
+                    @*<a style="margin-left: 5px;width:40px" class="DeleteClient btn btn-danger" href="/Clients/Delete/@item.id"><i class='fas fa-trash-alt'></i></a>
+                         <a style="margin-left: 5px;width:40px" class="btn btn-success" href="/Clients/Edit/@item.id"><i class='far fa-edit'></i></a>
+                        <a style="margin-left: 5px;width:40px" class="btn btn-outline-dark" href="/Clients/Details/@item.id"> <i class='fas fa-info'></i></a>*@
                 </td>
+
+
 
 
 
@@ -138,7 +143,7 @@
         @Html.ActionLink("Details", "Details", new { id=item.id }) |
         @Html.ActionLink("Delete", "Delete", new { id=item.id })*@
 
-   
+
 
 </table>
 
@@ -151,5 +156,101 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.20/cr-1.5.2/datatables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/3.3.0/js/dataTables.fixedColumns.min.js"></script>
 
-    @Scripts.Render("~/bundles/Client/js")
+    @*@Scripts.Render("~/bundles/Client/js")*@
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+}
+
+@section scripts{
+    <script type="text/javascript">
+    $(document).ready(function () {
+    alert("ddddd");
+    //$('#idTableClients').DataTable().destroy();
+    let table = $('#idTableClients').DataTable({
+
+    "columns": [
+
+    { "title": "Nom" },
+    { "title": "Adresse", "width": "40%" },
+    { "title": "Famille" },
+    { "title": "Ville" },
+    { "title": "contact" },
+    { "title": "Mail" },
+    { "title": "Mail" },
+
+    //{ "title": "DatedeCreation" },
+    { "title": "GSM" },
+
+    {
+    //"targets": 14,
+    "title": "Actions",
+    "data": "id",
+    "width": "20%",
+    "text-align": "center",
+    "orderable": false,
+    "text-align": "center",
+    "render": function (data, type, full, meta) {
+    return "<a style='width:40px' class='btn btn-success' onclick=PopupForm('@Url.Action("Edit", "Clients" )/" + data + "') ><i class='far fa-edit'></i></a><a onclick=Delete('" + data + "') style= 'margin-left: 5px;width:40px' class='btn btn-danger'><i class='fas fa-trash-alt'></i></a><a  style= 'margin-left: 5px;width:40px' class='btn btn-outline-dark'><i class='fas fa-info'></i></a>" ;
+        }
+     }
+    ],
+   "searching" : true,
+        // "scrollX": true,
+    "scrollCollapse": true,
+    //"autoWidth": false,
+    //"colReorder": true,
+    "language": {
+    "info": "Afficher _END_ sur _TOTAL_ ",
+    "lengthMenu": "Afficher _MENU_ par page",
+    "paginate": {
+    "first": "Premier",
+    "last": "Dernier",
+    "next": "Suivant",
+    "previous": "Précédent"
+    },
+    //"emptyTabale": "Pas d'enregistrement trouvés",
+    "emptyTable": "Chargement des donnée en cours, veuillez patienter ...",
+    select: {
+         style: 'multi'
+    },
+    }
+    });
+
+    });
+    function PopupForm(url) {
+        alert(url);
+            var formDiv = $('<div />');
+            $.get(url)
+            .done(function (response) {
+            formDiv.html(response);
+            Popup = formDiv.dialog({
+            autoOpen: true,
+            height: 550,
+            width: 700,
+            resizable: false,
+            title: 'Fiche client',
+            close: function () {
+                Popup.dialog('destory').remove();
+                }
+            });
+        });
+    }
+    function Delete(id) {
+            if (confirm("Etes-vous sur de vouloir supprimer ce client")) {
+            $.ajax({
+                type: "Post",
+                url: "@Url.Action("Delete", "Clients")/" + id ,
+                    success: function (data) {
+                        if (data.success) {
+                            dataTables.ajax.reload(),
+                            $.notify(data.message, {
+                                globalPosition: "top center",
+                                className: "success",
+                            })
+                         }
+                      }
+                 });
+            }
+    }
+    </script>
 }
