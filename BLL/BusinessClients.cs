@@ -16,7 +16,7 @@ namespace BLL
    public  class BusinessClients
     {
         ModelData context = new ModelData();
-        public void AjouterClient(DtoListeClients dto)
+        public int AjouterClient(DtoListeClients dto)
         {
             var Entity = new Tbl_Client();
             Entity.Nom = dto.Nom;
@@ -36,7 +36,7 @@ namespace BLL
             Entity.DatedeCreation = DateTime.Now;
             context.Tbl_Client.Add(Entity);
             context.SaveChanges();
-
+            return Entity.id;
         }
 
         public  List<DtoListeClients> BusinessliseClient()
