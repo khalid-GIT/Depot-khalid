@@ -1,10 +1,4 @@
-﻿1>------ Début du nettoyage : Projet : WebArchives, Configuration : Debug Any CPU ------
-1>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\Microsoft.Common.CurrentVersion.targets(5055,5): warning MSB3061: Impossible de supprimer le fichier "D:\Projets web\ASPMvc\WebArchives\bin\roslyn\csc.exe". L'accès au chemin d'accès 'D:\Projets web\ASPMvc\WebArchives\bin\roslyn\csc.exe' est refusé.
-1>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\Microsoft.Common.CurrentVersion.targets(5055,5): warning MSB3061: Impossible de supprimer le fichier "D:\Projets web\ASPMvc\WebArchives\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll". L'accès au chemin d'accès 'D:\Projets web\ASPMvc\WebArchives\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll' est refusé.
-1>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\Microsoft.Common.CurrentVersion.targets(5055,5): warning MSB3061: Impossible de supprimer le fichier "D:\Projets web\ASPMvc\WebArchives\bin\roslyn\Microsoft.CodeAnalysis.dll". L'accès au chemin d'accès 'D:\Projets web\ASPMvc\WebArchives\bin\roslyn\Microsoft.CodeAnalysis.dll' est refusé.
-1>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\Microsoft.Common.CurrentVersion.targets(5055,5): warning MSB3061: Impossible de supprimer le fichier "D:\Projets web\ASPMvc\WebArchives\bin\roslyn\System.Reflection.Metadata.dll". L'accès au chemin d'accès 'D:\Projets web\ASPMvc\WebArchives\bin\roslyn\System.Reflection.Metadata.dll' est refusé.
-1>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\Microsoft.Common.CurrentVersion.targets(5055,5): warning MSB3061: Impossible de supprimer le fichier "D:\Projets web\ASPMvc\WebArchives\bin\roslyn\VBCSCompiler.exe". L'accès au chemin d'accès 'D:\Projets web\ASPMvc\WebArchives\bin\roslyn\VBCSCompiler.exe' est refusé.
-2>------ Début du nettoyage : Projet : BLL, Configuration : Debug Any CPU ------
-3>------ Début du nettoyage : Projet : DAL, Configuration : Debug Any CPU ------
-4>------ Début du nettoyage : Projet : COMMON, Configuration : Debug Any CPU ------
-========== Nettoyage : 4 a réussi, 0 a échoué, 0 a été ignoré ==========
+﻿1>------ Début de la génération : Projet : WebArchives, Configuration : Debug Any CPU ------
+1>C:\Users\KElkettani\source\repos\Depot-khalid\WebArchives\Controllers\ClientsController.cs(166,30,166,31): warning CS0168: The variable 'e' is declared but never used
+1>  WebArchives -> C:\Users\KElkettani\source\repos\Depot-khalid\WebArchives\bin\WebArchives.dll
+========== Génération : 1 a réussi, 0 a échoué, 3 mis à jour, 0 a été ignoré ==========
