@@ -132,6 +132,8 @@ namespace WebArchives.Controllers
         public JsonResult Create(VMListeClient model)
         {
             var bizF = new BusinessFamilleClients();
+            var bis = new BusinessClients();
+
             try
             {
                 if (ModelState.IsValid == true)
@@ -140,13 +142,13 @@ namespace WebArchives.Controllers
                     dto.Nom = model.Nom;
                     dto.Adresse = model.Nom;
                     dto.Mail = model.Mail;
-             
+
                     dto.telephone1 = model.telephone1;
                     dto.fax = model.fax;
                     dto.idf = model.idf;
                     dto.Ice = model.Ice;
                     dto.Cnss = model.Cnss;
-                    dto.Teleph = model.Teleph;
+                    //dto.Teleph = model.Teleph;
                     dto.Gsm = model.Gsm;
 
                     dto.Tbl_Famille_Clt_Id = model.Tbl_Famille_Clt_Id;
@@ -167,8 +169,10 @@ namespace WebArchives.Controllers
 
                     var biz = new BusinessClients();
                     int id = biz.AjouterClient(dto);
+                    var clients = bis.BusinessliseClient();
+
                     //return RedirectToAction("index");
-                    return Json(id, JsonRequestBehavior.AllowGet);
+                    return Json(clients, JsonRequestBehavior.AllowGet);
                 }
                 return Json(false, JsonRequestBehavior.AllowGet);
             }
@@ -256,13 +260,15 @@ namespace WebArchives.Controllers
                 var biz = new BusinessClients();
                 biz.SupprimerClients(id);
                 //message de confirmation
-                TempData["SuccessMessage"] = "La ville a eté supprimée avec succés";
-
+                //TempData["SuccessMessage"] = "La ville a eté supprimée avec succés";
+                //return Json("success", JsonRequestBehavior.AllowGet);
                 return RedirectToAction("index");
+                //return View();
             }
             catch
             {
                 return View();
+
             }
         }
     }
