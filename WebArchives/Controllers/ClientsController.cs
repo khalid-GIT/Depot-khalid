@@ -19,7 +19,6 @@ namespace WebArchives.Controllers
             var bis = new BusinessClients();
             model.listeclients = bis.BusinessliseClient();
             //var bisFamille = new BusinessFamilleClients();
-
             var biz = new BusinessVilles();
             var bizF = new BusinessFamilleClients();
             var bizContact = new BusinessContactClt();
@@ -142,7 +141,6 @@ namespace WebArchives.Controllers
                     dto.Nom = model.Nom;
                     dto.Adresse = model.Nom;
                     dto.Mail = model.Mail;
-
                     dto.telephone1 = model.telephone1;
                     dto.fax = model.fax;
                     dto.idf = model.idf;
@@ -150,7 +148,6 @@ namespace WebArchives.Controllers
                     dto.Cnss = model.Cnss;
                     //dto.Teleph = model.Teleph;
                     dto.Gsm = model.Gsm;
-
                     dto.Tbl_Famille_Clt_Id = model.Tbl_Famille_Clt_Id;
                     //dto.Tbl_Famille_Clt_Id = 1;
                     dto.Tbl_Ville_id = model.Tbl_Ville_id;
@@ -253,21 +250,24 @@ namespace WebArchives.Controllers
         }
 
         //[Filtre1]
-        public ActionResult Delete(int id)
+        public JsonResult Delete(int id)
         {
             try
             {
                 var biz = new BusinessClients();
                 biz.SupprimerClients(id);
+
+             
+
                 //message de confirmation
                 //TempData["SuccessMessage"] = "La ville a eté supprimée avec succés";
-                //return Json("success", JsonRequestBehavior.AllowGet);
-                return RedirectToAction("index");
+                return Json("success", JsonRequestBehavior.AllowGet);
+                //return RedirectToAction("index");
                 //return View();
             }
             catch
             {
-                return View();
+                return Json(null, JsonRequestBehavior.AllowGet);
 
             }
         }

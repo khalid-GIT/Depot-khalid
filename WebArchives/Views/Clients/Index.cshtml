@@ -28,9 +28,9 @@
     <thead>
 
         <tr role="row">
-            @*<th>
+            <th>
                 @Html.DisplayNameFor(model => model.id)
-            </th>*@
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Nom)
             </th>
@@ -82,17 +82,17 @@
             </th>
         </tr>
     </thead>
-    <tbody id="idLignes">
+    @*<tbody id="idLignes">
         @foreach (var item in Model.listeclients)
              {
-        <tr role="row">
+        <tr role="row">*@
             @*<td>
                 @Html.DisplayFor(modelItem => item.id)
             </td>*@
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Nom)
-            </td>
-            <td>
+            </td>*@
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Adresse)
             </td>
             <td>
@@ -112,9 +112,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Gsm)
-            </td>
+            </td>*@
 
-            <td style="text-align: center">
+            @*<td style="text-align: center">
                 <a style="margin-left: 5px;width:40px" class="DeleteClient btn btn-danger" href="/Clients/Delete/@item.id"><i class='fas fa-trash-alt'></i></a>
                 <a style="margin-left: 5px;width:40px" class="btn btn-success" href="/Clients/Edit/@item.id"><i class='far fa-edit'></i></a>
                 <a style="margin-left: 5px;width:40px" class="btn btn-outline-dark" href="/Clients/Details/@item.id"> <i class='fas fa-info'></i></a>
@@ -122,7 +122,7 @@
             </td>
         </tr>
              }
-         </tbody>
+         </tbody>*@
 
 
 
@@ -132,6 +132,7 @@
     .modal {
         text-align: center;
         width: auto
+
     }
 
 
@@ -280,8 +281,7 @@
     <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
     <script>
         SetActions({
-           
-            Modify: "@Url.Action("Edit","Clients")",
+           Modify: "@Url.Action("Edit","Clients")",
             SaveGlobal: "@Url.Action("SaveGlobal","Fonds")",
             GetFonds: "@Url.Action("GetFonds","Fonds")",
             SaveFonds: "@Url.Action("SaveFonds","Fonds")",
@@ -294,38 +294,41 @@
     var table = null;
     <script type="text/javascript">
     $(document).ready(function () {
-        //alert("ddddd");
+       //alert("ddddd");
 
     //$('#idTableClients').DataTable().destroy();
     table = $('#idTableClients').DataTable({
         "ajax": {
-            "url": "/Clients/index",
+            "url": "/Clients/GetlisteClient",
             "type": "Get",
             "datatype": "json"
-        },
+         },
     
         
     "columns": [
-        //{"title": "id" },
-        {"title": "Nom" },
-        {"title": "Adresse", "width": "40%" },
-        {"title": "Famille" },
-        {"title": "Ville" },
-        {"title": "Contact" },
-        {"title": "Mail" },
-        {"title": "Téléphone" },
+        { "data": "id","title": "id" },
+        { "data": "Nom","title": "Nom" },
+        { "data": "Adresse","title": "Adresse", "width": "40%" },
+        { "data": "FamilleName","title": "Famille" },
+        //{ "data": "Tbl_Ville_id", "title": "Ville" },
+        { "data": "VilleName", "title": "Ville" },
+        //{ "data": "IDContact","title": "Contact" },
+        { "data": "ContactName", "title": "Contact" },
+        { "data": "Mail","title": "Mail" },
+        { "data": "telephone1","title": "Téléphone" },
         //{ "title": "DatedeCreation" },
-        {"title": "GSM" },
-     {
+        { "data": "Gsm","title": "GSM" },
+        {
+         "data": "id",
          "title": "Actions",
          "width": "60%",
          "orderable": false,
          "class": "center",
-         //"render": function (data, type, full, meta) {
-         //   //return "<a  style='width:40px' class='btn btn-success' ><i class='far fa-edit'></i></a><a onclick='Delete()' style= 'margin-left: 5px;width:40px' class='btn btn-danger'><i class='fas fa-trash-alt'></i></a><a  style= 'margin-left: 5px;width:40px' class='btn btn-outline-dark'><i class='fas fa-info'></i></a>";
-         //}
+         "render": function (data, type, full, meta) {
+            return "<a  style='width:40px' class='btn btn-success' ><i class='far fa-edit'></i></a><a onclick='Delete("+ data +")' style= 'margin-left: 5px;width:40px' class='btn btn-danger'><i class='fas fa-trash-alt'></i></a><a  style= 'margin-left: 5px;width:40px' class='btn btn-outline-dark'><i class='fas fa-info'></i></a>";
+         }
         }
-
+        //'" + row.id + "'
     ],
     "searching" : true,
     "scrollX": true,
@@ -355,20 +358,17 @@
             urls = actions;
         }
         function Delete(id) {
-            //debugger
+            debugger
             if (confirm("Etes-vous sur de vouloir supprimer ce client")) {
             $.ajax({
                 type: "Post",
-                url: "@Url.Action("Delete", "Clients")/" + id ,
-                    success: function (data) {
+                dataType: 'json',
+                url: "@Url.Action("Delete", "Clients")/" + id,
+                success: function (data) {   
                         if (data.success) {
-                            //debugger
-                            table.reload(),
-                                swal("Enregistrement effectué avec succès !", "", "success");
-                            //$.notify(data.message, {
-                            //    globalPosition: "top center",
-                            //    className: "success",
-                            //})
+                            debugger
+                            table.ajax.reload();
+                            swal("Enregistrement effectué avec succès !", "", "success");
                          }
                       }
                  });
@@ -377,10 +377,23 @@
         function AddClient() {
             //debugger
             $("#addClientModal").modal();
+        $("#addClientModal").show({
+                autoOpen: true,
+                height: 550,
+                width: 700,
+                resizable: false,
+                title: 'Fiche client',
+                close: function () {
+                    //alert("close");
+                    $("#addClientModal").remove();
+                    //Popup.dialog('destory').remove();
+                }
+            });
+            //dialog
             $("#addClientModal").show();
         }
         function SaveClient() {
-            debugger
+            //debugger
             //var id = res;
             var nom = $("#idNomClient").val();
             var Adresse = $("#idAdresseClient").val();
@@ -417,14 +430,15 @@
                         //on doit vider les inputs
                       $("#idNomClient").val("");
                       $("#idAdresseClient").val("");
-                      $("#idIdFamilleClient").val("");
-                      $("#idIdVilleClient").val("");
-                      $("#idIDContactClient").val("");
+                      //$("#idIdFamilleClient").val("");
+                      //$("#idIdVilleClient").val("");
+                      //$("#idIDContactClient").val("");
                       $("#idMailClient").val("");
                       $("#idtelephone1Client").val("");
                       $("#idGsmClient").val("");
-                      $("#addClientModal").hide();
-                        //table.reload();
+                        $("#addClientModal").remove();
+                       // debugger
+                        table.ajax.reload();
                         //table.row.add([
                         //    //on doit mettre les variables declarées en haut
 
@@ -443,10 +457,10 @@
                         //debugger
                         //table.draw();
                         var nombreLignes = res.Length;
-                        $("#idLignes").empty();
-                        for(var i = 0; i < nombreLignes; i++) {
-                            $("#idLignes").append('<tr><td>' + res[i].Nom + '</td></tr>');
-                        }
+                        //$("#idLignes").empty();
+                        //for(var i = 0; i < nombreLignes; i++) {
+                        //    $("#idLignes").append('<tr><td>' + res[i].Nom + '</td><td>' + res[i].Adresse + '</td><td>' + res[i].IdFamille + '</td><td>' + res[i].Tbl_Ville_id + '</td></tr>');
+                        //}
                         swal("Enregistrement effectué avec succès !", "", "success");
 
                     }
