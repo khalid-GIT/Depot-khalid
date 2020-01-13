@@ -38,9 +38,9 @@ namespace WebArchives.Controllers
         {
             var biz = new BusinessClients();
             model.listeclients = biz.BusinessliseClient();
-            var data = model.listeclients;
+            var clients = model.listeclients;
             //return View(model);
-            return Json(new { data = data }, JsonRequestBehavior.AllowGet);
+            return Json(new { clients }, JsonRequestBehavior.AllowGet);
 
         }
         // GET: Clients/Details/5
@@ -167,20 +167,18 @@ namespace WebArchives.Controllers
                     var biz = new BusinessClients();
                     int id = biz.AjouterClient(dto);
                     var clients = bis.BusinessliseClient();
-
                     //return RedirectToAction("index");
                     return Json(clients, JsonRequestBehavior.AllowGet);
                 }
                 return Json(false, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception e)
+            catch (Exception )
             {
                 return Json(null, JsonRequestBehavior.AllowGet);
             }
         }
-
         // GET: Clients/Edit/5
-        public ActionResult Edit(int id)
+        public JsonResult Edit(int id)
         {
             var biz = new BusinessClients();
             var dto = biz.GetClientById(id);
@@ -208,7 +206,8 @@ namespace WebArchives.Controllers
             model.ListeContact = bizContact.ListContact();
             model.listeVilles = bizV.GetListeVille();
             model.listeFamille = bizF.GetListFamilleClt();
-            return View(model);
+            return Json(new { model }, JsonRequestBehavior.AllowGet);
+            //return View(model);
         }
 
         // POST: Clients/Edit/5
@@ -257,11 +256,14 @@ namespace WebArchives.Controllers
                 var biz = new BusinessClients();
                 biz.SupprimerClients(id);
 
-             
+
 
                 //message de confirmation
                 //TempData["SuccessMessage"] = "La ville a eté supprimée avec succés";
-                return Json("success", JsonRequestBehavior.AllowGet);
+                //var biz = new BusinessClients();
+                //int id = biz.AjouterClient(dto);
+                var clients = biz.BusinessliseClient();
+                return Json(new { clients,IsDeleted=true }, JsonRequestBehavior.AllowGet);
                 //return RedirectToAction("index");
                 //return View();
             }

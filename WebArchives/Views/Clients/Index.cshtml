@@ -9,14 +9,15 @@
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.20/cr-1.5.2/datatables.min.css" />
 @*Icons plus font*@
-@Styles.Render("~/Content/fontawesome-free/css");
+@Styles.Render("~/Content/fontawesome-free/css")
 @*<link href="~/Content/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">*@
 
-@Styles.Render("~/datatable/buttons/css");
+@Styles.Render("~/datatable/buttons/css")
+
 <link href="@Url.Content("~/Content/jquery-ui.min.css")" rel="stylesheet" type="text/css" />
 <link href="@Url.Content("~/Content/jquery-ui.css")" rel="stylesheet" type="text/css" />
 <link href="~/Scripts/SweetAlert/sweetalert.css" rel="stylesheet" type="text/css" />
-<h2>Index</h2>
+<h2>Liste des clients</h2>
 @TempData["SuccessMessage"]
 
 @*<p>
@@ -24,7 +25,7 @@
     </p>*@
 @*<a class="btn btn-success" style="margin:10px auto" onclick="@Url.Action("Create", "Clients")"><i class="fas fa-plus">Ajouter</i></a>*@
 <a class="btn btn-success" style="margin:10px auto" onclick="AddClient()"><i class="fas fa-plus">Ajouter</i></a>
-<table id="idTableClients" class="table table-bordered" width="100%" cellspacing="0">
+<table id="idTableClients" class="table table-bordered" cellspacing="0">
     <thead>
 
         <tr role="row">
@@ -52,31 +53,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.telephone1)
             </th>
-            @*<th>
-                    @Html.DisplayNameFor(model => model.fax)
-                </th>*@
-            @*<th>
-                    @Html.DisplayNameFor(model => model.DatedeCreation)
-                </th>*@
-            @*<th>
-                    @Html.DisplayNameFor(model => model.idf)
-                </th>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.Cnss)
-                </th>*@
-            @*<th>
-                    @Html.DisplayNameFor(model => model.Ice)
-                </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Gsm)
             </th>
-            @*<th>
-                    @Html.DisplayNameFor(model => model.Teleph)
-                </th>*@
-            @*<th colspan="3">
-                    Action
-                </th>*@
             <th style="text-align: center">
                 Action
             </th>
@@ -86,35 +65,35 @@
         @foreach (var item in Model.listeclients)
              {
         <tr role="row">*@
-            @*<td>
-                @Html.DisplayFor(modelItem => item.id)
-            </td>*@
-            @*<td>
-                @Html.DisplayFor(modelItem => item.Nom)
-            </td>*@
-            @*<td>
-                @Html.DisplayFor(modelItem => item.Adresse)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FamilleName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VilleName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ContactName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.telephone1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Gsm)
-            </td>*@
+    @*<td>
+            @Html.DisplayFor(modelItem => item.id)
+        </td>*@
+    @*<td>
+            @Html.DisplayFor(modelItem => item.Nom)
+        </td>*@
+    @*<td>
+            @Html.DisplayFor(modelItem => item.Adresse)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FamilleName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VilleName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.telephone1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gsm)
+        </td>*@
 
-            @*<td style="text-align: center">
+    @*<td style="text-align: center">
                 <a style="margin-left: 5px;width:40px" class="DeleteClient btn btn-danger" href="/Clients/Delete/@item.id"><i class='fas fa-trash-alt'></i></a>
                 <a style="margin-left: 5px;width:40px" class="btn btn-success" href="/Clients/Edit/@item.id"><i class='far fa-edit'></i></a>
                 <a style="margin-left: 5px;width:40px" class="btn btn-outline-dark" href="/Clients/Details/@item.id"> <i class='fas fa-info'></i></a>
@@ -127,14 +106,22 @@
 
 
 </table>
+@*<div id='myModal' class='modal'>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div id='myModalContent'></div>
+            </div>
+        </div>
+
+    </div>*@
+<div id="dialog" style="display: none">
+</div>
 @*MODEL ADD*@
 <style>
     .modal {
         text-align: center;
         width: auto
-
     }
-
 
     .modal-dialog {
         display: inline-block;
@@ -148,11 +135,11 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Ajouter un client</h4>
+                
             </div>
             <div class="modal-body">
                 <div id="displayArea">
                     <div class="form-horizontal">
-
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group">
                             @Html.LabelFor(model => model.Nom, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -161,7 +148,6 @@
                                 @Html.ValidationMessageFor(model => model.Nom, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
                         <div class="form-group">
                             @Html.LabelFor(model => model.Adresse, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
@@ -169,7 +155,6 @@
                                 @Html.ValidationMessageFor(model => model.Adresse, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
                         <div class="form-group">
                             @Html.LabelFor(model => model.Mail, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
@@ -177,7 +162,6 @@
                                 @Html.ValidationMessageFor(model => model.Mail, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
                         <div class="form-group">
                             @Html.LabelFor(model => model.telephone1, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
@@ -185,7 +169,6 @@
                                 @Html.ValidationMessageFor(model => model.telephone1, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
                         <div class="form-group">
                             @Html.LabelFor(model => model.fax, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
@@ -193,7 +176,6 @@
                                 @Html.ValidationMessageFor(model => model.fax, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
                         <div class="form-group">
                             @Html.LabelFor(model => model.Tbl_Famille_Clt_Id, "Famille", new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
@@ -267,6 +249,130 @@
         </div>
     </div>
 </div>
+@*edit*@
+<div class="modal fade" id="editClientModal" role="dialog" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modifier un client</h4>
+                @Html.HiddenFor(model => model.id)
+            </div>
+            <div class="modal-body">
+                <div id="displayArea">
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Nom, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @class = "form-control", @id = "idNomClient" } })
+                                @Html.ValidationMessageFor(model => model.Nom, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Adresse, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Adresse, new { htmlAttributes = new { @class = "form-control", @id = "idAdresseClient" } })
+                                @Html.ValidationMessageFor(model => model.Adresse, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Mail, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Mail, new { htmlAttributes = new { @class = "form-control", @id = "idMailClient" } })
+                                @Html.ValidationMessageFor(model => model.Mail, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.telephone1, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.telephone1, new { htmlAttributes = new { @class = "form-control", @id = "idtelephone1Client" } })
+                                @Html.ValidationMessageFor(model => model.telephone1, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.fax, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.fax, new { htmlAttributes = new { @class = "form-control", @id = "idFaxClient" } })
+                                @Html.ValidationMessageFor(model => model.fax, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Tbl_Famille_Clt_Id, "Famille", new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.Tbl_Famille_Clt_Id, new SelectList(Model.listeFamille, "IdFamille", "Libelle"), new { @class = "form-control", @id = "idIdFamilleClient" })
+                                @Html.ValidationMessageFor(model => model.Tbl_Famille_Clt_Id, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Tbl_Ville_id, "Ville", new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.Tbl_Ville_id, new SelectList(Model.listeVilles, "IdVille", "Libelle"), new { @class = "form-control", @id = "idIdVilleClient" })
+                                @Html.ValidationMessageFor(model => model.Tbl_Ville_id, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.IDContact, "Contact", new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.IDContact, new SelectList(Model.ListeContact, "IDContact", "FullName"), new { @class = "form-control", @id = "idIDContactClient" })
+                                @Html.ValidationMessageFor(model => model.IDContact, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.idf, htmlAttributes: new { @class = "control-label col-md-2", @id = "ididfClient" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.idf, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.idf, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Cnss, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Cnss, new { htmlAttributes = new { @class = "form-control", @id = "idCnssClient" } })
+                                @Html.ValidationMessageFor(model => model.Cnss, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Ice, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Ice, new { htmlAttributes = new { @class = "form-control", @id = "idIceClient" } })
+                                @Html.ValidationMessageFor(model => model.Ice, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Gsm, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Gsm, new { htmlAttributes = new { @class = "form-control", @id = "idGsmClient" } })
+                                @Html.ValidationMessageFor(model => model.Gsm, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Teleph, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Teleph, new { htmlAttributes = new { @class = "form-control", @id = "idTelephClient" } })
+                                @Html.ValidationMessageFor(model => model.Teleph, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Create" class="btn btn-default" onclick="SaveClient()" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*Fin Edit client*@
+
+
 @*FIN MODEL CREATE*@
 @{
     <script src="@Url.Content("~/Scripts/jquery-ui.min.js")" type="text/javascript"></script>
@@ -281,119 +387,240 @@
     <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
     <script>
         SetActions({
-           Modify: "@Url.Action("Edit","Clients")",
-            SaveGlobal: "@Url.Action("SaveGlobal","Fonds")",
-            GetFonds: "@Url.Action("GetFonds","Fonds")",
-            SaveFonds: "@Url.Action("SaveFonds","Fonds")",
-            AddChoice: "@Url.Action("AddChoice","Fonds")",
-            SearchFonds: "@Url.Action("SearchFonds","Fonds")"})
+        Modify: "@Url.Action("Edit","Clients")",
+        SaveGlobal: "@Url.Action("SaveGlobal","Fonds")",
+        GetFonds: "@Url.Action("GetFonds","Fonds")",
+        SaveFonds: "@Url.Action("SaveFonds","Fonds")",
+        AddChoice: "@Url.Action("AddChoice","Fonds")",
+        SearchFonds: "@Url.Action("SearchFonds","Fonds")"})
     </script>
 }
 
 @section scripts{
-    var table = null;
+
+
     <script type="text/javascript">
+        var table = null;
+        function ReloadClientTable(data) {
+            //debugger
+            //$('#idTableClients').
+            if (table!= null)
+            {
+                //il y a des données  (table != null) &&
+                $('#idTableClients').DataTable().destroy();
+
+            }
+            //if (!table.emptyTable) table.destroy();
+
+            //
+                table = $('#idTableClients').DataTable({
+                data,
+                "columns": [
+                    { "data": "id", "title": "id" },
+                    { "data": "Nom", "title": "Nom" },
+                    { "data": "Adresse", "title": "Adresse", "width": "40%" },
+                    { "data": "FamilleName", "title": "Famille" },
+                    //{ "data": "Tbl_Ville_id", "title": "Ville" },
+                    { "data": "VilleName", "title": "Ville" },
+                    //{ "data": "IDContact","title": "Contact" },
+                    { "data": "ContactName", "title": "Contact" },
+                    { "data": "Mail", "title": "Mail" },
+                    { "data": "telephone1", "title": "Téléphone" },
+                    //{ "title": "DatedeCreation" },
+                    { "data": "Gsm", "title": "GSM" },
+                    {
+                        "data": "id",
+                        "title": "Actions",
+                        "width": "60%",
+                        "orderable": false,
+                        "class": "center",
+                        "render": function (data, type, full, meta) {
+                            return "<a onclick='EditClients(" + data + ")'  style='width:40px' class='btn btn-success' ><i class='far fa-edit'></i></a><a onclick='Delete(" + data + ")' style= 'margin-left: 5px;width:40px' class='btn btn-danger'><i class='fas fa-trash-alt'></i></a><a  style= 'margin-left: 5px;width:40px' class='btn btn-outline-dark'><i class='fas fa-info'></i></a>";
+                        }
+                    }
+                    //'" + row.id + "'
+                ],
+                 "searching": true,
+                 "scrollY": "300px",
+                "scrollX": true,
+                "scrollCollapse": true,
+                //"autoWidth": false,
+                //"colReorder": true,
+                "language": {
+                    "info": "Afficher _END_ sur _TOTAL_ ",
+                    "lengthMenu": "Afficher _MENU_ par page",
+                    "paginate": {
+                        "first": "Premier",
+                        "last": "Dernier",
+                        "next": "Suivant",
+                        "previous": "Précédent"
+                    },
+                    //"emptyTabale": "Pas d'enregistrement trouvés",
+                    "emptyTable": "Chargement des donnée en cours, veuillez patienter ...",
+                    select: {
+                        style: 'multi'
+                    },
+                }
+            });
+    }
     $(document).ready(function () {
        //alert("ddddd");
 
-    //$('#idTableClients').DataTable().destroy();
-    table = $('#idTableClients').DataTable({
-        "ajax": {
-            "url": "/Clients/GetlisteClient",
-            "type": "Get",
-            "datatype": "json"
-         },
-    
-        
-    "columns": [
-        { "data": "id","title": "id" },
-        { "data": "Nom","title": "Nom" },
-        { "data": "Adresse","title": "Adresse", "width": "40%" },
-        { "data": "FamilleName","title": "Famille" },
-        //{ "data": "Tbl_Ville_id", "title": "Ville" },
-        { "data": "VilleName", "title": "Ville" },
-        //{ "data": "IDContact","title": "Contact" },
-        { "data": "ContactName", "title": "Contact" },
-        { "data": "Mail","title": "Mail" },
-        { "data": "telephone1","title": "Téléphone" },
-        //{ "title": "DatedeCreation" },
-        { "data": "Gsm","title": "GSM" },
-        {
-         "data": "id",
-         "title": "Actions",
-         "width": "60%",
-         "orderable": false,
-         "class": "center",
-         "render": function (data, type, full, meta) {
-            return "<a  style='width:40px' class='btn btn-success' ><i class='far fa-edit'></i></a><a onclick='Delete("+ data +")' style= 'margin-left: 5px;width:40px' class='btn btn-danger'><i class='fas fa-trash-alt'></i></a><a  style= 'margin-left: 5px;width:40px' class='btn btn-outline-dark'><i class='fas fa-info'></i></a>";
-         }
-        }
-        //'" + row.id + "'
-    ],
-    "searching" : true,
-    "scrollX": true,
-    "scrollCollapse": true,
-    //"autoWidth": false,
-    //"colReorder": true,
-    "language": {
-    "info": "Afficher _END_ sur _TOTAL_ ",
-    "lengthMenu": "Afficher _MENU_ par page",
-    "paginate": {
-    "first": "Premier",
-    "last": "Dernier",
-    "next": "Suivant",
-    "previous": "Précédent"
-    },
-    //"emptyTabale": "Pas d'enregistrement trouvés",
-    "emptyTable": "Chargement des donnée en cours, veuillez patienter ...",
-    select: {
-         style: 'multi'
-    },
-    }
-    });
+        //debugger
+            $.ajax({
+                type: "Get",
+                dataType: 'json',
+                url: "/Clients/GetlisteClient",
+                success: function (data) {
+                    //debugger
+                         ReloadClientTable(data.clients);
+                         }
+            });
 
     });
+
+
+        //ReloadClientTable();
+
+    //table = $('#idTableClients').DataTable({
+    //    "ajax": {
+    //        "url": "/Clients/GetlisteClient",
+    //        "type": "Get",
+    //        "datatype": "json"
+    //     },
+
+    //"columns": [
+    //    { "data": "id","title": "id" },
+    //    { "data": "Nom","title": "Nom" },
+    //    { "data": "Adresse","title": "Adresse", "width": "40%" },
+    //    { "data": "FamilleName","title": "Famille" },
+    //    //{ "data": "Tbl_Ville_id", "title": "Ville" },
+    //    { "data": "VilleName", "title": "Ville" },
+    //    //{ "data": "IDContact","title": "Contact" },
+    //    { "data": "ContactName", "title": "Contact" },
+    //    { "data": "Mail","title": "Mail" },
+    //    { "data": "telephone1","title": "Téléphone" },
+    //    //{ "title": "DatedeCreation" },
+    //    { "data": "Gsm","title": "GSM" },
+    //    {
+    //     "data": "id",
+    //     "title": "Actions",
+    //     "width": "60%",
+    //     "orderable": false,
+    //     "class": "center",
+    //     "render": function (data, type, full, meta) {
+    //         return "<a  style='width:40px' class='btn btn-success' ><i class='far fa-edit'></i></a><a onclick='Delete(" + data + ")' style= 'margin-left: 5px;width:40px' class='btn btn-danger'><i class='fas fa-trash-alt'></i></a><a onclick='EditClient(" + data + ")'  style= 'margin-left: 5px;width:40px' class='btn btn-outline-dark'><i class='fas fa-info'></i></a>";
+    //     }
+    //    }
+    //    //'" + row.id + "'
+    //],
+    //    "searching": true,
+    //    "scrollY": "300px",
+    //"scrollX": true,
+    //"scrollCollapse": true,
+    ////"autoWidth": false,
+    ////"colReorder": true,
+    //"language": {
+    //"info": "Afficher _END_ sur _TOTAL_ ",
+    //"lengthMenu": "Afficher _MENU_ par page",
+    //"paginate": {
+    //"first": "Premier",
+    //"last": "Dernier",
+    //"next": "Suivant",
+    //"previous": "Précédent"
+    //},
+    ////"emptyTabale": "Pas d'enregistrement trouvés",
+    //"emptyTable": "Chargement des donnée en cours, veuillez patienter ...",
+    //select: {
+    //     style: 'multi'
+    //},
+    //}
+    //});
+
+    //});
         var urls = null;
         function SetActions(actions) {
             urls = actions;
         }
         function Delete(id) {
-            debugger
+            //debugger
             if (confirm("Etes-vous sur de vouloir supprimer ce client")) {
             $.ajax({
                 type: "Post",
                 dataType: 'json',
                 url: "@Url.Action("Delete", "Clients")/" + id,
-                success: function (data) {   
-                        if (data.success) {
-                            debugger
-                            table.ajax.reload();
-                            swal("Enregistrement effectué avec succès !", "", "success");
+                success: function (data) {
+                    if (data.IsDeleted) {
+                           //debugger
+                          //  table.ajax.reload();
+                            ReloadClientTable(data.clients);
+                            swal("Suppression effectuée avec succès !", "", "success");
                          }
-                      }
+                },
+                error: function (data) {
+                    swal("Impossible d'effectué la supression !", "", "error");
+               }
                  });
             }
         }
+        function EditClients(id) {
+            alert(id);
+            //var url = $(this).data("url");
+            var url = "@Url.Action("Edit", "Clients")/" + id;
+            $.get(url, function (data) {
+                $('#editClientModal').html(data);
+
+                $('#editClientModal').modal('show');
+            }); 
+
+
+                    @*$.ajax({
+                type: "Get",
+                dataType: 'json',
+                        url: "@Url.Action("Edit", "Clients")/" + id,
+                        //data:data,
+                        
+                });*@
+
+
+            //$("#editClientModal").modal({
+            //    autoOpen: true,
+            //    height: 550,
+            //    width: 700,
+            //    resizable: false,
+            //    title: 'Modifier le  client',
+            //    close: function () {
+            //        alert("close");
+            //        $("#editClientModal").hide();
+            //        //Popup.dialog('destory').remove();
+            //    }
+            //});
+
+            //$("#editClientModal").show();
+
+
+        }
         function AddClient() {
             //debugger
-            $("#addClientModal").modal();
-        $("#addClientModal").show({
+           $("#addClientModal").modal({
                 autoOpen: true,
                 height: 550,
                 width: 700,
                 resizable: false,
                 title: 'Fiche client',
                 close: function () {
-                    //alert("close");
-                    $("#addClientModal").remove();
+                    alert("close");
+                    $("#addClientModal").hide();
                     //Popup.dialog('destory').remove();
                 }
             });
-            //dialog
-            $("#addClientModal").show();
+
+             $("#addClientModal").show();
+            //$("#addClientModal").modal();
         }
+       
         function SaveClient() {
-            //debugger
+            debugger
             //var id = res;
             var nom = $("#idNomClient").val();
             var Adresse = $("#idAdresseClient").val();
@@ -425,9 +652,9 @@
                 contentType: 'application/json; charset=utf-8',
                 success: function (res) {
                     if (res != null && res != false) {
-                        //alert("res");
-                        // window.location.href = urls.GetFonds;
-                        //on doit vider les inputs
+                      //alert("res");
+                      // window.location.href = urls.GetFonds;
+                      //on doit vider les inputs
                       $("#idNomClient").val("");
                       $("#idAdresseClient").val("");
                       //$("#idIdFamilleClient").val("");
@@ -436,9 +663,12 @@
                       $("#idMailClient").val("");
                       $("#idtelephone1Client").val("");
                       $("#idGsmClient").val("");
-                        $("#addClientModal").remove();
-                       // debugger
-                        table.ajax.reload();
+                      $("#addClientModal").hide();
+                        // debugger
+                        ReloadClientTable(res);
+                        swal("Enregistrement effectué avec succès !", "", "success");
+                        //table.ajax.reload();
+                        //e.preventDefault();
                         //table.row.add([
                         //    //on doit mettre les variables declarées en haut
 
@@ -456,13 +686,14 @@
                         //]).draw(false).node().id = res;
                         //debugger
                         //table.draw();
-                        var nombreLignes = res.Length;
+                        //var nombreLignes = res.Length;
                         //$("#idLignes").empty();
                         //for(var i = 0; i < nombreLignes; i++) {
                         //    $("#idLignes").append('<tr><td>' + res[i].Nom + '</td><td>' + res[i].Adresse + '</td><td>' + res[i].IdFamille + '</td><td>' + res[i].Tbl_Ville_id + '</td></tr>');
                         //}
-                        swal("Enregistrement effectué avec succès !", "", "success");
+                      //  swal("Enregistrement effectué avec succès !", "", "success");
 
+                        //table.ajax.reload();
                     }
                 },
                 error: function (res) {
