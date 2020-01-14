@@ -135,7 +135,6 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Ajouter un client</h4>
-                
             </div>
             <div class="modal-body">
                 <div id="displayArea">
@@ -204,7 +203,6 @@
                                 @Html.ValidationMessageFor(model => model.idf, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
                         <div class="form-group">
                             @Html.LabelFor(model => model.Cnss, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
@@ -212,7 +210,6 @@
                                 @Html.ValidationMessageFor(model => model.Cnss, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
                         <div class="form-group">
                             @Html.LabelFor(model => model.Ice, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
@@ -220,7 +217,6 @@
                                 @Html.ValidationMessageFor(model => model.Ice, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
                         <div class="form-group">
                             @Html.LabelFor(model => model.Gsm, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
@@ -249,6 +245,7 @@
         </div>
     </div>
 </div>
+
 @*edit*@
 <div class="modal fade" id="editClientModal" role="dialog" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -256,7 +253,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Modifier un client</h4>
-                @Html.HiddenFor(model => model.id)
+                @Html.HiddenFor(model => model.id, new { htmlAttributes = new { @class = "form-control", @id = "idIdClientEdit" } })
             </div>
             <div class="modal-body">
                 <div id="displayArea">
@@ -265,102 +262,97 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.Nom, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @class = "form-control", @id = "idNomClient" } })
+                                @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @class = "form-control", @id = "idNomClientEdit" } })
                                 @Html.ValidationMessageFor(model => model.Nom, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.Adresse, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Adresse, new { htmlAttributes = new { @class = "form-control", @id = "idAdresseClient" } })
+                                @Html.EditorFor(model => model.Adresse, new { htmlAttributes = new { @class = "form-control", @id = "idAdresseClientEdit" } })
                                 @Html.ValidationMessageFor(model => model.Adresse, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.Mail, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Mail, new { htmlAttributes = new { @class = "form-control", @id = "idMailClient" } })
+                                @Html.EditorFor(model => model.Mail, new { htmlAttributes = new { @class = "form-control", @id = "idMailClientEdit" } })
                                 @Html.ValidationMessageFor(model => model.Mail, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.telephone1, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.telephone1, new { htmlAttributes = new { @class = "form-control", @id = "idtelephone1Client" } })
+                                @Html.EditorFor(model => model.telephone1, new { htmlAttributes = new { @class = "form-control", @id = "idtelephone1ClientEdit" } })
                                 @Html.ValidationMessageFor(model => model.telephone1, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.fax, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.fax, new { htmlAttributes = new { @class = "form-control", @id = "idFaxClient" } })
+                                @Html.EditorFor(model => model.fax, new { htmlAttributes = new { @class = "form-control", @id = "idFaxClientEdit" } })
                                 @Html.ValidationMessageFor(model => model.fax, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.Tbl_Famille_Clt_Id, "Famille", new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.DropDownListFor(model => model.Tbl_Famille_Clt_Id, new SelectList(Model.listeFamille, "IdFamille", "Libelle"), new { @class = "form-control", @id = "idIdFamilleClient" })
+                                @Html.DropDownListFor(model => model.Tbl_Famille_Clt_Id, new SelectList(Model.listeFamille, "IdFamille", "Libelle"), new { @class = "form-control", @id = "idIdFamilleClientEdit" })
                                 @Html.ValidationMessageFor(model => model.Tbl_Famille_Clt_Id, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.Tbl_Ville_id, "Ville", new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.DropDownListFor(model => model.Tbl_Ville_id, new SelectList(Model.listeVilles, "IdVille", "Libelle"), new { @class = "form-control", @id = "idIdVilleClient" })
+                                @Html.DropDownListFor(model => model.Tbl_Ville_id, new SelectList(Model.listeVilles, "IdVille", "Libelle"), new { @class = "form-control", @id = "idIdVilleClientEdit" })
                                 @Html.ValidationMessageFor(model => model.Tbl_Ville_id, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.IDContact, "Contact", new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.DropDownListFor(model => model.IDContact, new SelectList(Model.ListeContact, "IDContact", "FullName"), new { @class = "form-control", @id = "idIDContactClient" })
+                                @Html.DropDownListFor(model => model.IDContact, new SelectList(Model.ListeContact, "IDContact", "FullName"), new { @class = "form-control", @id = "idIDContactClientEdit" })
                                 @Html.ValidationMessageFor(model => model.IDContact, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(model => model.idf, htmlAttributes: new { @class = "control-label col-md-2", @id = "ididfClient" })
+                            @Html.LabelFor(model => model.idf, htmlAttributes: new { @class = "control-label col-md-2", @id = "ididfClientEdit" })
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.idf, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.idf, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
                         <div class="form-group">
                             @Html.LabelFor(model => model.Cnss, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Cnss, new { htmlAttributes = new { @class = "form-control", @id = "idCnssClient" } })
+                                @Html.EditorFor(model => model.Cnss, new { htmlAttributes = new { @class = "form-control", @id = "idCnssClientEdit" } })
                                 @Html.ValidationMessageFor(model => model.Cnss, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
                         <div class="form-group">
                             @Html.LabelFor(model => model.Ice, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Ice, new { htmlAttributes = new { @class = "form-control", @id = "idIceClient" } })
+                                @Html.EditorFor(model => model.Ice, new { htmlAttributes = new { @class = "form-control", @id = "idIceClientEdit" } })
                                 @Html.ValidationMessageFor(model => model.Ice, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
                         <div class="form-group">
                             @Html.LabelFor(model => model.Gsm, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Gsm, new { htmlAttributes = new { @class = "form-control", @id = "idGsmClient" } })
+                                @Html.EditorFor(model => model.Gsm, new { htmlAttributes = new { @class = "form-control", @id = "idGsmClientEdit" } })
                                 @Html.ValidationMessageFor(model => model.Gsm, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
                         <div class="form-group">
                             @Html.LabelFor(model => model.Teleph, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Teleph, new { htmlAttributes = new { @class = "form-control", @id = "idTelephClient" } })
+                                @Html.EditorFor(model => model.Teleph, new { htmlAttributes = new { @class = "form-control", @id = "idTelephClientEdit" } })
                                 @Html.ValidationMessageFor(model => model.Teleph, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Create" class="btn btn-default" onclick="SaveClient()" />
+                                <input type="submit" value="Save" class="btn btn-default" onclick="SaveEditClients()" />
                             </div>
                         </div>
                     </div>
@@ -383,6 +375,10 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.20/cr-1.5.2/datatables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/3.3.0/js/dataTables.fixedColumns.min.js"></script>
 
+    //Validation 
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+
     @*@Scripts.Render("~/bundles/Client/js")*@
     <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
     <script>
@@ -395,9 +391,7 @@
         SearchFonds: "@Url.Action("SearchFonds","Fonds")"})
     </script>
 }
-
 @section scripts{
-
 
     <script type="text/javascript">
         var table = null;
@@ -408,11 +402,8 @@
             {
                 //il y a des données  (table != null) &&
                 $('#idTableClients').DataTable().destroy();
-
             }
             //if (!table.emptyTable) table.destroy();
-
-            //
                 table = $('#idTableClients').DataTable({
                 data,
                 "columns": [
@@ -435,7 +426,7 @@
                         "orderable": false,
                         "class": "center",
                         "render": function (data, type, full, meta) {
-                            return "<a onclick='EditClients(" + data + ")'  style='width:40px' class='btn btn-success' ><i class='far fa-edit'></i></a><a onclick='Delete(" + data + ")' style= 'margin-left: 5px;width:40px' class='btn btn-danger'><i class='fas fa-trash-alt'></i></a><a  style= 'margin-left: 5px;width:40px' class='btn btn-outline-dark'><i class='fas fa-info'></i></a>";
+                            return "<a onclick='EditClients("+ data + ")'  style='width:40px' class='btn btn-success' ><i class='far fa-edit'></i></a><a onclick='Delete(" + data + ")' style= 'margin-left: 5px;width:40px' class='btn btn-danger'><i class='fas fa-trash-alt'></i></a><a  style= 'margin-left: 5px;width:40px' class='btn btn-outline-dark'><i class='fas fa-info'></i></a>";
                         }
                     }
                     //'" + row.id + "'
@@ -456,7 +447,7 @@
                         "previous": "Précédent"
                     },
                     //"emptyTabale": "Pas d'enregistrement trouvés",
-                    "emptyTable": "Chargement des donnée en cours, veuillez patienter ...",
+                    "emptyTable": "Chargement des donnée en cours, veuillez patienter ....",
                     select: {
                         style: 'multi'
                     },
@@ -465,79 +456,18 @@
     }
     $(document).ready(function () {
        //alert("ddddd");
-
         //debugger
             $.ajax({
                 type: "Get",
                 dataType: 'json',
                 url: "/Clients/GetlisteClient",
                 success: function (data) {
-                    //debugger
-                         ReloadClientTable(data.clients);
-                         }
+                   //debugger
+                     ReloadClientTable(data.clients);
+                }
             });
-
     });
 
-
-        //ReloadClientTable();
-
-    //table = $('#idTableClients').DataTable({
-    //    "ajax": {
-    //        "url": "/Clients/GetlisteClient",
-    //        "type": "Get",
-    //        "datatype": "json"
-    //     },
-
-    //"columns": [
-    //    { "data": "id","title": "id" },
-    //    { "data": "Nom","title": "Nom" },
-    //    { "data": "Adresse","title": "Adresse", "width": "40%" },
-    //    { "data": "FamilleName","title": "Famille" },
-    //    //{ "data": "Tbl_Ville_id", "title": "Ville" },
-    //    { "data": "VilleName", "title": "Ville" },
-    //    //{ "data": "IDContact","title": "Contact" },
-    //    { "data": "ContactName", "title": "Contact" },
-    //    { "data": "Mail","title": "Mail" },
-    //    { "data": "telephone1","title": "Téléphone" },
-    //    //{ "title": "DatedeCreation" },
-    //    { "data": "Gsm","title": "GSM" },
-    //    {
-    //     "data": "id",
-    //     "title": "Actions",
-    //     "width": "60%",
-    //     "orderable": false,
-    //     "class": "center",
-    //     "render": function (data, type, full, meta) {
-    //         return "<a  style='width:40px' class='btn btn-success' ><i class='far fa-edit'></i></a><a onclick='Delete(" + data + ")' style= 'margin-left: 5px;width:40px' class='btn btn-danger'><i class='fas fa-trash-alt'></i></a><a onclick='EditClient(" + data + ")'  style= 'margin-left: 5px;width:40px' class='btn btn-outline-dark'><i class='fas fa-info'></i></a>";
-    //     }
-    //    }
-    //    //'" + row.id + "'
-    //],
-    //    "searching": true,
-    //    "scrollY": "300px",
-    //"scrollX": true,
-    //"scrollCollapse": true,
-    ////"autoWidth": false,
-    ////"colReorder": true,
-    //"language": {
-    //"info": "Afficher _END_ sur _TOTAL_ ",
-    //"lengthMenu": "Afficher _MENU_ par page",
-    //"paginate": {
-    //"first": "Premier",
-    //"last": "Dernier",
-    //"next": "Suivant",
-    //"previous": "Précédent"
-    //},
-    ////"emptyTabale": "Pas d'enregistrement trouvés",
-    //"emptyTable": "Chargement des donnée en cours, veuillez patienter ...",
-    //select: {
-    //     style: 'multi'
-    //},
-    //}
-    //});
-
-    //});
         var urls = null;
         function SetActions(actions) {
             urls = actions;
@@ -566,39 +496,95 @@
         function EditClients(id) {
             alert(id);
             //var url = $(this).data("url");
-            var url = "@Url.Action("Edit", "Clients")/" + id;
-            $.get(url, function (data) {
-                $('#editClientModal').html(data);
-
-                $('#editClientModal').modal('show');
-            }); 
-
-
-                    @*$.ajax({
+                $.ajax({
                 type: "Get",
+                dataType:'json',
+                url: "@Url.Action("Edit", "Clients")/" + id,
+                        success: function (data) {
+                        debugger
+                            //$('#editClientModal').html(data.model); // This should be an empty div where you can inject your new html (the partial view)
+                            var model = data.model;
+                            $('#idNomClientEdit').val(model.Nom);
+                            $('#idAdresseClientEdit').val(model.Adresse);
+                            $('#idMailClientEdit').val(model.Mail);
+                            $('#idtelephone1ClientEdit').val(model.telephone1);
+                            $('#idfaxClientEdit').val(model.fax);
+                            $('#idCnssClientEdit').val(model.Cnss);
+                            $('#ididfClientEdit').val(model.idf);
+                            $('#idIceClientEdit').val(model.Ice);
+                            $('#idGsmClientEdit').val(model.Gsm);
+                            $('#editClientModal').modal({
+                            autoOpen: true,
+                            height: 550,
+                            width: 700,
+                            resizable: false,
+                            title: 'Modifier le  client',
+                            close: function () {
+                                alert("close");
+                                $("#editClientModal").hide();
+                                //Popup.dialog('destory').remove();
+                            }
+                        });
+                        $("#editClientModal").show();
+                    }
+
+
+
+                });
+        
+        }
+        function SaveEditClients() {
+          
+            alert("save");
+            var id =  $("#idIdClientEdit").val();
+            var nom = $("#idNomClientEdit").val();
+            var Adresse = $("#idAdresseClientEdit").val();
+            var IdFamille = $("#idIdFamilleClientEdit").val();
+            var Tbl_Ville_id = $("#idIdVilleClientEdit").val();
+            var IDContact = $("#idIDContactClientEdit").val();
+            var Mail = $("#idMailClientEdit").val();
+            var telephone1 = $("#idtelephone1ClientEdit").val();
+            var Gsm = $("#idGsmClientEdit").val();
+
+            let dataObject = JSON.stringify({
+                'Id':id,
+                'Nom': nom,
+                'Adresse': Adresse,
+                'Tbl_Famille_Clt_Id': IdFamille,
+                'Tbl_Ville_id': Tbl_Ville_id,
+                'IDContact': IDContact,
+                'Mail': Mail,
+                'telephone1': telephone1,
+                'Gsm': Gsm,
+            });
+            //var url = $(this).data("url");
+            $.ajax({
+                type: "Post",
                 dataType: 'json',
-                        url: "@Url.Action("Edit", "Clients")/" + id,
-                        //data:data,
-                        
-                });*@
+                data: dataObject,
+                url: "@Url.Action("Edit", "Clients")",
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    debugger
+                                  
+                    $('#editClientModal').modal({
+                        autoOpen: true,
+                        height: 550,
+                        width: 700,
+                        resizable: false,
+                        title: 'Modifier le  client',
+                        close: function () {
+                            alert("close");
+                            $("#editClientModal").hide();
+                            //Popup.dialog('destory').remove();
+                        }
+                    });
+                    $("#editClientModal").show();
+                }
 
 
-            //$("#editClientModal").modal({
-            //    autoOpen: true,
-            //    height: 550,
-            //    width: 700,
-            //    resizable: false,
-            //    title: 'Modifier le  client',
-            //    close: function () {
-            //        alert("close");
-            //        $("#editClientModal").hide();
-            //        //Popup.dialog('destory').remove();
-            //    }
-            //});
 
-            //$("#editClientModal").show();
-
-
+            });
         }
         function AddClient() {
             //debugger
@@ -618,9 +604,9 @@
              $("#addClientModal").show();
             //$("#addClientModal").modal();
         }
-       
+
         function SaveClient() {
-            debugger
+            //debugger
             //var id = res;
             var nom = $("#idNomClient").val();
             var Adresse = $("#idAdresseClient").val();
@@ -666,34 +652,7 @@
                       $("#addClientModal").hide();
                         // debugger
                         ReloadClientTable(res);
-                        swal("Enregistrement effectué avec succès !", "", "success");
-                        //table.ajax.reload();
-                        //e.preventDefault();
-                        //table.row.add([
-                        //    //on doit mettre les variables declarées en haut
-
-                        //    nom,
-                        //    Adresse,
-                        //    IdFamille,
-                        //    Tbl_Ville_id,
-                        //    IDContact,
-                        //    Mail,
-                        //    telephone1,
-                        //    Gsm,
-                        //    ""
-                        //   //'<a style="width:40px" class="btn btn-success"><i class="far fa-edit"></i></a><a style= "margin-left: 5px;width:40px" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a><a  style= "margin-left: 5px;width:40px" class="btn btn-outline-dark"><i class="fas fa-info"></i></a>'
-
-                        //]).draw(false).node().id = res;
-                        //debugger
-                        //table.draw();
-                        //var nombreLignes = res.Length;
-                        //$("#idLignes").empty();
-                        //for(var i = 0; i < nombreLignes; i++) {
-                        //    $("#idLignes").append('<tr><td>' + res[i].Nom + '</td><td>' + res[i].Adresse + '</td><td>' + res[i].IdFamille + '</td><td>' + res[i].Tbl_Ville_id + '</td></tr>');
-                        //}
-                      //  swal("Enregistrement effectué avec succès !", "", "success");
-
-                        //table.ajax.reload();
+                        swal("Enregistrement effectué avec succès !", "", "success");                     
                     }
                 },
                 error: function (res) {
@@ -706,3 +665,17 @@
     //SaveClient
     </script>
 }
+
+
+
+
+
+
+
+@*EmpVar.DOB = Convert.ToDateTime(Rows.DOB).ToShortDateString();
+
+    EmpVar.MobileNo =Convert.ToInt16(Rows.MobileNo);
+
+    EmpVar.Age = Convert.ToInt16(Rows.Age);
+
+    EmpVar.EmailId = Rows.EmailId;*@

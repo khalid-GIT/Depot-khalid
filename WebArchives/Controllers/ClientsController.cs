@@ -182,7 +182,6 @@ namespace WebArchives.Controllers
         {
             var biz = new BusinessClients();
             var dto = biz.GetClientById(id);
-
             var model = new VMListeClient
             {
                 id = dto.id,
@@ -240,11 +239,17 @@ namespace WebArchives.Controllers
 
                 }
 
-                return RedirectToAction("index");
+                var bizV = new BusinessVilles();
+                var bizF = new BusinessFamilleClients();
+                var bizContact = new BusinessContactClt();
+                model.ListeContact = bizContact.ListContact();
+                model.listeVilles = bizV.GetListeVille();
+                model.listeFamille = bizF.GetListFamilleClt();
+                return Json(new { model }, JsonRequestBehavior.AllowGet);
             }
             catch
             {
-                return View();
+                return Json( null, JsonRequestBehavior.AllowGet);
             }
         }
 
