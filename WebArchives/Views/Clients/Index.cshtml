@@ -253,7 +253,8 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Modifier un client</h4>
-                @Html.HiddenFor(model => model.id, new { htmlAttributes = new { @class = "form-control", @id = "idIdClientEdit" } })
+               @* @Html.LabelFor(model => model.id, new { htmlAttributes = new { @class = "form-control", @id = "idIdClientEdit" } })*@
+                @Html.HiddenFor(model => model.id, new { htmlAttributes = new { @class = "form-control", @id ="idIdClientEdit" } })
             </div>
             <div class="modal-body">
                 <div id="displayArea">
@@ -504,7 +505,8 @@
                         debugger
                             //$('#editClientModal').html(data.model); // This should be an empty div where you can inject your new html (the partial view)
                             var model = data.model;
-                            $('#idNomClientEdit').val(model.Nom);
+                            $('#idIdClientEdit').val(model.id);
+                            $('#idNomClientEdit').val(model.nom);
                             $('#idAdresseClientEdit').val(model.Adresse);
                             $('#idMailClientEdit').val(model.Mail);
                             $('#idtelephone1ClientEdit').val(model.telephone1);
@@ -557,6 +559,7 @@
                 'telephone1': telephone1,
                 'Gsm': Gsm,
             });
+            debugger
             //var url = $(this).data("url");
             $.ajax({
                 type: "Post",
