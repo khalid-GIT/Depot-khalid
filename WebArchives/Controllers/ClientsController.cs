@@ -70,16 +70,25 @@ namespace WebArchives.Controllers
         }
 
         // GET: Clients/Create
-        public ActionResult Create()
+        public JsonResult Create()
         {
-            var model = new VMListeClient();
-            var biz = new BusinessVilles();
-            var bizF = new BusinessFamilleClients();
-            var bizContact = new BusinessContactClt();
-            model.ListeContact = bizContact.ListContact();
-            model.listeVilles = biz.GetListeVille();
-            model.listeFamille = bizF.GetListFamilleClt();
-            return View(model);
+
+            try
+            {
+                var model = new VMListeClient();
+                var biz = new BusinessVilles();
+                var bizF = new BusinessFamilleClients();
+                var bizContact = new BusinessContactClt();
+                model.ListeContact = bizContact.ListContact();
+                model.listeVilles = biz.GetListeVille();
+                model.listeFamille = bizF.GetListFamilleClt();
+                //return View(model);
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return Json(null, JsonRequestBehavior.AllowGet);
+            }
         }
 
         // POST: Clients/Create Ancienne méthode avec formulaire
@@ -106,28 +115,29 @@ namespace WebArchives.Controllers
         //                dto.Tbl_Ville_id = model.Tbl_Ville_id;
         //                dto.IDContact = model.IDContact;
 
-        //            var bizv = new BusinessVilles();
-        //            var bizContact = new BusinessContactClt();
+            //            var bizv = new BusinessVilles();
+            //            var bizContact = new BusinessContactClt();
 
 
-        //            model.ListeContact = bizContact.ListContact();
-        //            model.listeVilles = bizv.GetListeVille();
-        //            model.listeFamille = bizF.GetListFamilleClt();
+            //            model.ListeContact = bizContact.ListContact();
+            //            model.listeVilles = bizv.GetListeVille();
+            //            model.listeFamille = bizF.GetListFamilleClt();
 
 
-        //            var biz = new BusinessClients();
-        //            biz.AjouterClient(dto);
-        //            return RedirectToAction("index");
-        //        }
-        //        return View(model);
-        //    }
-        //    catch(Exception e)
-        //    {
-        //        return View(model);
-        //    }
-        //}
+            //            var biz = new BusinessClients();
+            //            biz.AjouterClient(dto);
+            //            return RedirectToAction("index");
+            //        }
+            //        return View(model);
+            //    }
+            //    catch(Exception e)
+            //    {
+            //        return View(model);
+            //    }
+            //}
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public JsonResult Create(VMListeClient model)
         {
             var bizF = new BusinessFamilleClients();
@@ -139,7 +149,7 @@ namespace WebArchives.Controllers
                 {
                     var dto = new DtoListeClients();
                     dto.Nom = model.Nom;
-                    dto.Adresse = model.Nom;
+                    dto.Adresse = model.Adresse;
                     dto.Mail = model.Mail;
                     dto.telephone1 = model.telephone1;
                     dto.fax = model.fax;
@@ -213,16 +223,19 @@ namespace WebArchives.Controllers
         [HttpPost]
         public ActionResult Edit(VMListeClient model)
         {
+            var biz = new BusinessClients();
+           var  IsUpdate = false;
             try
             {
                 // TODO: Add update logic here
 
                 if (ModelState.IsValid)
                 {
+                    IsUpdate = true;
                     var dto = new DtoListeClients();
                     dto.id = model.id;
                     dto.Nom = model.Nom;
-                    dto.Adresse = model.Nom;
+                    dto.Adresse = model.Adresse;
                     dto.Mail = model.Mail;
                     dto.telephone1 = model.telephone1;
                     dto.fax = model.fax;
@@ -234,7 +247,7 @@ namespace WebArchives.Controllers
                     dto.Tbl_Famille_Clt_Id = model.Tbl_Famille_Clt_Id;
                     dto.Tbl_Ville_id = model.Tbl_Ville_id;
                     dto.IDContact = model.IDContact;
-                    var biz = new BusinessClients();
+                  
                     biz.MdifierClient(dto);
 
                 }
@@ -242,11 +255,16 @@ namespace WebArchives.Controllers
                 var bizV = new BusinessVilles();
                 var bizF = new BusinessFamilleClients();
                 var bizContact = new BusinessContactClt();
+              
+
                 model.ListeContact = bizContact.ListContact();
                 model.listeVilles = bizV.GetListeVille();
                 model.listeFamille = bizF.GetListFamilleClt();
-                return Json(new { model }, JsonRequestBehavior.AllowGet);
-            }
+                var clients = biz.BusinessliseClient();
+
+                return Json(new { clients, IsUpdate ,message="Success" }, JsonRequestBehavior.AllowGet);
+            
+         }
             catch
             {
                 return Json( null, JsonRequestBehavior.AllowGet);

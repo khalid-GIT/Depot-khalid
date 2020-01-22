@@ -16,13 +16,16 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/raphael/js")
     @Scripts.Render("~/bundles/metisMenu/js")
+    @Scripts.Render("~/bundles/jqueryval")
+
+
     @*@Scripts.Render("~/bundles/startmin/js")*@
     @if (IsSectionDefined("scripts"))
     {
         @RenderSection("scripts", required: false);
     }
 
-   @* @RenderSection("scripts", required: false)*@
+    @* @RenderSection("scripts", required: false)*@
 </head>
 <body>
     <div id="wrapper">

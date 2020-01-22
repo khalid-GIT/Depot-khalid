@@ -20,7 +20,7 @@ namespace BLL
         {
             var Entity = new Tbl_Client();
             Entity.Nom = dto.Nom;
-            Entity.Adresse = dto.Nom;
+            Entity.Adresse = dto.Adresse;
             Entity.Mail = dto.Mail;
             Entity.telephone1 = dto.telephone1;
             Entity.fax = dto.fax;
@@ -110,7 +110,7 @@ namespace BLL
 
             var Entity = context.Tbl_Client.Find(dto.id);
             Entity.Nom = dto.Nom;
-            Entity.Adresse = dto.Nom;
+            Entity.Adresse = dto.Adresse;
             Entity.Mail = dto.Mail;
             Entity.telephone1 = dto.telephone1;
             Entity.fax = dto.fax;

@@ -5,5 +5,6 @@
 3>------ Début de la génération : Projet : BLL, Configuration : Debug Any CPU ------
 3>  BLL -> C:\Users\KElkettani\source\repos\Depot-khalid\BLL\bin\Debug\BLL.dll
 4>------ Début de la génération : Projet : WebArchives, Configuration : Debug Any CPU ------
+4>C:\Users\KElkettani\source\repos\Depot-khalid\WebArchives\Controllers\ClientsController.cs(88,30,88,31): warning CS0168: The variable 'e' is declared but never used
 4>  WebArchives -> C:\Users\KElkettani\source\repos\Depot-khalid\WebArchives\bin\WebArchives.dll
 ========== Génération : 4 a réussi, 0 a échoué, 0 mis à jour, 0 a été ignoré ==========

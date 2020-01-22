@@ -12,7 +12,7 @@ namespace WebArchives.Models.Clients
     public class VMListeClient
     {
         public int id { get; set; }
-        [Required(ErrorMessage = "Please enter Name"), MaxLength(50)]
+        [Required(ErrorMessage = "Le nom est obligatoire !"), MaxLength(50)]
         [StringLength(50)]
         [Display(Name = "Nom client")]
         public string Nom { get; set; }
