@@ -68,9 +68,9 @@
 
 
 </table>
-<div><a href="@Url.Action("Report",new { id="PDF"})">Exporter en PDF</a></div>
-<div><a href="@Url.Action("Report",new { id="PDF"})">Exporter en PDF</a></div>
-<div><a href="@Url.Action("Report",new { id="PDF"})">Exporter en PDF</a></div>
+<div><a href="@Url.Action("Report","Clients",new { repotType="PDF"})">Exporter en PDF</a></div>
+<div><a href="@Url.Action("Report",new { repotType="Word"})">Exporter en WORD</a></div>
+<div><a href="@Url.Action("Report",new { repotType="Excel"})">Exporter en EXCEL</a></div>
 <!-- Modal -->
 @*MODEL ADD*@
 <style>

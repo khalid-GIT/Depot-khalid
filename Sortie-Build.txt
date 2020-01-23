@@ -1,10 +1,7 @@
 ﻿1>------ Début de la génération : Projet : COMMON, Configuration : Debug Any CPU ------
-1>  COMMON -> C:\Users\KElkettani\source\repos\Depot-khalid\COMMON\bin\Debug\COMMON.dll
+1>  COMMON -> C:\Users\KElkettani\Source\Repos\Depot-khalid\COMMON\bin\Debug\COMMON.dll
 2>------ Début de la génération : Projet : DAL, Configuration : Debug Any CPU ------
-2>  DAL -> C:\Users\KElkettani\source\repos\Depot-khalid\DAL\bin\Debug\DAL.dll
+2>  DAL -> C:\Users\KElkettani\Source\Repos\Depot-khalid\DAL\bin\Debug\DAL.dll
 3>------ Début de la génération : Projet : BLL, Configuration : Debug Any CPU ------
-3>  BLL -> C:\Users\KElkettani\source\repos\Depot-khalid\BLL\bin\Debug\BLL.dll
+3>  BLL -> C:\Users\KElkettani\Source\Repos\Depot-khalid\BLL\bin\Debug\BLL.dll
 4>------ Début de la génération : Projet : WebArchives, Configuration : Debug Any CPU ------
-4>C:\Users\KElkettani\source\repos\Depot-khalid\WebArchives\Controllers\ClientsController.cs(88,30,88,31): warning CS0168: The variable 'e' is declared but never used
-4>  WebArchives -> C:\Users\KElkettani\source\repos\Depot-khalid\WebArchives\bin\WebArchives.dll
-========== Génération : 4 a réussi, 0 a échoué, 0 mis à jour, 0 a été ignoré ==========

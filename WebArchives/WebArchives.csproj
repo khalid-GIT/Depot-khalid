@@ -215,6 +215,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ASPMVCDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="ASPMVCDataSet_V.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ASPMVCDataSet_V.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -2033,6 +2038,17 @@
     </None>
     <Content Include="ASPMVCDataSet.xss">
       <DependentUpon>ASPMVCDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="ASPMVCDataSet_V.xsc">
+      <DependentUpon>ASPMVCDataSet_V.xsd</DependentUpon>
+    </Content>
+    <None Include="ASPMVCDataSet_V.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ASPMVCDataSet_V.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="ASPMVCDataSet_V.xss">
+      <DependentUpon>ASPMVCDataSet_V.xsd</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />

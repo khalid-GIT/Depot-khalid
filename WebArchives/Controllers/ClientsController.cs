@@ -1,12 +1,16 @@
 ﻿using BLL;
 using COMMON.DTO.Clients;
+using Microsoft.Reporting.WebForms;
+using Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebArchives.Filtres;
 using WebArchives.Models.Clients;
+using Warning = Microsoft.Reporting.WebForms.Warning;
 
 namespace WebArchives.Controllers
 {
@@ -91,6 +95,77 @@ namespace WebArchives.Controllers
             }
         }
 
+        public ActionResult Report(string repotType)
+        {
+            LocalReport Lr = new LocalReport();
+            String path = Path.Combine(Server.MapPath("~/Reports"), "Report1.rdlc");
+
+            if (System.IO.File.Exists(path))
+            {
+                Lr.ReportPath = path;
+
+            }
+            else
+            {
+                return RedirectToAction("index");
+
+            }
+
+            var bis = new BusinessClients();
+            var model = new VMListeClient();
+            model.listeclients = bis.BusinessliseClient();
+            var list = model.listeclients;
+
+
+            ReportDataSource rd = new ReportDataSource("DataSet1", list);
+            Lr.DataSources.Add(rd);
+            //string reportType = id;
+            string mimeType;
+            string encoding;
+            string fileNameExtension;
+
+            switch (repotType)
+            {
+                case "Excel":
+                    fileNameExtension = "xlsx";
+                    break;
+                case "Word":
+                    fileNameExtension = "docs";
+                    break;
+                case "PDF":
+                    fileNameExtension = "pdf";
+                    break;
+                default:
+                    fileNameExtension = "jpg";
+                    break;
+            }
+
+            string deviceinfo =
+                "<deviceInfo>" +
+                "<outPutFormat>" + repotType + "</outPutFormat>" +
+                "<PageWidth>8.5in</outPutFormat>" +
+                "<PageHeiht>11in</PageHeiht>" +
+                "<MarginTop>0.5in</MarginTop>" +
+                "<MarginLeft>1in</MarginLeft>" +
+                "<MarginRight>1in</MarginLeft>" +
+                "<MarginBottom>0,5in</MarginBottom>" +
+                "<deviceInfo>";
+
+            Warning[] warnings;
+            string[] streams;
+            byte[] renderBytes;
+
+            renderBytes = Lr.Render(
+                repotType,
+                "",
+                out mimeType,
+                out encoding,
+                out fileNameExtension,
+                out streams,
+                out warnings
+                );
+            return File(renderBytes, mimeType);
+        }
         // POST: Clients/Create Ancienne méthode avec formulaire
         //[HttpPost]
         //public ActionResult Create(VMListeClient model)
