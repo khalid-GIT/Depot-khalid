@@ -319,6 +319,8 @@ namespace WebArchives {
             
             private global::System.Data.DataColumn columnContactName;
             
+            private global::System.Data.DataColumn columnContactGsm;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public Tbl_ClientDataTable() {
@@ -514,6 +516,14 @@ namespace WebArchives {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn ContactGsmColumn {
+                get {
+                    return this.columnContactGsm;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -568,7 +578,8 @@ namespace WebArchives {
                         string DataColumn1, 
                         string VilleName, 
                         string FamilleName, 
-                        string ContactName) {
+                        string ContactName, 
+                        string ContactGsm) {
                 Tbl_ClientRow rowTbl_ClientRow = ((Tbl_ClientRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -590,7 +601,8 @@ namespace WebArchives {
                         DataColumn1,
                         VilleName,
                         FamilleName,
-                        ContactName};
+                        ContactName,
+                        ContactGsm};
                 rowTbl_ClientRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowTbl_ClientRow);
                 return rowTbl_ClientRow;
@@ -640,6 +652,7 @@ namespace WebArchives {
                 this.columnVilleName = base.Columns["VilleName"];
                 this.columnFamilleName = base.Columns["FamilleName"];
                 this.columnContactName = base.Columns["ContactName"];
+                this.columnContactGsm = base.Columns["ContactGsm"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -685,6 +698,8 @@ namespace WebArchives {
                 base.Columns.Add(this.columnFamilleName);
                 this.columnContactName = new global::System.Data.DataColumn("ContactName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnContactName);
+                this.columnContactGsm = new global::System.Data.DataColumn("ContactGsm", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnContactGsm);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnid}, true));
                 this.columnid.AutoIncrement = true;
@@ -1150,6 +1165,22 @@ namespace WebArchives {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string ContactGsm {
+                get {
+                    try {
+                        return ((string)(this[this.tableTbl_Client.ContactGsmColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("La valeur pour la colonne \'ContactGsm\' dans la table \'Tbl_Client\' est DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTbl_Client.ContactGsmColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsNomNull() {
                 return this.IsNull(this.tableTbl_Client.NomColumn);
             }
@@ -1338,6 +1369,18 @@ namespace WebArchives {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetContactNameNull() {
                 this[this.tableTbl_Client.ContactNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsContactGsmNull() {
+                return this.IsNull(this.tableTbl_Client.ContactGsmColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetContactGsmNull() {
+                this[this.tableTbl_Client.ContactGsmColumn] = global::System.Convert.DBNull;
             }
         }
         

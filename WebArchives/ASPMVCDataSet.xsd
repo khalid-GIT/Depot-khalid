@@ -188,6 +188,7 @@
               <xs:element name="VilleName" msprop:Generator_ColumnVarNameInTable="columnVilleName" msprop:Generator_ColumnPropNameInRow="VilleName" msprop:Generator_ColumnPropNameInTable="VilleNameColumn" msprop:Generator_UserColumnName="VilleName" type="xs:string" minOccurs="0" />
               <xs:element name="FamilleName" msprop:Generator_ColumnVarNameInTable="columnFamilleName" msprop:Generator_ColumnPropNameInRow="FamilleName" msprop:Generator_ColumnPropNameInTable="FamilleNameColumn" msprop:Generator_UserColumnName="FamilleName" type="xs:string" minOccurs="0" />
               <xs:element name="ContactName" msprop:Generator_ColumnVarNameInTable="columnContactName" msprop:Generator_ColumnPropNameInRow="ContactName" msprop:Generator_ColumnPropNameInTable="ContactNameColumn" msprop:Generator_UserColumnName="ContactName" type="xs:string" minOccurs="0" />
+              <xs:element name="ContactGsm" msprop:Generator_ColumnVarNameInTable="columnContactGsm" msprop:Generator_ColumnPropNameInRow="ContactGsm" msprop:Generator_ColumnPropNameInTable="ContactGsmColumn" msprop:Generator_UserColumnName="ContactGsm" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

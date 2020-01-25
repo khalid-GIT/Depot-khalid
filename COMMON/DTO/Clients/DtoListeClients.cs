@@ -22,6 +22,7 @@ namespace COMMON.DTO.Clients
         public string VilleName { get; set; }
         public string FamilleName { get; set; }
         public string DataColumn1 { get; set; }
+        public string ContactGsm { get; set; }
         
         public DateTime DatedeCreation { get; set; }
         public int Tbl_Famille_Clt_Id { get; set; }
