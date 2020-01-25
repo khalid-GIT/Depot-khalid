@@ -39,7 +39,37 @@ namespace BLL
             return Entity.id;
         }
 
-        public  List<DtoListeClients> BusinessliseClient()
+        public List<DtoListeClients> BusinessliseViewClient()
+        { 
+
+            //var list = context.Tbl_Client.ToList();
+            var list = context.Tbl_Client.Select(x => new DtoListeClients
+            {
+                id = x.id,
+                Nom = x.Nom,
+                telephone1 = x.telephone1,
+                Adresse = x.Adresse,
+                fax = x.fax,
+                Mail = x.Mail,
+                Cnss = x.Cnss,
+                idf = x.idf,
+                Ice = x.Ice,
+                Gsm = x.Gsm,
+                Teleph = x.Teleph,
+
+                DataColumn1 = x.Tbl_Ville.libelle,
+                VilleName = x.Tbl_Ville.libelle,
+                FamilleName = x.Tbl_Famille_Clt.Libelle,
+                ContactName = x.Tbl_Contact_Clt.Nom + ", " + x.Tbl_Contact_Clt.Prenom
+            }).ToList();
+            //list = list.ToList();
+            //context.Tbl_Clients.ToList();
+            var DtoClients = Mapper.Map<List<DtoListeClients>>(list);
+            return DtoClients;
+        }
+
+
+        public List<DtoListeClients> BusinessliseClient()
         {
 
             //var list = context.Tbl_Client.ToList();

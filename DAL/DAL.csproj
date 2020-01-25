@@ -78,6 +78,10 @@
     <Compile Include="Migrations\201912211652439_versioN211219k.Designer.cs">
       <DependentUpon>201912211652439_versioN211219k.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001240745265_InitialCreate_viewclt.cs" />
+    <Compile Include="Migrations\202001240745265_InitialCreate_viewclt.Designer.cs">
+      <DependentUpon>202001240745265_InitialCreate_viewclt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -102,6 +106,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912211652439_versioN211219k.resx">
       <DependentUpon>201912211652439_versioN211219k.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001240745265_InitialCreate_viewclt.resx">
+      <DependentUpon>202001240745265_InitialCreate_viewclt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

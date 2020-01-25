@@ -19,7 +19,6 @@
         {
            
         }
-
         //public virtual DbSet<IdentityRole> Roles { get; set; }
         //public virtual DbSet<ApplicationUser> Users { get; set; }
         //public virtual DbSet<IdentityUserClaim> UserClaims { get; set; }
@@ -45,9 +44,9 @@
         public DbSet<Tbl_Famille_Clt> Tbl_Famille_Clt { get; set; }
         public DbSet<Tbl_Contact_Clt> Tbl_Contact_clt { get; set; }
         public DbSet<Tbl_Service> Tbl_Service { get; set; }
-
-
-    }
+        
+    //View_Clt
+}
     //Enable-Migrations
     //Add-Migration "InitialCreate"
     //Update-Database

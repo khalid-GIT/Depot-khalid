@@ -311,6 +311,14 @@ namespace WebArchives {
             
             private global::System.Data.DataColumn columnCodePostal;
             
+            private global::System.Data.DataColumn columnDataColumn1;
+            
+            private global::System.Data.DataColumn columnVilleName;
+            
+            private global::System.Data.DataColumn columnFamilleName;
+            
+            private global::System.Data.DataColumn columnContactName;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public Tbl_ClientDataTable() {
@@ -474,6 +482,38 @@ namespace WebArchives {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DataColumn1Column {
+                get {
+                    return this.columnDataColumn1;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn VilleNameColumn {
+                get {
+                    return this.columnVilleName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn FamilleNameColumn {
+                get {
+                    return this.columnFamilleName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn ContactNameColumn {
+                get {
+                    return this.columnContactName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -509,7 +549,26 @@ namespace WebArchives {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public Tbl_ClientRow AddTbl_ClientRow(string Nom, string Adresse, string Mail, string telephone1, string fax, System.DateTime DatedeCreation, string idf, string Cnss, string Ice, string Gsm, string Teleph, int IdVille, int IdFamille, int IDContact, string CodePostal) {
+            public Tbl_ClientRow AddTbl_ClientRow(
+                        string Nom, 
+                        string Adresse, 
+                        string Mail, 
+                        string telephone1, 
+                        string fax, 
+                        System.DateTime DatedeCreation, 
+                        string idf, 
+                        string Cnss, 
+                        string Ice, 
+                        string Gsm, 
+                        string Teleph, 
+                        int IdVille, 
+                        int IdFamille, 
+                        int IDContact, 
+                        string CodePostal, 
+                        string DataColumn1, 
+                        string VilleName, 
+                        string FamilleName, 
+                        string ContactName) {
                 Tbl_ClientRow rowTbl_ClientRow = ((Tbl_ClientRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -527,7 +586,11 @@ namespace WebArchives {
                         IdVille,
                         IdFamille,
                         IDContact,
-                        CodePostal};
+                        CodePostal,
+                        DataColumn1,
+                        VilleName,
+                        FamilleName,
+                        ContactName};
                 rowTbl_ClientRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowTbl_ClientRow);
                 return rowTbl_ClientRow;
@@ -573,6 +636,10 @@ namespace WebArchives {
                 this.columnIdFamille = base.Columns["IdFamille"];
                 this.columnIDContact = base.Columns["IDContact"];
                 this.columnCodePostal = base.Columns["CodePostal"];
+                this.columnDataColumn1 = base.Columns["DataColumn1"];
+                this.columnVilleName = base.Columns["VilleName"];
+                this.columnFamilleName = base.Columns["FamilleName"];
+                this.columnContactName = base.Columns["ContactName"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -610,6 +677,14 @@ namespace WebArchives {
                 base.Columns.Add(this.columnIDContact);
                 this.columnCodePostal = new global::System.Data.DataColumn("CodePostal", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCodePostal);
+                this.columnDataColumn1 = new global::System.Data.DataColumn("DataColumn1", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDataColumn1);
+                this.columnVilleName = new global::System.Data.DataColumn("VilleName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnVilleName);
+                this.columnFamilleName = new global::System.Data.DataColumn("FamilleName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFamilleName);
+                this.columnContactName = new global::System.Data.DataColumn("ContactName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnContactName);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnid}, true));
                 this.columnid.AutoIncrement = true;
@@ -1011,6 +1086,70 @@ namespace WebArchives {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string DataColumn1 {
+                get {
+                    try {
+                        return ((string)(this[this.tableTbl_Client.DataColumn1Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("La valeur pour la colonne \'DataColumn1\' dans la table \'Tbl_Client\' est DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTbl_Client.DataColumn1Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string VilleName {
+                get {
+                    try {
+                        return ((string)(this[this.tableTbl_Client.VilleNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("La valeur pour la colonne \'VilleName\' dans la table \'Tbl_Client\' est DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTbl_Client.VilleNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string FamilleName {
+                get {
+                    try {
+                        return ((string)(this[this.tableTbl_Client.FamilleNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("La valeur pour la colonne \'FamilleName\' dans la table \'Tbl_Client\' est DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTbl_Client.FamilleNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string ContactName {
+                get {
+                    try {
+                        return ((string)(this[this.tableTbl_Client.ContactNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("La valeur pour la colonne \'ContactName\' dans la table \'Tbl_Client\' est DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTbl_Client.ContactNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsNomNull() {
                 return this.IsNull(this.tableTbl_Client.NomColumn);
             }
@@ -1151,6 +1290,54 @@ namespace WebArchives {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetCodePostalNull() {
                 this[this.tableTbl_Client.CodePostalColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsDataColumn1Null() {
+                return this.IsNull(this.tableTbl_Client.DataColumn1Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetDataColumn1Null() {
+                this[this.tableTbl_Client.DataColumn1Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsVilleNameNull() {
+                return this.IsNull(this.tableTbl_Client.VilleNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetVilleNameNull() {
+                this[this.tableTbl_Client.VilleNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsFamilleNameNull() {
+                return this.IsNull(this.tableTbl_Client.FamilleNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetFamilleNameNull() {
+                this[this.tableTbl_Client.FamilleNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsContactNameNull() {
+                return this.IsNull(this.tableTbl_Client.ContactNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetContactNameNull() {
+                this[this.tableTbl_Client.ContactNameColumn] = global::System.Convert.DBNull;
             }
         }
         

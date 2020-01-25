@@ -4,6 +4,7 @@ using Microsoft.Reporting.WebForms;
 using Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -110,14 +111,13 @@ namespace WebArchives.Controllers
                 return RedirectToAction("index");
 
             }
-
             var bis = new BusinessClients();
             var model = new VMListeClient();
-            model.listeclients = bis.BusinessliseClient();
-            var list = model.listeclients;
-
+            var list = bis.BusinessliseViewClient();
+            //var list = model.listeclients;
 
             ReportDataSource rd = new ReportDataSource("DataSet1", list);
+            
             Lr.DataSources.Add(rd);
             //string reportType = id;
             string mimeType;
@@ -248,7 +248,6 @@ namespace WebArchives.Controllers
                     model.listeVilles = bizv.GetListeVille();
                     model.listeFamille = bizF.GetListFamilleClt();
 
-
                     var biz = new BusinessClients();
                     int id = biz.AjouterClient(dto);
                     var clients = bis.BusinessliseClient();
@@ -353,9 +352,6 @@ namespace WebArchives.Controllers
             {
                 var biz = new BusinessClients();
                 biz.SupprimerClients(id);
-
-
-
                 //message de confirmation
                 //TempData["SuccessMessage"] = "La ville a eté supprimée avec succés";
                 //var biz = new BusinessClients();

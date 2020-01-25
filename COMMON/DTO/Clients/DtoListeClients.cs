@@ -21,6 +21,8 @@ namespace COMMON.DTO.Clients
         public string Teleph { get; set; }
         public string VilleName { get; set; }
         public string FamilleName { get; set; }
+        public string DataColumn1 { get; set; }
+        
         public DateTime DatedeCreation { get; set; }
         public int Tbl_Famille_Clt_Id { get; set; }
         public int Tbl_Ville_id { get; set; }

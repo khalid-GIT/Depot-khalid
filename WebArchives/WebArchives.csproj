@@ -215,11 +215,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ASPMVCDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="ASPMVCDataSet_V.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ASPMVCDataSet_V.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -233,6 +228,11 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="rd.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rd.xsd</DependentUpon>
+    </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -2039,19 +2039,19 @@
     <Content Include="ASPMVCDataSet.xss">
       <DependentUpon>ASPMVCDataSet.xsd</DependentUpon>
     </Content>
-    <Content Include="ASPMVCDataSet_V.xsc">
-      <DependentUpon>ASPMVCDataSet_V.xsd</DependentUpon>
-    </Content>
-    <None Include="ASPMVCDataSet_V.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>ASPMVCDataSet_V.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <Content Include="ASPMVCDataSet_V.xss">
-      <DependentUpon>ASPMVCDataSet_V.xsd</DependentUpon>
-    </Content>
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
+    <Content Include="rd.xsc">
+      <DependentUpon>rd.xsd</DependentUpon>
+    </Content>
+    <None Include="rd.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>rd.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="rd.xss">
+      <DependentUpon>rd.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
