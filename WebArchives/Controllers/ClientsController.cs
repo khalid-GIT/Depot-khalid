@@ -15,7 +15,7 @@ using Warning = Microsoft.Reporting.WebForms.Warning;
 
 namespace WebArchives.Controllers
 {
-    //[Auth]
+   // [Auth]
     public class ClientsController : Controller
     {
         // GET: Clients
@@ -88,6 +88,7 @@ namespace WebArchives.Controllers
                 model.listeVilles = biz.GetListeVille();
                 model.listeFamille = bizF.GetListFamilleClt();
                 //return View(model);
+                ModelState.Remove("Name");
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
@@ -366,6 +367,15 @@ namespace WebArchives.Controllers
                 return Json(null, JsonRequestBehavior.AllowGet);
 
             }
+        }
+        public JsonResult Chercher(string chercher)
+        {
+
+            var biz = new BusinessClients();
+            
+            var clients = biz.BusinessliseClient();
+            return Json(new { clients, IsDeleted = true }, JsonRequestBehavior.AllowGet);
+
         }
     }
 }

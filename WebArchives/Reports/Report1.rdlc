@@ -339,6 +339,7 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>LightBlue</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -573,7 +574,7 @@
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>Ville Name</Value>
+                            <Value>Ville</Value>
                             <Style />
                           </TextRun>
                         </TextRuns>
@@ -606,7 +607,7 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>Famille Name</Value>
+                                <Value>Famille</Value>
                                 <Style />
                               </TextRun>
                             </TextRuns>

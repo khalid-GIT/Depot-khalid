@@ -28,7 +28,18 @@
             @Html.ActionLink("Create New", "Create")
     </p>*@
 @*<a class="btn btn-success" style="margin:10px auto" onclick="@Url.Action("Create", "Clients")"><i class="fas fa-plus">Ajouter</i></a>*@
-<a class="btn btn-success" style="margin:10px auto" onclick="AddClient()"><i class="fas fa-plus">Ajouter</i></a>
+<div class="col-sm-12">
+    @*align="left"*@
+    <div class="col-sm-6">
+        <a class="btn btn-success" style="margin:10px auto" onclick="AddClient()"><i class="fas fa-plus">Ajouter</i></a>
+    </div>
+
+</div>
+@using (Html.BeginForm("","",FormMethod.Post, new { @style = "align:right margin-right:100px margin-top:50px", @class = "pull-right" }))
+{
+    <b> Chercher </b>@Html.TextBox("Chercher")
+    <input type="button"  id="chercherClient" onclick= "ChercherClient" value="Chercher" placeholder="Chercher" />
+}
 <table id="idTableClients" class="table table-bordered" cellspacing="0">
     <thead>
 
@@ -94,7 +105,7 @@
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" onclick="Close()" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Ajouter un client</h4>
                 </div>
                 <div class="modal-body">
@@ -104,56 +115,56 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Nom, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @class = "form-control", @id = "idNomClient" } })
-                                    @* @Html.ValidationMessageFor(model => model.Nom, "", new { @class = "text-danger" })*@
+                                    @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @class = "form-control", @id = "idNomClient", @required = "required" } })
+                                    @Html.ValidationMessageFor(model => model.Nom, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Adresse, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
                                     @Html.EditorFor(model => model.Adresse, new { htmlAttributes = new { @class = "form-control", @id = "idAdresseClient" } })
-                                    @*   @Html.ValidationMessageFor(model => model.Adresse, "", new { @class = "text-danger" })*@
+                                    @Html.ValidationMessageFor(model => model.Adresse, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Mail, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Mail, new { htmlAttributes = new { @class = "form-control", @id = "idMailClient" } })
-                                    @*  @Html.ValidationMessageFor(model => model.Mail, "", new { @class = "text-danger" })*@
+                                    @Html.EditorFor(model => model.Mail, new { htmlAttributes = new { @class = "form-control", @id = "idMailClient", @required = "required" } })
+                                    @Html.ValidationMessageFor(model => model.Mail, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.telephone1, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
                                     @Html.EditorFor(model => model.telephone1, new { htmlAttributes = new { @class = "form-control", @id = "idtelephone1Client" } })
-                                    @*  @Html.ValidationMessageFor(model => model.telephone1, "", new { @class = "text-danger" })*@
+                                    @Html.ValidationMessageFor(model => model.telephone1, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.fax, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
                                     @Html.EditorFor(model => model.fax, new { htmlAttributes = new { @class = "form-control", @id = "idFaxClient" } })
-                                    @*  @Html.ValidationMessageFor(model => model.fax, "", new { @class = "text-danger" })*@
+                                    @Html.ValidationMessageFor(model => model.fax, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Tbl_Famille_Clt_Id, "Famille", new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.DropDownListFor(model => model.Tbl_Famille_Clt_Id, new SelectList(Model.listeFamille, "IdFamille", "Libelle"), new { @class = "form-control", @id = "idIdFamilleClient" })
+                                    @Html.DropDownListFor(model => model.Tbl_Famille_Clt_Id, new SelectList(Model.listeFamille, "IdFamille", "Libelle"), new { @class = "form-control", @id = "idIdFamilleClient", @required = "required" })
                                     @Html.ValidationMessageFor(model => model.Tbl_Famille_Clt_Id, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Tbl_Ville_id, "Ville", new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.DropDownListFor(model => model.Tbl_Ville_id, new SelectList(Model.listeVilles, "IdVille", "Libelle"), new { @class = "form-control", @id = "idIdVilleClient" })
+                                    @Html.DropDownListFor(model => model.Tbl_Ville_id, new SelectList(Model.listeVilles, "IdVille", "Libelle"), new { @class = "form-control", @id = "idIdVilleClient", @required = "required" })
                                     @Html.ValidationMessageFor(model => model.Tbl_Ville_id, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.IDContact, "Contact", new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.DropDownListFor(model => model.IDContact, new SelectList(Model.ListeContact, "IDContact", "FullName"), new { @class = "form-control", @id = "idIDContactClient" })
+                                    @Html.DropDownListFor(model => model.IDContact, new SelectList(Model.ListeContact, "IDContact", "FullName"), new { @class = "form-control", @id = "idIDContactClient", @required = "required" })
                                     @Html.ValidationMessageFor(model => model.IDContact, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -220,6 +231,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Modifier un client</h4>
+                    @*  <input type="hidden" name="UserID" id="UserID" value="@Model.UserID" />*@
                     @* @Html.LabelFor(model => model.id, new { htmlAttributes = new { @class = "form-control", @id = "idIdClientEdit" } })*@
                     @Html.EditorFor(model => model.id, new { htmlAttributes = new { type = "hidden", @id = "idIdClientEdit" } })
                 </div>
@@ -343,8 +355,8 @@
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.20/cr-1.5.2/datatables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/3.3.0/js/dataTables.fixedColumns.min.js"></script>
-    <script src="~/Scripts/jquery.validate.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    @*<script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>*@
     //Validation
 
 
@@ -362,7 +374,7 @@
     </script>
 }
 @section scripts{
-
+    @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
         var table = null;
         function ReloadClientTable(data) {
@@ -403,7 +415,7 @@
                             }
                             //'" + row.id + "'
                         ],
-                        "searching": true,
+                        "searching": false,
                         "scrollY": "300px",
                         "scrollX": true,
                         "scrollCollapse": true,
@@ -429,6 +441,12 @@
     }
     $(document).ready(function () {
        ////alert("ddddd");
+        $("#NomClientEdit").focus();
+        $("#NomClient").focus();
+        function Close() {
+
+            $("#addClientModal").hide();
+        }
 
         jQuery.extend(jQuery.validator.messages, {
             required: "votre message",
@@ -449,7 +467,48 @@
             max: jQuery.validator.format("votre message  inférieur ou égal à {0}."),
             min: jQuery.validator.format("votre message  supérieur ou égal à {0}.")
         });
+        jQuery("#editClientForm").validate({
+            rules: {
+                "NomClientEdit": {
+                    "required": false,
+                    "minlength": 2,
+                    "maxlength": 4
+                }
+                //,"idMailClientEdit": {
+                //    "email": true,
+                //    "maxlength": 255
+                //},
+                //"idAdresseClientEdit": {
+                //    "required": true
+                //},
+                //"idtelephone1ClientEdit": {
+                //    "required": true,
+                //    "regex": /^(\+33\.|0)[0-9]{9}$/
+                //}
 
+            }
+        });
+        jQuery("#addClientModal").validate({
+            rules: {
+                "idNomClient": {
+                    "required": true,
+                    "minlength": 2,
+                    "maxlength": 4
+                }
+                ,"idMailClient": {
+                    "email": false,
+                    "maxlength": 255
+                },
+                //"idAdresseClientEdit": {
+                //    "required": true
+                //},
+                //"idtelephone1ClientEdit": {
+                //    "required": true,
+                //    "regex": /^(\+33\.|0)[0-9]{9}$/
+                //}
+
+            }
+        });
         //jQuery.validator.addMethod(
         //    "regex",
         //    function (value, element, regexp) {
@@ -546,49 +605,6 @@
         }
         function SaveEditClients() {
             //alert("save");
-            debugger
-            jQuery.extend(jQuery.validator.messages, {
-
-                required: "votre message",
-                remote: "votre message",
-                email: "votre message",
-                url: "votre message",
-                date: "votre message",
-                dateISO: "votre message",
-                number: "votre message",
-                digits: "votre message",
-                creditcard: "votre message",
-                equalTo: "votre message",
-                accept: "votre message",
-                maxlength: jQuery.validator.format("votre message {0} caractéres."),
-                minlength: jQuery.validator.format("votre message {0} caractéres."),
-                rangelength: jQuery.validator.format("votre message  entre {0} et {1} caractéres."),
-                range: jQuery.validator.format("votre message  entre {0} et {1}."),
-                max: jQuery.validator.format("votre message  inférieur ou égal à {0}."),
-                min: jQuery.validator.format("votre message  supérieur ou égal à {0}.")
-            });
-
-            jQuery("#editClientForm").validate({
-                rules: {
-                    "NomClientEdit": {
-                        "required": false,
-                        "minlength": 2,
-                        "maxlength": 4
-                    }
-                    //,"idMailClientEdit": {
-                    //    "email": true,
-                    //    "maxlength": 255
-                    //},
-                    //"idAdresseClientEdit": {
-                    //    "required": true
-                    //},
-                    //"idtelephone1ClientEdit": {
-                    //    "required": true,
-                    //    "regex": /^(\+33\.|0)[0-9]{9}$/
-                    //}
-
-                }
-            });
             var id =  $("#idIdClientEdit").val();
             var nom = $("#idNomClientEdit").val();
             var Adresse = $("#idAdresseClientEdit").val();
@@ -646,14 +662,27 @@
             }
         }
         function AddClient() {
-            alert("AddClient");
 
-            $("#idNomClient").val("");
-            $("#idAdresseClient").val("");
-
-            $("#idMailClient").val();
-            $("#idtelephone1Client").val("");
-            $("#idGsmClient").val("");
+            //pour ne pas afficher les
+            $('#idIdClient').val("");
+            $('#idNomClient').val("");
+            $('#idAdresseClient').val("");
+            $('#idMailClient').val("");
+            $('#idtelephone1Client').val("");
+            $('#idfaxClient').val("");
+            $('#idCnssClient').val("");
+            $('#ididfClient').val("");
+            $('#idFaxClient').val("");
+            $('#idTelephClient').val("");
+            $('#idIceClient').val("");
+            $('#idGsmClient').val("");
+            //messages au chargement du modal
+            //var $el = $('#addClientModal');
+            //$el.data('validator', null);
+            //$el.validator = null;
+            //$.validator.unobtrusive.parse($el);
+            //$("#idNomClient").removeAttr("Required");
+            //$('#idNomClient').attr('required', 'Required')
 
             $.ajax({
                 type: "Get",
@@ -747,7 +776,42 @@
         }
         }
     //SaveClient
+        function ChercherClient() {
+            debugger
+            var ch = $("#chercherClient").val();
+            if (ch != null) {
+                $.ajax({
+                    type: "Get",
+                    dataType: 'json',
+                    url: '/Clients/Chercher',
+                    data: ch,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (res) {
+                        if (res != null && res != false) {
+                            //alert("res");
+                            // window.location.href = urls.GetFonds;
+                            //on doit vider les inputs
+                            $("#chercherClient").val("");
+                            ReloadClientTable(res);
+
+                        }
+                    },
+                    error: function (res) {
+                        //alert(response);
+                        console.log(res);
+                        swal("Acune information à afficher", "", "error");
+                    }
+                });
+
+
+            } else {
+                swal("Veuillez entrer une valeur à chercher", "", "error");
+            }
+        
+
+        }
     </script>
+
 }
 
 
