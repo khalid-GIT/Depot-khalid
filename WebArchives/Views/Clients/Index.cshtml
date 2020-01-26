@@ -38,7 +38,7 @@
 @using (Html.BeginForm("","",FormMethod.Post, new { @style = "align:right margin-right:100px margin-top:50px", @class = "pull-right" }))
 {
     <b> Chercher </b>@Html.TextBox("Chercher")
-    <input type="button"  id="chercherClient" onclick= "ChercherClient" value="Chercher" placeholder="Chercher" />
+    <input type="button"   onclick= "ChercherClient()" value="Chercher" placeholder="Chercher" />
 }
 <table id="idTableClients" class="table table-bordered" cellspacing="0">
     <thead>
@@ -777,9 +777,11 @@
         }
     //SaveClient
         function ChercherClient() {
+            
+            var ch = $("#Chercher").val();
             debugger
-            var ch = $("#chercherClient").val();
-            if (ch != null) {
+            if ((ch != null) && (ch != "Chercher") && (ch != "")) {
+                debugger
                 $.ajax({
                     type: "Get",
                     dataType: 'json',
@@ -787,7 +789,7 @@
                     data: ch,
                     contentType: 'application/json; charset=utf-8',
                     success: function (res) {
-                        if (res != null && res != false) {
+                        if (res != null || res != false) {
                             //alert("res");
                             // window.location.href = urls.GetFonds;
                             //on doit vider les inputs

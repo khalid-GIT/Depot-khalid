@@ -374,7 +374,7 @@ namespace WebArchives.Controllers
             var biz = new BusinessClients();
             
             var clients = biz.BusinessliseClient();
-            return Json(new { clients, IsDeleted = true }, JsonRequestBehavior.AllowGet);
+            return Json(new { clients, IsTrouve = true }, JsonRequestBehavior.AllowGet);
 
         }
     }
