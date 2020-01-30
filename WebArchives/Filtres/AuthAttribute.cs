@@ -24,12 +24,12 @@ namespace WebArchives.Filtres
 
             if (user == null)
             {
-                //filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary
-                //{
-                //    { "controller", "Home" },
-                //    { "action", "Login" },
-                //    { "isExpired", 0 }
-                //});
+                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary
+                {
+                    { "controller", "Home" },
+                    { "action", "Login" },
+                    { "isExpired", 0 }
+                });
             }
         }
     }
