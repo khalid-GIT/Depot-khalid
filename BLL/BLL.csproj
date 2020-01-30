@@ -59,6 +59,7 @@
     <Compile Include="BusinessClients.cs" />
     <Compile Include="BusinessContactClt.cs" />
     <Compile Include="BusinessFamilleClients.cs" />
+    <Compile Include="BusinessUser.cs" />
     <Compile Include="BusinessVilles.cs" />
     <Compile Include="MapperConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

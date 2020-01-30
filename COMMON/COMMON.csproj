@@ -49,6 +49,7 @@
     <Compile Include="DTO\Clients\DtoListeClients.cs" />
     <Compile Include="DTO\Clients\Dto_Familles_Clt.cs" />
     <Compile Include="DTO\Clients\Dto_liste_Contact.cs" />
+    <Compile Include="DTO\Users\DtoUsers.cs" />
     <Compile Include="DTO\Villes\DtoListeVilles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -9,13 +9,19 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Filters;
+using System.Web.Routing;
 using WebArchives.Filtres;
 using WebArchives.Models.Clients;
 using Warning = Microsoft.Reporting.WebForms.Warning;
 
 namespace WebArchives.Controllers
 {
-   // [Auth]
+
+    
+
+    [Auth]  //equal AuthAttribute
+    [Authorize] //se base sur les roles de l utilisateur connecté
     public class ClientsController : Controller
     {
         // GET: Clients
@@ -330,15 +336,13 @@ namespace WebArchives.Controllers
                 var bizV = new BusinessVilles();
                 var bizF = new BusinessFamilleClients();
                 var bizContact = new BusinessContactClt();
-              
-
+ 
                 model.ListeContact = bizContact.ListContact();
                 model.listeVilles = bizV.GetListeVille();
                 model.listeFamille = bizF.GetListFamilleClt();
                 var clients = biz.BusinessliseClient();
 
                 return Json(new { clients, IsUpdate ,message="Success" }, JsonRequestBehavior.AllowGet);
-            
          }
             catch
             {

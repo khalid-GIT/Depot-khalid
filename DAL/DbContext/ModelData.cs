@@ -6,7 +6,7 @@
     using System.Data.Entity;
     using System.Linq;
 
-    public class ModelData : DbContext   //IdentityDbContext  //
+    public class ModelData : DbContext  //IdentityDbContext  // DbContext //
     {
         // Votre contexte a été configuré pour utiliser une chaîne de connexion « ModelData » du fichier 
         // de configuration de votre application (App.config ou Web.config). Par défaut, cette chaîne de connexion cible 
@@ -44,9 +44,9 @@
         public DbSet<Tbl_Famille_Clt> Tbl_Famille_Clt { get; set; }
         public DbSet<Tbl_Contact_Clt> Tbl_Contact_clt { get; set; }
         public DbSet<Tbl_Service> Tbl_Service { get; set; }
-        
-    //View_Clt
-}
+
+       
+    }
     //Enable-Migrations
     //Add-Migration "InitialCreate"
     //Update-Database
@@ -57,6 +57,6 @@
     //    public int Id { get; set; }
     //    public string Name { get; set; }
     //}
-    
+
 
 }

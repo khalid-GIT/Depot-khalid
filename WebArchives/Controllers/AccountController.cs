@@ -5,7 +5,9 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using BLL;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WebArchives.Models;
@@ -70,8 +72,22 @@ namespace WebArchives.Controllers
         {
             if (!ModelState.IsValid)
             {
+               
                 return View(model);
             }
+            Session["UserName"] = model.Email;
+
+            //var userStore = new UserStore<ApplicationUser>();
+            //var _userManager = new UserManager<ApplicationUser>(userStore);
+            //var user = await _userManager.FindAsync(model.Email, model.Password);
+
+
+            var bis = new BusinessClients();
+            var user = UserManager.FindById("a2e513fe-9bb8-44f2-b388-694b1b0058d3");
+            Session["UserRole"] = user.Roles.FirstOrDefault();
+
+
+            //Session["UserName"] = model.;
 
             // Ceci ne comptabilise pas les échecs de connexion pour le verrouillage du compte
             // Pour que les échecs de mot de passe déclenchent le verrouillage du compte, utilisez shouldLockout: true
@@ -79,7 +95,11 @@ namespace WebArchives.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    {
+                        var x = User.Identity.GetUserId();
+                        var y = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                        return RedirectToLocal(returnUrl);
+                    }
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:

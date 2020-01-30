@@ -16,6 +16,37 @@ namespace BLL
    public  class BusinessClients
     {
         ModelData context = new ModelData();
+
+        public DtoListeClients GetClientById(int id)
+        {
+            var x = new Tbl_Client();
+            x = context.Tbl_Client.Find(id);
+            return new DtoListeClients
+            {
+                id = x.id,
+                Nom = x.Nom,
+                telephone1 = x.telephone1,
+                Adresse = x.Adresse,
+                fax = x.fax,
+                Mail = x.Mail,
+                Cnss = x.Cnss,
+                idf = x.idf,
+                Gsm = x.Gsm,
+                // DatedeCreation = x.DatedeCreation,              
+                Teleph = x.Teleph,
+                Ice = x.Ice,
+                Tbl_Famille_Clt_Id = x.IdFamille,
+                Tbl_Ville_id = x.IdVille,
+                IDContact = x.IDContact,
+
+                //  VilleName = x.Tbl_Ville.libelle,
+                FamilleName = x.Tbl_Famille_Clt.Libelle
+            };
+
+            //DtoClients = Mapper.Map<DtoListeClients>(x);
+            // return DtoClients;
+        }
+
         public int AjouterClient(DtoListeClients dto)
         {
             var Entity = new Tbl_Client();
@@ -40,10 +71,12 @@ namespace BLL
         }
 
         public List<DtoListeClients> BusinessliseViewClient()
-        { 
+        {
 
             //var list = context.Tbl_Client.ToList();
-            var list = context.Tbl_Client.Select(x => new DtoListeClients
+            //var list = context.Tbl_Client.Where(c => c.CodePostal == "82000").Select(x => new DtoListeClients
+
+           var list = context.Tbl_Client.Select(x => new DtoListeClients
             {
                 id = x.id,
                 Nom = x.Nom,
@@ -63,9 +96,16 @@ namespace BLL
                 ContactName = x.Tbl_Contact_Clt.Nom + ", " + x.Tbl_Contact_Clt.Prenom,
                 ContactGsm = x.Tbl_Contact_Clt.Gsm
             }).ToList();
-            //list = list.ToList();
-            //context.Tbl_Clients.ToList();
-            var DtoClients = Mapper.Map<List<DtoListeClients>>(list);
+            //list.Add(new DtoListeClients { Adresse = "hhhhhh"});
+            //var c = list.FirstOrDefault();
+            //foreach(var item in list)
+            //{
+            //    item.Adresse = "bbb";
+            //}
+        //}).ToList().OrderByDescending(c=>c.Adresse);
+        //list = list.ToList();
+        //context.Tbl_Clients.ToList();
+        var DtoClients = Mapper.Map<List<DtoListeClients>>(list);
             return DtoClients;
         }
 
@@ -105,37 +145,7 @@ namespace BLL
             context.Tbl_Client.Remove(Entity);
             context.SaveChanges();
         }
-
-        public DtoListeClients GetClientById(int id)
-        {
-            var x = new Tbl_Client();
-            x = context.Tbl_Client.Find(id);
-            return new DtoListeClients
-            {
-                id = x.id,
-                Nom = x.Nom,
-                telephone1 = x.telephone1,
-                Adresse = x.Adresse,
-                fax = x.fax,
-                Mail = x.Mail,
-                Cnss = x.Cnss,
-                idf = x.idf,
-                Gsm = x.Gsm,
-               // DatedeCreation = x.DatedeCreation,              
-                Teleph = x.Teleph,
-                Ice = x.Ice,
-                Tbl_Famille_Clt_Id = x.IdFamille,
-                Tbl_Ville_id = x.IdVille,
-                IDContact = x.IDContact,
-
-            //  VilleName = x.Tbl_Ville.libelle,
-            FamilleName = x.Tbl_Famille_Clt.Libelle
-            };
-            
-           //DtoClients = Mapper.Map<DtoListeClients>(x);
-           // return DtoClients;
-        }
-
+      
         public void MdifierClient(DtoListeClients dto)
         {
 
