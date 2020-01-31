@@ -45,7 +45,10 @@
         public DbSet<Tbl_Contact_Clt> Tbl_Contact_clt { get; set; }
         public DbSet<Tbl_Service> Tbl_Service { get; set; }
 
-       
+        //public bool RequireUniqueEmail { get; set; }
+        //public virtual IDbSet<TRole> Roles { get; set; }
+        //public virtual IDbSet<TUser> Users { get; set; }
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder);
     }
     //Enable-Migrations
     //Add-Migration "InitialCreate"

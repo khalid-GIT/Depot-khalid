@@ -45,7 +45,45 @@
 
             @Html.AntiForgeryToken()
             <ul class="nav navbar-nav navbar-right navbar-top-links">
-                <li><a href="@Url.Action("Login", "Account") "><i class="fa fa-sign-out fa-fw"></i> Deconnexion</a></li>
+                <li>
+
+
+                    @*<a href="@Url.Action("LogOff", "Account")" data-form-method="post"> <i class="fa fa-sign-out fa-fw"></i> Deconnexion
+            </a>*@
+
+
+                </li>
+                <li>
+                    @Html.ActionLink("Bonjour " + User.Identity.Name + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                </li>
+                <li class="dropdown">
+                
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+
+                    <i class="fa fa-user fa-fw"></i> Compte <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li>
+                        <a href="#"><i class="fa fa-user fa-fw"></i>Profile Utilisateur</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-gear fa-fw"></i> Paramétres</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        {
+                        @Html.AntiForgeryToken()
+
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Se déconnecter</a></li>
+                        </ul>
+                        }
+                       @* <a href="@Url.Action("LogOff", "Account")"><i class="fa fa-sign-out fa-fw"></i> Se déconnecter</a>*@
+                    </li>
+                </ul>
+                </li>
             </ul>
             <!-- Top Navigation: Right Menu -->
             <ul class="nav navbar-right navbar-top-links">

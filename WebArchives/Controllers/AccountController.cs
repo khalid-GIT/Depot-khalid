@@ -83,8 +83,8 @@ namespace WebArchives.Controllers
 
 
             var bis = new BusinessClients();
-            var user = UserManager.FindById("a2e513fe-9bb8-44f2-b388-694b1b0058d3");
-            Session["UserRole"] = user.Roles.FirstOrDefault();
+            //var user = UserManager.FindById("a2e513fe-9bb8-44f2-b388-694b1b0058d3");
+            
 
 
             //Session["UserName"] = model.;
@@ -97,7 +97,9 @@ namespace WebArchives.Controllers
                 case SignInStatus.Success:
                     {
                         var x = User.Identity.GetUserId();
-                        var y = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                        var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                        Session["UserName"] = model.Email ;
+                        Session["UserRole"] = user.Roles.FirstOrDefault();
                         return RedirectToLocal(returnUrl);
                     }
                 case SignInStatus.LockedOut:
@@ -408,18 +410,14 @@ namespace WebArchives.Controllers
         //
         // POST: /Account/LogOff
         [HttpPost]
+       
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Login", "Account");
         }
-        [HttpGet]
-        public ActionResult quitter()
-        {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Login", "Account");
-        }
+    
 
         //
         // GET: /Account/ExternalLoginFailure

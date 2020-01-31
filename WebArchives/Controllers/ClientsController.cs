@@ -21,7 +21,7 @@ namespace WebArchives.Controllers
     
 
     [Auth]  //equal AuthAttribute
-    [Authorize] //se base sur les roles de l utilisateur connecté
+    [Authorize] //se base sur les roles de l utilisateur connecté /Sécuriser un contrôleur
     public class ClientsController : Controller
     {
         // GET: Clients

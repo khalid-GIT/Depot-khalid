@@ -21,7 +21,8 @@ namespace WebArchives.Filtres
         public void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
         {
             var user = filterContext.HttpContext.Session["UserName"];
-
+            var userRole = filterContext.HttpContext.Session["UserRole"];
+            //filterContext.Controller
             if (user == null)
             {
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary
