@@ -27,7 +27,7 @@ namespace WebArchives.Filtres
             {
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary
                 {
-                    { "controller", "Home" },
+                    { "controller", "Account" },
                     { "action", "Login" },
                     { "isExpired", 0 }
                 });

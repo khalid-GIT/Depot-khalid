@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Caching;
 using System.Web.Mvc;
 using BLL;
 using Microsoft.AspNet.Identity;
@@ -96,11 +98,27 @@ namespace WebArchives.Controllers
             {
                 case SignInStatus.Success:
                     {
+                        Session.Timeout = 5;
                         var x = User.Identity.GetUserId();
+                        var IdSession = Session["SessionID"];
                         var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
                         Session["UserName"] = model.Email ;
-                        Session["UserRole"] = user.Roles.FirstOrDefault();
+                        if (user!=null)
+                        {
+                            Session["UserRole"] = user.Roles.FirstOrDefault();
+                        }
+ 
+                        var url = Convert.ToString(returnUrl);
+
+                        //if (url==null)
+                        //{
+                        //    return RedirectToAction("Login", "Account");
+                        //}
+                        //else
+                        //{
                         return RedirectToLocal(returnUrl);
+                        //}
+
                     }
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -410,12 +428,24 @@ namespace WebArchives.Controllers
         //
         // POST: /Account/LogOff
         [HttpPost]
-       
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+           
+            Session["UserName"] = null;
+            Session["UserRole"] = null;
+            Session.Abandon();
+            Response.Expires = -1;
+            Response.Cache.SetNoStore();
+            Response.AppendHeader("Pragma", "no-cache");
+
+            Response.ClearHeaders();
+            Response.AddHeader("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate");
+            Response.AddHeader("Pragma", "no-cache");
+
             return RedirectToAction("Login", "Account");
+          
         }
     
 

@@ -7,7 +7,11 @@
     //ActivationContext de validation
     //HtmlHelper.ClientValidationEnabled = false;
     //HtmlHelper.UnobtrusiveJavaScriptEnabled = false;
-
+    if (Session["UserName"] ==null)
+    {
+        Response.Redirect("~/Views/Account/Login.cshtml");
+    }
+    
 }
 @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
 
@@ -35,10 +39,14 @@
     </div>
 
 </div>
-@using (Html.BeginForm("","",FormMethod.Post, new { @style = "align:right margin-right:100px margin-top:50px", @class = "pull-right" }))
+@using (Html.BeginForm("", "", FormMethod.Post, new { @style = "align:right margin-right:100px margin-top:50px", @class = "pull-right" }))
 {
+    <div class="col-md-10">
+
+        @*@Html.DropDownList("Categorie", (IEnumerable<SelectListItem>)ViewBag.categorie, "Veuillez choisir une catégorie")*@
+    </div>
     <b> Chercher </b>@Html.TextBox("Chercher")
-    <input type="button"   onclick= "ChercherClient()" value="Chercher" placeholder="Chercher" />
+    <input type="button" onclick="ChercherClient()" value="Chercher" placeholder="Chercher" />
 }
 <table id="idTableClients" class="table table-bordered" cellspacing="0">
     <thead>
@@ -356,7 +364,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.20/cr-1.5.2/datatables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/3.3.0/js/dataTables.fixedColumns.min.js"></script>
     @*<script src="~/Scripts/jquery.validate.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>*@
+        <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>*@
     //Validation
 
 
@@ -777,7 +785,7 @@
         }
     //SaveClient
         function ChercherClient() {
-            
+
             var ch = $("#Chercher").val();
             debugger
             if ((ch != null) && (ch != "Chercher") && (ch != "")) {
@@ -809,7 +817,7 @@
             } else {
                 swal("Veuillez entrer une valeur à chercher", "", "error");
             }
-        
+
 
         }
     </script>

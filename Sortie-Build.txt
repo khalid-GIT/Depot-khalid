@@ -1,7 +1,1 @@
-﻿1>------ Début de la génération : Projet : COMMON, Configuration : Debug Any CPU ------
-1>  COMMON -> C:\Users\KElkettani\Source\Repos\Depot-khalid\COMMON\bin\Debug\COMMON.dll
-2>------ Début de la génération : Projet : DAL, Configuration : Debug Any CPU ------
-2>  DAL -> C:\Users\KElkettani\Source\Repos\Depot-khalid\DAL\bin\Debug\DAL.dll
-3>------ Début de la génération : Projet : BLL, Configuration : Debug Any CPU ------
-3>  BLL -> C:\Users\KElkettani\Source\Repos\Depot-khalid\BLL\bin\Debug\BLL.dll
-4>------ Début de la génération : Projet : WebArchives, Configuration : Debug Any CPU ------
+﻿1>------ Début de la génération : Projet : WebArchives, Configuration : Debug Any CPU ------
