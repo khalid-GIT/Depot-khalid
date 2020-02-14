@@ -7,12 +7,26 @@
     //ActivationContext de validation
     //HtmlHelper.ClientValidationEnabled = false;
     //HtmlHelper.UnobtrusiveJavaScriptEnabled = false;
-    if (Session["UserName"] ==null)
+
+    if (!Request.IsAuthenticated)
     {
-        Response.Redirect("~/Views/Account/Login.cshtml");
+        if (Session["UserName"] == null)
+        {
+            Response.Redirect("~/Views/Account/Login.cshtml");
+        }
+
+        else
+        {
+            Response.ClearHeaders();
+            Response.AddHeader("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate");
+            Response.AddHeader("Pragma", "no-cache");
+        }
     }
-    
 }
+@*<META Http-Equiv="Cache-Control" Content="no-cache">
+<META Http-Equiv="Pragma" Content="no-cache">
+<META Http-Equiv="Expires" Content="0">*@
+
 @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.20/cr-1.5.2/datatables.min.css" />
@@ -447,7 +461,12 @@
                    });
 
     }
-    $(document).ready(function () {
+        $(document).ready(function () {
+            setInterval(function () {
+                //alert("Hello")
+                Window.location = "./Login";
+                ;
+            }, 3000);
        ////alert("ddddd");
         $("#NomClientEdit").focus();
         $("#NomClient").focus();

@@ -3,98 +3,108 @@
 @{
     ViewBag.Title = "Connexion";
     Layout = "~/Views/Shared/_Layout-Login.cshtml";
-    //Layout = null;
+    //Layout = null;text-align: center;
 }
-    
-    <div class="row col-md-12">
- 
-            <div style="text-align: center;">
-                <div style="width: 500px; margin-left: auto; margin-right:auto;">
-                    <section id="loginForm">
-                        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            @*@Html.ValidationSummary(true, "Login failed. Check your login details.");*@
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            <div class="form-group row">
-                                    <h2>@ViewBag.Title.</h2>
-                                    <h4>Utilisez un compte local pour vous connecter.</h4>
-                                    <hr />
-                            </div>
-                            <div class="form-group row">
-                                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                                <div class="col-md-10">
-                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                                <div class="col-md-10">
-                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class=" col-md-10">
-                                    @*col-md-offset-2*@
-                                    <div class="checkbox">
-                                        @Html.CheckBoxFor(m => m.RememberMe)
-                                        @Html.LabelFor(m => m.RememberMe)
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-md-offset-2 col-md-10">
-                                    <input type="submit" value="Connexion" class="btn btn-default" />
-                                </div>
-                            </div>
-                            <p>
-                                @Html.ActionLink("S'inscrire comme nouvel utilisateur", "Register")
-                            </p>
-                            @* Activer ceci une fois que la confirmation de votre compte est activée pour la fonctionnalité de réinitialisation du mot de passe
-                <p>
-                    @Html.ActionLink("Vous avez oublié votre mot de passe ?", "ForgotPassword")
-                </p>*@
-                        }
-                    </section>
+<link href="~/Content/CSS/Login.css" rel="stylesheet" />
 
-                </div>
-
-            </div>
-           
-       
-        @*<div class="col-md-4">
-            <section id="socialLoginForm">
-                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-            </section>
-        </div>*@
-    </div>
-
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
+@{ var imagePath = "";
+    if (Request["photoChoice"] != null)
+    {
+        imagePath = @"images\" + Request["photoChoice"];
     }
+    imagePath = "~/Content/images/logo.jfif";
+}
+
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+<div class="row col-md-12  center-div" style="text-align: center;">
+    @* <div class="fa-border" style="width: 1000px; background-color: #e70cf1; margin-left: auto; margin-right:auto;">*@
+    @* <section id="loginForm">*@
+
+    @Html.AntiForgeryToken()
+    @*@Html.ValidationSummary(true, "Login failed. Check your login details.");*@
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @*Ajout une liste deroulante pour choisir*@
+    @*<select name="photoChoice">
+            <option value="Photo1.jpg">Photo 1</option>
+            <option value="Photo2.jpg">Photo 2</option>
+            <option value="Photo3.jpg">Photo 3</option>
+        </select>*@
+
+    @*<div class="form-group col-lg-4 div-logo" style="background-color: #00ffff;width:300px">*@
+    @if (imagePath != "")
+    {
+        @*<img src="@imagePath" alt="Sample Image"  />*@
+    }
+    @*<img id="logo" src="~/Content/images/logo.jfif" alt="Sample Photo" />*@
+    @*  </div> *@
+    @* <div class="form-group  col-lg-8 div-login" style="background-color: #808080;">*@
+    @* <h2>@ViewBag.Title.</h2>*@
+    <h4>Utilisez un compte local pour vous connecter.</h4>
+    <hr />
+    <div class="form-group">
+        <div class=" col-md-3">
+            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+        </div>
+        <div class=" col-md-6">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class=" col-md-3">
+            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+        </div>
+        <div class=" col-md-6">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class=" col-md-6">
+            <div class="checkbox">
+                @Html.CheckBoxFor(m => m.RememberMe)
+                @Html.LabelFor(m => m.RememberMe)
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="Connexion" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+
+           
+
+@*</div>*@
+}
 
 
-    @*@using Microsoft.AspNet.Identity
-        @if (Request.IsAuthenticated)
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+@*@using Microsoft.AspNet.Identity
+    @if (Request.IsAuthenticated)
+    {
+        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
         {
-            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-            {
-            @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    @Html.ActionLink("Bonjour " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-                </li>
-                <li><a href="javascript:document.getElementById('logoutForm').submit()">Se déconnecter</a></li>
-            </ul>
-            }
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Bonjour " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Se déconnecter</a></li>
+        </ul>
         }
-        else
-        {
-            <ul class="nav navbar-nav navbar-right">
-                <li>@Html.ActionLink("S’inscrire", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-                <li>@Html.ActionLink("Se connecter", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-            </ul>
-        }*@
+    }
+    else
+    {
+        <ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink("S’inscrire", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            <li>@Html.ActionLink("Se connecter", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        </ul>
+    }*@

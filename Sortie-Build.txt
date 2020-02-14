@@ -1,1 +1,5 @@
-﻿1>------ Début de la génération : Projet : WebArchives, Configuration : Debug Any CPU ------
+﻿1>------ Début du nettoyage : Projet : WebArchives, Configuration : Debug Any CPU ------
+2>------ Début du nettoyage : Projet : BLL, Configuration : Debug Any CPU ------
+3>------ Début du nettoyage : Projet : DAL, Configuration : Debug Any CPU ------
+4>------ Début du nettoyage : Projet : COMMON, Configuration : Debug Any CPU ------
+========== Nettoyage : 4 a réussi, 0 a échoué, 0 a été ignoré ==========

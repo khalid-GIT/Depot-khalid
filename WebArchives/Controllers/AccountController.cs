@@ -13,6 +13,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WebArchives.Models;
+using WebArchives.Vider_Cache;
 
 namespace WebArchives.Controllers
 {
@@ -429,17 +430,24 @@ namespace WebArchives.Controllers
         // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [NoCacheAttribute]
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
            
             Session["UserName"] = null;
             Session["UserRole"] = null;
+
             Session.Abandon();
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetExpires(DateTime.Now);
+
+
             Response.Expires = -1;
             Response.Cache.SetNoStore();
             Response.AppendHeader("Pragma", "no-cache");
-
+                //voir cre lien
+        //https://askcodez.com/comment-desactiver-le-bouton-precedent-du-navigateur-seulement-apres-deconnexion-dans-mvc3-net.html
             Response.ClearHeaders();
             Response.AddHeader("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate");
             Response.AddHeader("Pragma", "no-cache");

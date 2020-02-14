@@ -9,6 +9,7 @@ namespace WebArchives.Controllers
 {
     [Auth]
     [Authorize]
+    [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
     public class HomeController : Controller
     {
         public ActionResult Index()

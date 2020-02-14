@@ -236,6 +236,7 @@
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Vider_Cache\NoCacheAttribute .cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-datetimepicker.css" />
@@ -245,6 +246,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\CSS\Login.css" />
     <Content Include="Content\datatables\DataTables-1.10.20\css\dataTables.bootstrap.css" />
     <Content Include="Content\datatables\DataTables-1.10.20\css\dataTables.bootstrap.min.css" />
     <Content Include="Content\datatables\DataTables-1.10.20\css\dataTables.bootstrap4.css" />
@@ -1854,6 +1856,7 @@
     <Content Include="Content\images\delete-grey.png" />
     <Content Include="Content\images\delete-red.png" />
     <Content Include="Content\images\delete2.png" />
+    <Content Include="Content\images\logo.jfif" />
     <Content Include="Content\images\sort_asc.png" />
     <Content Include="Content\images\sort_asc_disabled.png" />
     <Content Include="Content\images\sort_both.png" />

@@ -22,6 +22,7 @@ namespace WebArchives.Controllers
 
     [Auth]  //equal AuthAttribute
     [Authorize] //se base sur les roles de l utilisateur connecté /Sécuriser un contrôleur
+    [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")] //Vider le cache
     public class ClientsController : Controller
     {
         // GET: Clients

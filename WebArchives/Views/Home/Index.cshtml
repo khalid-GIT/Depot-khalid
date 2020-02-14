@@ -2,12 +2,22 @@
 
 @{
     ViewBag.Title = "Home Page";
-    if (Session["UserName"] == null|| !Request.IsAuthenticated)
+    if (!Request.IsAuthenticated)
     {
+        if (Session["UserName"] == null)
+        {
+            //Request.Url = Url = {http://localhost:1334/};
+            Response.Redirect("~/Views/Account/Login.cshtml");
+        }
 
-        Response.Redirect("~/Views/Account/Login.cshtml");
-
+        else
+        {
+            Response.ClearHeaders();
+            Response.AddHeader("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate");
+            Response.AddHeader("Pragma", "no-cache");
+        }
     }
+}
 }
 }
 
@@ -32,5 +42,7 @@
             <li>@Html.ActionLink("Se connecter", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
         </ul>
     }*@
-
+@*<META Http-Equiv="Cache-Control" Content="no-cache">
+<META Http-Equiv="Pragma" Content="no-cache">
+<META Http-Equiv="Expires" Content="0">*@
 
