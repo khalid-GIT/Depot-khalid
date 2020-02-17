@@ -14,6 +14,7 @@ using System.Web.Routing;
 using WebArchives.Filtres;
 using WebArchives.Models.Clients;
 using Warning = Microsoft.Reporting.WebForms.Warning;
+using WebArchives.ServiceReference1;
 
 namespace WebArchives.Controllers
 {
@@ -28,6 +29,10 @@ namespace WebArchives.Controllers
         // GET: Clients
         public ActionResult Index(VMListeClient model)
         {
+            //Déclaration du web service wcf
+            Service1Client srv = new Service1Client();
+            string value = srv.GetData(123);
+            var liste = srv.GetClients();
             var bis = new BusinessClients();
             model.listeclients = bis.BusinessliseClient();
             //var bisFamille = new BusinessFamilleClients();

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/DAL.Entity" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DAL.Entity" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfTbl_Client">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Tbl_Client" nillable="true" type="tns:Tbl_Client" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTbl_Client" nillable="true" type="tns:ArrayOfTbl_Client" />
+  <xs:complexType name="Tbl_Client">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Adresse" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Cnss" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CodePostal" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DatedeCreation" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Gsm" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IDContact" type="xs:int" />
+      <xs:element minOccurs="0" name="Ice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IdFamille" type="xs:int" />
+      <xs:element minOccurs="0" name="IdVille" type="xs:int" />
+      <xs:element minOccurs="0" name="Mail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Nom" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Tbl_Contact_Clt" nillable="true" type="tns:Tbl_Contact_Clt" />
+      <xs:element minOccurs="0" name="Tbl_Famille_Clt" nillable="true" type="tns:Tbl_Famille_Clt" />
+      <xs:element minOccurs="0" name="Tbl_Ville" nillable="true" type="tns:Tbl_Ville" />
+      <xs:element minOccurs="0" name="Teleph" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="fax" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="idf" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="telephone1" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Tbl_Client" nillable="true" type="tns:Tbl_Client" />
+  <xs:complexType name="Tbl_Contact_Clt">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Gsm" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IDContact" type="xs:int" />
+      <xs:element minOccurs="0" name="IDService" type="xs:int" />
+      <xs:element minOccurs="0" name="Nom" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Prenom" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Tbl_Client" nillable="true" type="tns:ArrayOfTbl_Client" />
+      <xs:element minOccurs="0" name="Tbl_Service" nillable="true" type="tns:Tbl_Service" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Tbl_Contact_Clt" nillable="true" type="tns:Tbl_Contact_Clt" />
+  <xs:complexType name="Tbl_Service">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IDService" type="xs:int" />
+      <xs:element minOccurs="0" name="Tbl_Contact_Clit" nillable="true" type="tns:ArrayOfTbl_Contact_Clt" />
+      <xs:element minOccurs="0" name="libelle" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Tbl_Service" nillable="true" type="tns:Tbl_Service" />
+  <xs:complexType name="ArrayOfTbl_Contact_Clt">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Tbl_Contact_Clt" nillable="true" type="tns:Tbl_Contact_Clt" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTbl_Contact_Clt" nillable="true" type="tns:ArrayOfTbl_Contact_Clt" />
+  <xs:complexType name="Tbl_Famille_Clt">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IdFamille" type="xs:int" />
+      <xs:element minOccurs="0" name="Libelle" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Tbl_Client" nillable="true" type="tns:ArrayOfTbl_Client" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Tbl_Famille_Clt" nillable="true" type="tns:Tbl_Famille_Clt" />
+  <xs:complexType name="Tbl_Ville">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IdVille" type="xs:int" />
+      <xs:element minOccurs="0" name="Tbl_Clients" nillable="true" type="tns:ArrayOfTbl_Client" />
+      <xs:element minOccurs="0" name="libelle" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Tbl_Ville" nillable="true" type="tns:Tbl_Ville" />
+</xs:schema>
