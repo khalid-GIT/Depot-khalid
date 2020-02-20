@@ -401,7 +401,6 @@
         var table = null;
         function ReloadClientTable(data) {
             //debugger
-
                     //debugger
                     //ReloadClientTable(data.clients);
                     //$('#idTableClients').
@@ -594,7 +593,7 @@
                     url: "@Url.Action("Edit", "Clients")/" + id,
 
                         success: function (data) {
-                        debugger
+                        //debugger
                             //$('#editClientModal').html(data.model); // This should be an empty div where you can inject your new html (the partial view)
                             var model = data.model;
                             $('#idIdClientEdit').val(model.id);
@@ -804,24 +803,27 @@
         }
     //SaveClient
         function ChercherClient() {
-
+            alert("ch");
             var ch = $("#Chercher").val();
-            debugger
+            alert(ch);
+            //debugger
             if ((ch != null) && (ch != "Chercher") && (ch != "")) {
                 debugger
                 $.ajax({
                     type: "Get",
                     dataType: 'json',
-                    url: '/Clients/Chercher',
-                    data: ch,
+                    //data: ch,
+                    //url: "@Url.Action("Chercher", "Clients")/" + ch + ",
+                    url: '/Clients/Chercher/?ch=' + ch,
+                    //data: ch,
                     contentType: 'application/json; charset=utf-8',
-                    success: function (res) {
-                        if (res != null || res != false) {
-                            //alert("res");
+                    success: function (data) {
+                        if (data.model.listeclients != null || data.model.listeclients != false) {
+                            alert(data.model.listeclients);
                             // window.location.href = urls.GetFonds;
                             //on doit vider les inputs
                             $("#chercherClient").val("");
-                            ReloadClientTable(res);
+                            ReloadClientTable(data.model.listeclients);
 
                         }
                     },

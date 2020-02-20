@@ -138,6 +138,40 @@ namespace BLL
             return DtoClients;
         }
 
+        public List<DtoListeClients> ChercherClient(string ch)
+        {
+
+           
+                 var list = context.Tbl_Client.Select(x => new DtoListeClients
+                            {
+                                id = x.id,
+                                Nom = x.Nom,
+                                telephone1 = x.telephone1,
+                                Adresse = x.Adresse,
+                                fax = x.fax,
+                                Mail = x.Mail,
+                                Cnss = x.Cnss,
+                                idf = x.idf,
+                                Ice = x.Ice,
+                                Gsm = x.Gsm,
+                                Teleph = x.Teleph,
+
+                                VilleName = x.Tbl_Ville.libelle,
+                                FamilleName = x.Tbl_Famille_Clt.Libelle,
+                                ContactName = x.Tbl_Contact_Clt.Nom + ", " + x.Tbl_Contact_Clt.Prenom
+                            }).Where(s => s.Nom.Contains(ch)).ToList();
+
+           
+            //context.Tbl_Clients.ToList();
+            
+                //return DtoClients;
+            
+var DtoClients = Mapper.Map<List<DtoListeClients>>(list);
+    return DtoClients;    
+               
+            
+         
+        }
         public void SupprimerClients(int id)
         {
             var Entity = new Tbl_Client();

@@ -30,9 +30,9 @@ namespace WebArchives.Controllers
         public ActionResult Index(VMListeClient model)
         {
             //Déclaration du web service wcf
-            Service1Client srv = new Service1Client();
-            string value = srv.GetData(123);
-            var liste = srv.GetClients();
+            //Service1Client srv = new Service1Client();
+            //string value = srv.GetData(123);
+            //var liste = srv.GetClients();
             var bis = new BusinessClients();
             model.listeclients = bis.BusinessliseClient();
             //var bisFamille = new BusinessFamilleClients();
@@ -378,13 +378,23 @@ namespace WebArchives.Controllers
 
             }
         }
-        public JsonResult Chercher(string chercher)
+        [HttpGet]
+        public JsonResult Chercher(string ch)
         {
-
+            var clients = new VMListeClient();
+            var dto = new DtoListeClients();
             var biz = new BusinessClients();
-            
-            var clients = biz.BusinessliseClient();
-            return Json(new { clients, IsTrouve = true }, JsonRequestBehavior.AllowGet);
+            var model = new VMListeClient();
+
+            if (!String.IsNullOrEmpty(ch))
+            {
+                model.listeclients = biz.ChercherClient(ch);
+                //clients = model.listeclients;
+                //clients.listeclients  = biz.ChercherClient(ch);
+                
+            }
+          
+            return Json(new { model.listeclients, IsTrouve = true }, JsonRequestBehavior.AllowGet);
 
         }
     }
