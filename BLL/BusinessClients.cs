@@ -127,7 +127,6 @@ namespace BLL
                 Ice = x.Ice,
                 Gsm = x.Gsm,
                 Teleph = x.Teleph,
-
                 VilleName = x.Tbl_Ville.libelle,
                 FamilleName = x.Tbl_Famille_Clt.Libelle,
                 ContactName=x.Tbl_Contact_Clt.Nom + ", " + x.Tbl_Contact_Clt.Prenom
@@ -138,36 +137,49 @@ namespace BLL
             return DtoClients;
         }
 
-        public List<DtoListeClients> ChercherClient(string ch)
+        public List<DtoListeClients> ChercherClient(string chercher)
         {
 
-           
-                 var list = context.Tbl_Client.Select(x => new DtoListeClients
-                            {
-                                id = x.id,
-                                Nom = x.Nom,
-                                telephone1 = x.telephone1,
-                                Adresse = x.Adresse,
-                                fax = x.fax,
-                                Mail = x.Mail,
-                                Cnss = x.Cnss,
-                                idf = x.idf,
-                                Ice = x.Ice,
-                                Gsm = x.Gsm,
-                                Teleph = x.Teleph,
+            if (chercher != null && chercher != "")
+            {
+                var List = context.Tbl_Client.Where(y => y.Nom.Contains(chercher));
+                var dto = Mapper.Map<List<DtoListeClients>>(List);
+                return dto;
+            }
+            else
+            {
+                var List = context.Tbl_Client.ToList();
+                var dto = Mapper.Map<List<DtoListeClients>>(List);
+                return dto;
+            }
+            //var list = context.Tbl_Client()
+            //if (!String.IsNullOrEmpty(ch))
+            //{
+            //    var list = context.Tbl_Client.Select(x => new DtoListeClients
+            //    {
+            //        id = x.id,
+            //        Nom = x.Nom,
+            //        telephone1 = x.telephone1,
+            //        Adresse = x.Adresse,
+            //        fax = x.fax,
+            //        Mail = x.Mail,
+            //        Cnss = x.Cnss,
+            //        idf = x.idf,
+            //        Ice = x.Ice,
+            //        Gsm = x.Gsm,
+            //        Teleph = x.Teleph,
+            //        VilleName = x.Tbl_Ville.libelle,
+            //        FamilleName = x.Tbl_Famille_Clt.Libelle,
+            //        ContactName = x.Tbl_Contact_Clt.Nom + ", " + x.Tbl_Contact_Clt.Prenom
+            //    }).Where(s => s.Nom.Contains(ch)).ToList();
+            //}
 
-                                VilleName = x.Tbl_Ville.libelle,
-                                FamilleName = x.Tbl_Famille_Clt.Libelle,
-                                ContactName = x.Tbl_Contact_Clt.Nom + ", " + x.Tbl_Contact_Clt.Prenom
-                            }).Where(s => s.Nom.Contains(ch)).ToList();
-
-           
             //context.Tbl_Clients.ToList();
-            
-                //return DtoClients;
-            
-var DtoClients = Mapper.Map<List<DtoListeClients>>(list);
-    return DtoClients;    
+
+            //return DtoClients;
+
+    //        var DtoClients = Mapper.Map<List<DtoListeClients>>(list);
+    //return DtoClients;    
                
             
          

@@ -244,7 +244,7 @@ namespace WebArchives.Controllers
                     dto.idf = model.idf;
                     dto.Ice = model.Ice;
                     dto.Cnss = model.Cnss;
-                    //dto.Teleph = model.Teleph;
+                    dto.Teleph = model.Teleph;
                     dto.Gsm = model.Gsm;
                     dto.Tbl_Famille_Clt_Id = model.Tbl_Famille_Clt_Id;
                     //dto.Tbl_Famille_Clt_Id = 1;
@@ -381,20 +381,20 @@ namespace WebArchives.Controllers
         [HttpGet]
         public JsonResult Chercher(string ch)
         {
-            var clients = new VMListeClient();
+            //var clients = new VMListeClient();
             var dto = new DtoListeClients();
             var biz = new BusinessClients();
             var model = new VMListeClient();
 
-            if (!String.IsNullOrEmpty(ch))
-            {
-                model.listeclients = biz.ChercherClient(ch);
-                //clients = model.listeclients;
+            //if (!String.IsNullOrEmpty(ch))
+            //{
+                var clients = biz.ChercherClient(ch);
+                
                 //clients.listeclients  = biz.ChercherClient(ch);
                 
-            }
+            //}
           
-            return Json(new { model.listeclients, IsTrouve = true }, JsonRequestBehavior.AllowGet);
+            return Json(new { clients, IsTrouve = true }, JsonRequestBehavior.AllowGet);
 
         }
     }

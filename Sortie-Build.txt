@@ -1,5 +1,6 @@
-﻿1>------ Début du nettoyage : Projet : WebArchives, Configuration : Debug Any CPU ------
-2>------ Début du nettoyage : Projet : BLL, Configuration : Debug Any CPU ------
-3>------ Début du nettoyage : Projet : DAL, Configuration : Debug Any CPU ------
-4>------ Début du nettoyage : Projet : COMMON, Configuration : Debug Any CPU ------
-========== Nettoyage : 4 a réussi, 0 a échoué, 0 a été ignoré ==========
+﻿1>------ Début de la génération : Projet : BLL, Configuration : Debug Any CPU ------
+1>C:\Users\KElkettani\source\repos\Depot-khalid\BLL\BusinessClients.cs(182,64,182,68): error CS0103: Le nom 'list' n'existe pas dans le contexte actuel
+1>C:\Users\KElkettani\source\repos\Depot-khalid\BLL\BusinessClients.cs(182,13,182,16): warning CS0162: Impossible d'atteindre le code détecté
+2>------ Début de la génération : Projet : WebArchives, Configuration : Debug Any CPU ------
+2>  WebArchives -> C:\Users\KElkettani\source\repos\Depot-khalid\WebArchives\bin\WebArchives.dll
+========== Génération : 1 a réussi, 1 a échoué, 2 mis à jour, 0 a été ignoré ==========
