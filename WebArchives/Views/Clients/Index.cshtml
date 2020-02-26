@@ -32,8 +32,8 @@
 @*Pour appler une vew partiale*@
 
 @*@{
-    Html.RenderPartial("_HeaderNavBar");
-}*@
+        Html.RenderPartial("_HeaderNavBar");
+    }*@
 
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.20/cr-1.5.2/datatables.min.css" />
@@ -53,6 +53,8 @@
     </p>*@
 
 @*<a class="btn btn-success" style="margin:10px auto" onclick="@Url.Action("Create", "Clients")"><i class="fas fa-plus">Ajouter</i></a>*@
+
+
 @using (Html.BeginForm("", "", new { @style = "align:right margin-right:100px margin-top:50px", @class = "pull-right" }))
 {
     <div class="col-sm-12">
@@ -121,17 +123,28 @@
         text-align: left;
         vertical-align: middle;
     }
+    /*.ValidationMessage {
+        display: none;
+    }
+    .validation-summary-errors {
+        border: 2px solid red;
+        color: red;
+        font-weight: bold;
+        margin: 6px;
+        width: 30%;*/
+
 </style>
 
 @*Debut Add client*@
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "addClientForm", name = "formAdd", role = "form" }))
+@using (Html.BeginForm( new { id = "addClientForm", name = "formAdd", role = "form" }))
 {
     @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="modal fade" id="addClientModal" role="dialog" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" onclick="//Close()" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" onclick="Close()" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Ajouter un client</h4>
                 </div>
                 <div class="modal-body">
@@ -143,8 +156,9 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Nom, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @class = "form-control", @id = "idNomClient", @required = "required" } })
-                                    @Html.ValidationMessageFor(model => model.Nom, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @class = "form-control", @id = "idNomClient" } })  @*, @required = "required"*@
+                                    @Html.ValidationMessageFor(model => model.Nom, "", new { @class = "text-danger ValidationMessage" })
+                                    @*<span class="glyphicon glyphicon-lock form-control-feedback"></span>*@
                                 </div>
                             </div>
                             <div class="form-group">
@@ -152,12 +166,13 @@
                                 <div class="col-md-10">
                                     @Html.EditorFor(model => model.Adresse, new { htmlAttributes = new { @class = "form-control", @id = "idAdresseClient" } })
                                     @Html.ValidationMessageFor(model => model.Adresse, "", new { @class = "text-danger" })
+                                    @*<span class="glyphicon glyphicon-lock form-control-feedback"></span>*@
                                 </div>
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Mail, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Mail, new { htmlAttributes = new { @class = "form-control", @id = "idMailClient", @required = "required" } })
+                                    @Html.EditorFor(model => model.Mail, new { htmlAttributes = new { @class = "form-control", @id = "idMailClient" } })  @*, @required = "required"*@
                                     @Html.ValidationMessageFor(model => model.Mail, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -385,15 +400,16 @@
 @*@Scripts.Render("~/bundles/Client/js")*@
 <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
 <script>
-        SetActions({
-            Modify: "@Url.Action("Edit","Clients")",
-            SaveGlobal: "@Url.Action("SaveGlobal","Fonds")",
-            GetFonds: "@Url.Action("GetFonds","Fonds")",
-            SaveFonds: "@Url.Action("SaveFonds","Fonds")",
-            AddChoice: "@Url.Action("AddChoice","Fonds")",
-            SearchFonds: "@Url.Action("SearchFonds","Fonds")"
-        })
+    SetActions({
+        Modify: "@Url.Action("Edit","Clients")",
+        SaveGlobal: "@Url.Action("SaveGlobal","Fonds")",
+        GetFonds: "@Url.Action("GetFonds","Fonds")",
+        SaveFonds: "@Url.Action("SaveFonds","Fonds")",
+        AddChoice: "@Url.Action("AddChoice","Fonds")",
+        SearchFonds: "@Url.Action("SearchFonds","Fonds")"
+    })
 </script>
+
 @*  }*@
 @section scripts{
     @Scripts.Render("~/bundles/jqueryval")
@@ -455,16 +471,18 @@
                         }
                    });
     }
-                $(document).ready(function () {
-                    setInterval(function () {
-                        //alert("Hello")
-                        Window.location = "./Login";
-                        ;
-                    }, 3000);
-               ////alert("ddddd");
-                $("#NomClientEdit").focus();
-                $("#NomClient").focus();
+        $(document).ready(function () {
 
+                setInterval(function () {
+                    //alert("Hello")
+                    Window.location = "./Login";
+                    ;
+                }, 3000);
+                   ////alert("ddddd");
+                $("#NomClientEdit").focus();
+            $("#NomClient").focus();
+           
+                //$('#editClientModal').modal({
                     //$("#NomClient").rules("add", {
                     //    required: true,
                     //    minlength: 2,
@@ -473,10 +491,7 @@
                     //    //    //minlength: jQuery.validator.format("Please, at least {0} characters are necessary")
                     //    //}
                     //});
-                    function Close() {
-                        alert("close");
-                    $("#addClientForm").hide();
-                }
+
 
                 //jQuery.extend(jQuery.validator.messages, {
                 //    required: "Please insert the name, it is mandatory !",
@@ -558,15 +573,22 @@
                     url: "/Clients/GetlisteClient",
                     success: function (data) {
                         //debugger
-                            ReloadClientTable(data.clients);
+                        ReloadClientTable(data.clients);
                     }
                 });
                 //ReloadClientTable();
-            });
+        });
+
         var urls = null;
         function SetActions(actions) {
             urls = actions;
         }
+
+        function Close() {
+            alert("close");
+            $("#addClientForm").Close();
+        }
+
         function Delete(id) {
               if (confirm("Etes-vous sur de vouloir supprimer ce client")) {
                         $.ajax({
@@ -712,7 +734,7 @@
             $.ajax({
                 type: "Get",
                 dataType: 'json',
-                url: '/Clients/Create',
+                url: '/Clients/AddCreate',
                 //data: dataObject,
                 contentType: 'application/json; charset=utf-8',
 
@@ -739,7 +761,7 @@
         }
 
         function SaveAddClient() {
-            //debugger
+            debugger
             //var id = res;
             var nom = $("#idNomClient").val();
             var Adresse = $("#idAdresseClient").val();
@@ -750,7 +772,6 @@
             var telephone1 = $("#idtelephone1Client").val();
             var Gsm = $("#idGsmClient").val();
 
-
             let dataObject = JSON.stringify({
                 //'Id':id,
                 'Nom': nom,
@@ -760,20 +781,23 @@
                 'IDContact': IDContact,
                 'Mail': Mail,
                 'telephone1': telephone1,
-                'Gsm': Gsm,
+                'Gsm': Gsm
             });
-            var data = 1;
+            //var data = 1;
             //Send the JSON array to Controller using AJAX.
-            if ($("#addClientForm").valid()) {
+            //if ($("#addClientForm").valid()) {
+            //    //alert("ADD");
+            //    //debugger
                     $.ajax({
-                        type: "POST",
+                        type: "Post",
                         dataType: 'json',
-                        url: '/Clients/Create',
+                        //url: '/Clients/Create',
+                        url: "@Url.Action("Create", "Clients")",
                         data: dataObject,
                         contentType: 'application/json; charset=utf-8',
-                        success: function (res) {
-                            if (res != null && res != false) {
-                                //alert("res");
+                        success: function (resp) {
+                            if (resp != null && resp != false) {
+                                //alert(res.clients);
                                 // window.location.href = urls.GetFonds;
                                 //on doit vider les inputs
                                 $("#idNomClient").val("");
@@ -784,21 +808,21 @@
                                 $("#idMailClient").val("");
                                 $("#idtelephone1Client").val("");
                                 $("#idGsmClient").val("");
-                                $("#addClientModal").hide();
+                                //$("#addClientModal").hide();
+                                $("#addClientModal").remove();
                                 // debugger
-
-                                ReloadClientTable(res);
+                                ReloadClientTable(clients);
                                 //ReloadClientTable();
                                 swal("Enregistrement effectué avec succès !", "", "success");
                             }
-                        },
-                        error: function (res) {
-                            //alert(response);
-                            console.log(res);
-                            swal("Échec du Sauvegarde !", "", "error");
                         }
+            //            //error: function (res) {
+            //            //    //alert(response);
+            //            //    console.log(res);
+            //            //    swal("Échec du Sauvegarde !", "", "error");
+            //            //}
                     });
-        }
+            //}
         }
     //SaveClient
         function ChercherClient() {
@@ -842,12 +866,6 @@
         }
     </script>
 }
-
-
-
-
-
-
 
 @*EmpVar.DOB = Convert.ToDateTime(Rows.DOB).ToShortDateString();
 

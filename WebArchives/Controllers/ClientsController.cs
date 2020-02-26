@@ -87,11 +87,12 @@ namespace WebArchives.Controllers
         }
 
         // GET: Clients/Create
-        public JsonResult Create()
+        [HttpGet]
+        public JsonResult AddCreate()
         {
 
-            try
-            {
+            //try
+            //{
                 var model = new VMListeClient();
                 var biz = new BusinessVilles();
                 var bizF = new BusinessFamilleClients();
@@ -99,14 +100,17 @@ namespace WebArchives.Controllers
                 model.ListeContact = bizContact.ListContact();
                 model.listeVilles = biz.GetListeVille();
                 model.listeFamille = bizF.GetListFamilleClt();
-                //return View(model);
-                ModelState.Remove("Name");
-                return Json(model, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception)
-            {
-                return Json(null, JsonRequestBehavior.AllowGet);
-            }
+            //return View(model);
+            //ModelState.Remove("Nom");
+            //ModelState.Remove("Mail");
+            //ModelState.Clear();
+            //ModelState.Clear();
+            return Json(model, JsonRequestBehavior.AllowGet);
+            //}
+            //catch (Exception)
+            //{
+            //    return Json(null, JsonRequestBehavior.AllowGet);
+            //}
         }
 
         public ActionResult Report(string repotType)
@@ -225,7 +229,7 @@ namespace WebArchives.Controllers
             //}
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public JsonResult Create(VMListeClient model)
         {
             var bizF = new BusinessFamilleClients();
@@ -265,6 +269,7 @@ namespace WebArchives.Controllers
                     int id = biz.AjouterClient(dto);
                     var clients = bis.BusinessliseClient();
                     //return RedirectToAction("index");
+                    ModelState.Clear();
                     return Json(clients, JsonRequestBehavior.AllowGet);
                 }
                 return Json(false, JsonRequestBehavior.AllowGet);

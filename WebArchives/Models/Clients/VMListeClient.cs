@@ -16,7 +16,7 @@ namespace WebArchives.Models.Clients
         [StringLength(50)]
         [Display(Name = "Nom client")]
         public string Nom { get; set; }
-        [StringLength(150)]
+        //[StringLength(150)]
         [Display(Name = "Adresse client")]
         public string Adresse { get; set; }
         [Required(ErrorMessage = "Please enter Email")]
@@ -56,6 +56,8 @@ namespace WebArchives.Models.Clients
         public string FamilleName { get; set; }
         public string ContactName { get; set; }
 
+        //[Compare("NewUserName", ErrorMessage = "The new password and confirmation password do not match.")]
+        //public string ConfirmUserName { get; set; }
 
 
     }
