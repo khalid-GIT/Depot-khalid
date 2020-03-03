@@ -1,3 +1,1 @@
-﻿1>------ Début de la génération : Projet : Agency, Configuration : Debug Any CPU ------
-1>  Agency -> C:\Users\KElkettani\source\repos\Agence\Agency\bin\Agency.dll
-========== Génération : 1 a réussi, 0 a échoué, 0 mis à jour, 0 a été ignoré ==========
+﻿1>------ Début de la génération : Projet : WebArchives, Configuration : Debug Any CPU ------

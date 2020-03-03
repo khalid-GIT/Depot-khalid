@@ -59,6 +59,16 @@ namespace WebArchives.Models.Clients
         //[Compare("NewUserName", ErrorMessage = "The new password and confirmation password do not match.")]
         //public string ConfirmUserName { get; set; }
 
+        //public string Email { get; set; }
 
+        //[Compare(nameof(Email), ErrorMessage = "The Email and Confirm Email fields do not match.")]
+        //public string ConfirmEmail { get; set; }
+
+        //[Display(Name = "Email")]
+        //public string Email { get; set; }
+
+        //[Display(Name = "Confirm Email")]
+        //[Compare("Email", ErrorMessage = "The '{1}' and '{0}' fields do not match.")]
+        //public string ConfirmEmail { get; set; }
     }
 }

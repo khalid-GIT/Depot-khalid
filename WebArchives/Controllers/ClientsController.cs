@@ -27,14 +27,16 @@ namespace WebArchives.Controllers
     public class ClientsController : Controller
     {
         // GET: Clients
-        public ActionResult Index(VMListeClient model)
+        public ActionResult Index()
         {
             //Déclaration du web service wcf
             //Service1Client srv = new Service1Client();
             //string value = srv.GetData(123);
             //var liste = srv.GetClients();
+            var model = new VMListeClient();
+
             var bis = new BusinessClients();
-            model.listeclients = bis.BusinessliseClient();
+            //model.listeclients = bis.BusinessliseClient();
             //var bisFamille = new BusinessFamilleClients();
             var biz = new BusinessVilles();
             var bizF = new BusinessFamilleClients();
@@ -44,12 +46,12 @@ namespace WebArchives.Controllers
             model.listeFamille = bizF.GetListFamilleClt();
 
             //model.listeFamille = bisFamille.GetListFamilleClt();
-
-            //return View(model);
-            var data = model.listeclients;
-         return View(model);
+            ViewBag.Locations = model;
+            return View(model);
+            //var data = model.listeclients;
+            //return View();
             //return Json(new { data }, JsonRequestBehavior.AllowGet);
-           // return Json(new { data }, JsonRequestBehavior.AllowGet);
+            // return Json(new { data }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult GetlisteClient(VMListeClient model)
         {
@@ -100,16 +102,18 @@ namespace WebArchives.Controllers
                 model.ListeContact = bizContact.ListContact();
                 model.listeVilles = biz.GetListeVille();
                 model.listeFamille = bizF.GetListFamilleClt();
-            //return View(model);
+
             //ModelState.Remove("Nom");
             //ModelState.Remove("Mail");
             //ModelState.Clear();
-            //ModelState.Clear();
-            return Json(model, JsonRequestBehavior.AllowGet);
+            ModelState.Clear();
+            //return Json(true, JsonRequestBehavior.AllowGet);
             //}
+            //return View(model);
             //catch (Exception)
             //{
-            //    return Json(null, JsonRequestBehavior.AllowGet);
+        
+            return Json(new { model }, JsonRequestBehavior.AllowGet);
             //}
         }
 
@@ -235,8 +239,8 @@ namespace WebArchives.Controllers
             var bizF = new BusinessFamilleClients();
             var bis = new BusinessClients();
 
-            try
-            {
+            //try
+            //{
                 if (ModelState.IsValid == true)
                 {
                     var dto = new DtoListeClients();
@@ -269,16 +273,16 @@ namespace WebArchives.Controllers
                     int id = biz.AjouterClient(dto);
                     var clients = bis.BusinessliseClient();
                     //return RedirectToAction("index");
-                    ModelState.Clear();
-                    return Json(clients, JsonRequestBehavior.AllowGet);
+                    //ModelState.Clear();
+                    return Json(new { clients, message = "Success" }, JsonRequestBehavior.AllowGet);
                 }
                 return Json(false, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception )
-            {
-                return Json(null, JsonRequestBehavior.AllowGet);
-            }
-        }
+            //catch (Exception )
+            //{
+            //    return Json(null, JsonRequestBehavior.AllowGet);
+            //}
+        //}
         // GET: Clients/Edit/5
         public JsonResult Edit(int id)
         {

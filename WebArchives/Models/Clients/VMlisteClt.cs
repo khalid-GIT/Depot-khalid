@@ -3,6 +3,7 @@ using COMMON.DTO.Clients.Familles;
 using COMMON.DTO.Villes;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -11,6 +12,7 @@ namespace WebArchives.Models.Clients
     public class VMlisteClt
     {
         public int id { get; set; }
+        
         public string Nom { get; set; }
        
         public string Adresse { get; set; }
