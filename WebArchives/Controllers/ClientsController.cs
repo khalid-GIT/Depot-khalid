@@ -21,9 +21,7 @@ namespace WebArchives.Controllers
 
     
 
-    [Auth]  //equal AuthAttribute
-    [Authorize] //se base sur les roles de l utilisateur connecté /Sécuriser un contrôleur
-    [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")] //Vider le cache
+    
     public class ClientsController : Controller
     {
         // GET: Clients
@@ -241,48 +239,97 @@ namespace WebArchives.Controllers
 
             //try
             //{
-                if (ModelState.IsValid == true)
-                {
-                    var dto = new DtoListeClients();
-                    dto.Nom = model.Nom;
-                    dto.Adresse = model.Adresse;
-                    dto.Mail = model.Mail;
-                    dto.telephone1 = model.telephone1;
-                    dto.fax = model.fax;
-                    dto.idf = model.idf;
-                    dto.Ice = model.Ice;
-                    dto.Cnss = model.Cnss;
-                    dto.Teleph = model.Teleph;
-                    dto.Gsm = model.Gsm;
-                    dto.Tbl_Famille_Clt_Id = model.Tbl_Famille_Clt_Id;
-                    //dto.Tbl_Famille_Clt_Id = 1;
-                    dto.Tbl_Ville_id = model.Tbl_Ville_id;
-                    //dto.Tbl_Ville_id = 1;
-                    dto.IDContact = model.IDContact;
-                    //dto.IDContact = 1;
+            if (ModelState.IsValid == true)
+            {
+                var dto = new DtoListeClients();
+                dto.Nom = model.Nom;
+                dto.Adresse = model.Adresse;
+                dto.Mail = model.Mail;
+                dto.telephone1 = model.telephone1;
+                dto.fax = model.fax;
+                dto.idf = model.idf;
+                dto.Ice = model.Ice;
+                dto.Cnss = model.Cnss;
+                dto.Teleph = model.Teleph;
+                dto.Gsm = model.Gsm;
+                dto.Tbl_Famille_Clt_Id = model.Tbl_Famille_Clt_Id;
+                //dto.Tbl_Famille_Clt_Id = 1;
+                dto.Tbl_Ville_id = model.Tbl_Ville_id;
+                //dto.Tbl_Ville_id = 1;
+                dto.IDContact = model.IDContact;
+                //dto.IDContact = 1;
 
-                    var bizv = new BusinessVilles();
-                    var bizContact = new BusinessContactClt();
+                var bizv = new BusinessVilles();
+                var bizContact = new BusinessContactClt();
 
 
-                    model.ListeContact = bizContact.ListContact();
-                    model.listeVilles = bizv.GetListeVille();
-                    model.listeFamille = bizF.GetListFamilleClt();
+                model.ListeContact = bizContact.ListContact();
+                model.listeVilles = bizv.GetListeVille();
+                model.listeFamille = bizF.GetListFamilleClt();
 
-                    var biz = new BusinessClients();
-                    int id = biz.AjouterClient(dto);
-                    var clients = bis.BusinessliseClient();
-                    //return RedirectToAction("index");
-                    //ModelState.Clear();
-                    return Json(new { clients, message = "Success" }, JsonRequestBehavior.AllowGet);
-                }
-                return Json(false, JsonRequestBehavior.AllowGet);
+                var biz = new BusinessClients();
+                int id = biz.AjouterClient(dto);
+                var clients = bis.BusinessliseClient();
+                //return RedirectToAction("index");
+                //ModelState.Clear();
+                return Json(new { clients, Success = true }, JsonRequestBehavior.AllowGet);
             }
-            //catch (Exception )
-            //{
-            //    return Json(null, JsonRequestBehavior.AllowGet);
-            //}
+            return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
+            }
+        //catch (Exception )
+        //{
+        //    return Json(null, JsonRequestBehavior.AllowGet);
         //}
+        //}
+
+
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public JsonResult SaveClient(VMListeClient model)
+        {
+            var bizF = new BusinessFamilleClients();
+            var bis = new BusinessClients();
+
+            //try
+            //{
+            if (ModelState.IsValid == true)
+            {
+                var dto = new DtoListeClients();
+                dto.Nom = model.Nom;
+                dto.Adresse = model.Adresse;
+                dto.Mail = model.Mail;
+                dto.telephone1 = model.telephone1;
+                dto.fax = model.fax;
+                dto.idf = model.idf;
+                dto.Ice = model.Ice;
+                dto.Cnss = model.Cnss;
+                dto.Teleph = model.Teleph;
+                dto.Gsm = model.Gsm;
+                dto.Tbl_Famille_Clt_Id = model.Tbl_Famille_Clt_Id;
+                //dto.Tbl_Famille_Clt_Id = 1;
+                dto.Tbl_Ville_id = model.Tbl_Ville_id;
+                //dto.Tbl_Ville_id = 1;
+                dto.IDContact = model.IDContact;
+                //dto.IDContact = 1;
+
+                var bizv = new BusinessVilles();
+                var bizContact = new BusinessContactClt();
+
+
+                model.ListeContact = bizContact.ListContact();
+                model.listeVilles = bizv.GetListeVille();
+                model.listeFamille = bizF.GetListFamilleClt();
+
+                var biz = new BusinessClients();
+                int id = biz.AjouterClient(dto);
+                var clients = bis.BusinessliseClient();
+                //return RedirectToAction("index");
+                //ModelState.Clear();
+                return Json(new { clients, Success = true }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: Clients/Edit/5
         public JsonResult Edit(int id)
         {
