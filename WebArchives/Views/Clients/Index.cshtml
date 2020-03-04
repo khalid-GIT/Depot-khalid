@@ -47,9 +47,7 @@
 <h2>Liste des clients</h2>
 @TempData["SuccessMessage"]
 
-@*<p>
-            @Html.ActionLink("Create New", "Create")
-    </p>*@
+
 
 @*<a class="btn btn-success" style="margin:10px auto" onclick="@Url.Action("Create", "Clients")"><i class="fas fa-plus">Ajouter</i></a>*@
 @*@using (Html.BeginForm("", "", new { @style = "align:right margin-right:100px margin-top:50px", @class = "pull-right" }))
@@ -186,7 +184,7 @@
                                     @Html.ValidationMessageFor(model => model.fax, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-                            @*<div class="form-group">
+                            <div class="form-group">
                                 @Html.LabelFor(model => model.Tbl_Famille_Clt_Id, "Famille", new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
                                     @Html.DropDownListFor(model => model.Tbl_Famille_Clt_Id, new SelectList(Model.listeFamille, "IdFamille", "Libelle"), new { @class = "form-control", @id = "idIdFamilleClientEdit" })
@@ -206,7 +204,7 @@
                                     @Html.DropDownListFor(model => model.IDContact, new SelectList(Model.ListeContact, "IDContact", "FullName"), new { @class = "form-control", @id = "idIDContactClientEdit" })
                                     @Html.ValidationMessageFor(model => model.IDContact, "", new { @class = "text-danger" })
                                 </div>
-                            </div>*@
+                            </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.idf, htmlAttributes: new { @class = "control-label col-md-2", @id = "ididfClientEdit" })
                                 <div class="col-md-10">
@@ -282,10 +280,10 @@
 
 @section scripts{
     @Scripts.Render("~/bundles/jqueryval")
-    <script type="text/javascript">
+<script type="text/javascript">
         var table = null;
         function ReloadClientTable(data) {
-            alert("Hello")
+            //alert("Hello")
               if (table != null) {
                         //il y a des données  (table != null) &&
                         $('#idTableClients').DataTable().destroy();
@@ -341,10 +339,20 @@
                         }
                    });
         }
-        //$("#addClientForm").load(function () {
-        //    alert("addClientForm");
+       
+
+    
+
+    $(document).ready(function () {
+        //pour annuler le load de la page index une fois je clique sur submit
+        $('form').submit(function (e) {
+            e.preventDefault();
+        });
+
+        //$('form').click(function (e) {
+        //    debugger
+        //    e.preventDefault();
         //});
-        $(document).ready(function () {
 
             //RegisterAjaxEvents();
                 //setInterval(function () {
@@ -352,82 +360,82 @@
                 //    Window.location = "./Login";
                 //    ;
                 //}, 3000);
-                 alert("ddddd");
+                 //alert("ddddd");
                 $("#NomClientEdit").focus();
                 $("#NomClient").focus();
 
-                //$('#editClientModal').modal({
-                    //$("#NomClient").rules("add", {
-                    //    required: true,
-                    //    minlength: 2,
-                    //    //messages: {
-                    //    //    //required: "Please insert the name, it is mandatory !",
-                    //    //    //minlength: jQuery.validator.format("Please, at least {0} characters are necessary")
-                    //    //}
-                    //});
+                $('#editClientModal').modal({
+                    $("#NomClient").rules("add", {
+                        required: true,
+                        minlength: 2,
+                        //messages: {
+                        //    //required: "Please insert the name, it is mandatory !",
+                        //    //minlength: jQuery.validator.format("Please, at least {0} characters are necessary")
+                        //}
+                    });
 
 
-                //jQuery.extend(jQuery.validator.messages, {
-                //    required: "Please insert the name, it is mandatory !",
-                //    remote: "votre message",
-                //    email: "votre message",
-                //    url: "votre message",
-                //    date: "votre message",
-                //    dateISO: "votre message",
-                //    number: "votre message",
-                //    digits: "votre message",
-                //    creditcard: "votre message",
-                //    equalTo: "votre message",
-                //    accept: "votre message",
-                //    maxlength: jQuery.validator.format("votre message {0} caractéres."),
-                //    minlength: jQuery.validator.format("votre message {0} caractéres."),
-                //    rangelength: jQuery.validator.format("votre message  entre {0} et {1} caractéres."),
-                //    range: jQuery.validator.format("votre message  entre {0} et {1}."),
-                //    max: jQuery.validator.format("votre message  inférieur ou égal à {0}."),
-                //    min: jQuery.validator.format("votre message  supérieur ou égal à {0}.")
-                //});
-                //    jQuery("#editClientForm").validate({
-                //        rules: {
-                //        "NomClient": {
-                //            "required": false,
-                //            "minlength": 2,
-                //            "maxlength": 4
-                //        }
-                //        //,"idMailClientEdit": {
-                //        //    "email": true,
-                //        //    "maxlength": 255
-                //        //},
-                //        //"idAdresseClientEdit": {
-                //        //    "required": true
-                //        //},
-                //        //"idtelephone1ClientEdit": {
-                //        //    "required": true,
-                //        //    "regex": /^(\+33\.|0)[0-9]{9}$/
-                //        //}
+                jQuery.extend(jQuery.validator.messages, {
+                    required: "Please insert the name, it is mandatory !",
+                    remote: "votre message",
+                    email: "votre message",
+                    url: "votre message",
+                    date: "votre message",
+                    dateISO: "votre message",
+                    number: "votre message",
+                    digits: "votre message",
+                    creditcard: "votre message",
+                    equalTo: "votre message",
+                    accept: "votre message",
+                    maxlength: jQuery.validator.format("votre message {0} caractéres."),
+                    minlength: jQuery.validator.format("votre message {0} caractéres."),
+                    rangelength: jQuery.validator.format("votre message  entre {0} et {1} caractéres."),
+                    range: jQuery.validator.format("votre message  entre {0} et {1}."),
+                    max: jQuery.validator.format("votre message  inférieur ou égal à {0}."),
+                    min: jQuery.validator.format("votre message  supérieur ou égal à {0}.")
+                });
+                    jQuery("#editClientForm").validate({
+                        rules: {
+                        "NomClient": {
+                            "required": false,
+                            "minlength": 2,
+                            "maxlength": 4
+                        }
+                        //,"idMailClientEdit": {
+                        //    "email": true,
+                        //    "maxlength": 255
+                        //},
+                        //"idAdresseClientEdit": {
+                        //    "required": true
+                        //},
+                        //"idtelephone1ClientEdit": {
+                        //    "required": true,
+                        //    "regex": /^(\+33\.|0)[0-9]{9}$/
+                        //}
 
-                //    }
-                //});
-                //    jQuery("#addClientForm").validate({
-                //    rules: {
-                //        "Nom": {
-                //            "required": true,
-                //            "minlength": 2,
-                //            "maxlength": 4
-                //        }
-                //        //,"idMailClient": {
-                //        //    "email": false,
-                //        //    "maxlength": 255
-                //        //},
-                //        //"idAdresseClientEdit": {
-                //        //    "required": true
-                //        //},
-                //        //"idtelephone1ClientEdit": {
-                //        //    "required": true,
-                //        //    "regex": /^(\+33\.|0)[0-9]{9}$/
-                //        //}
+                    }
+                });
+                    jQuery("#addClientForm").validate({
+                    rules: {
+                        "Nom": {
+                            "required": true,
+                            "minlength": 2,
+                            "maxlength": 4
+                        }
+                        //,"idMailClient": {
+                        //    "email": false,
+                        //    "maxlength": 255
+                        //},
+                        //"idAdresseClientEdit": {
+                        //    "required": true
+                        //},
+                        //"idtelephone1ClientEdit": {
+                        //    "required": true,
+                        //    "regex": /^(\+33\.|0)[0-9]{9}$/
+                        //}
 
-                //    }
-                //});
+                    }
+                });
 
                 //jQuery.validator.addMethod(
                 //    "regex",
@@ -446,15 +454,18 @@
                     dataType: 'json',
                     url: "/Clients/GetlisteClient",
                     success: function (data) {
-                        //debugger
                         ReloadClientTable(data.clients);
                     }
                 });
                 //ReloadClientTable();
-        });
+    });
+
+    
+    
 
         var urls = null;
-        function SetActions(actions) {
+    function SetActions(actions) {
+
             urls = actions;
         }
 
@@ -463,10 +474,11 @@
             //$("#addClientModal").removeData("validator");
             //$("#addClientModal").removeData("unobtrusiveValidation");
             //$.validator.unobtrusive.parse("#addClientModal");
-           
-            //$("#addClientForm").hide();
+
+
+            $("#addClientModal").hide();
         }
-        
+
           @*function AddClient() {
             alert("Create0");
             $('#addClientModal').dialog({
@@ -562,6 +574,9 @@
             var Mail = $("#idMailClientEdit").val();
             var telephone1 = $("#idtelephone1ClientEdit").val();
             var Gsm = $("#idGsmClientEdit").val();
+            var idf = $("#ididfClientEdit").val();
+            var cnss = $("#idCnssClientEdit").val();
+            var ice = $("#idIceClientEdit").val();
 
             let dataObject = JSON.stringify({
                 'Id':id,
@@ -573,6 +588,9 @@
                 'Mail': Mail,
                 'telephone1': telephone1,
                 'Gsm': Gsm,
+                'cnss': cnss,
+                'ice': ice,
+
             });
             if ($("#editClientForm").valid()) {
                 //debugger
@@ -600,16 +618,16 @@
                         error: function (data) {
                             alert("response");
                             console.log(data);
-                            //swal("Échec du Sauvegarde !", "", "error");
+                            swal("Échec du Sauvegarde !", "", "error");
                         }
 
                         });
             }
         };
 
-      
+
         function AddClient() {
-            alert("Create0q");
+            //alert("Create0q");
             //pour ne pas afficher les
             $('#idIdClient').val("");
             $('#idNomClient').val("");
@@ -623,11 +641,11 @@
             $('#idTelephClient').val("");
             $('#idIceClient').val("");
             $('#idGsmClient').val("");
-            debugger;
+            //debugger;
             // Init JQuery Validation for view
-            //$("addClientModal").removeData("validator");
-            //$("addClientModal").removeData("unobtrusiveValidation");
-            //$.validator.unobtrusive.parse("addClientModal");
+            //$("addClientForm").removeData("validator");
+            //$("addClientForm").removeData("unobtrusiveValidation");
+                $.validator.unobtrusive.parse("addClientModal");
             $.ajax({
                 cache: false,
                 modal: true,
@@ -639,7 +657,7 @@
                 //data: dataObject,
                 contentType: 'application/json; charset=utf-8',
                 success: function (res) {
-                    debugger
+                    //debugger
                     if (res != null && res != false) {
                         $("#addClientModal").modal({
                             autoOpen: true,
@@ -659,10 +677,10 @@
             });
          //$("#addClientModal").modal();
         }
-        
+
         function SaveAddClient() {
-            
-            //alert("debugger");
+
+            //alert("SaveAddClient");
             //var id = res;
             var nom = $("#idNomClient").val();
             var Adresse = $("#idAdresseClient").val();
@@ -672,6 +690,12 @@
             var Mail = $("#idMailClient").val();
             var telephone1 = $("#idtelephone1Client").val();
             var Gsm = $("#idGsmClient").val();
+            var fax = $("#idFaxClient").val();
+            var Cnss = $("#idCnssClient").val();
+
+            var idf = $("#ididfClient").val();
+            var Ice = $("#idIceClient").val();
+            var Teleph = $("#idTelephClient").val();
 
             let dataObject = JSON.stringify({
                 //'Id':id,
@@ -682,59 +706,78 @@
                 'IDContact': IDContact,
                 'Mail': Mail,
                 'telephone1': telephone1,
-                'Gsm': Gsm
+                'Gsm': Gsm,
+                'fax': fax,
+                'Cnss': Cnss,
+                'idf': idf,
+                'Ice': Ice,
+                'Teleph': Teleph
             });
-          
+
             //var mydata = $("#addClientForm").serialize();
             //Send the JSON array to Controller using AJAX.
-            //if ($("#addClientModal").valid()) {
-                
-                @*$.ajax({
-                    type: "post",
+            //validation coté client 
+            //if ($("#addClientForm").valid()) {
+
+                $.ajax({
+                    type: "Post",
                     dataType: 'json',
-                    url: './SaveClient',
-                    //url: "@Url.Action("Create", "Clients")",
+                    //url: './SaveClient',
+                    url: "@Url.Action("SaveClient", "Clients")",
                     data: dataObject,   /*mydata,*/
                     contentType: 'application/json; charset=utf-8',
                     success: function (res) {
-                        debugger;
-                         //if (clients != null && clients != false) {
+                        if (res.Success) {
+                            $("#idNomClient").val("");
+                            $("#idAdresseClient").val("");
+
+                            $("#idMailClient").val("");
+                            $("#idtelephone1Client").val("");
+                            $("#idGsmClient").val("");
+                            $("#idFaxClient").val("");
+                            $("#idCnssClient").val("");
+                            $("#ididfClient").val("");
+                            $("#idIceClient").val("");
+                            $("#idTelephClient").val("");
+
+                            $("#addClientModal").hide();
+
+
+                            ReloadClientTable(res.clients);
+                            debugger
+                            console.log(res);
+
+                            swal("Enregistrement effectué avec succès !", "", "success");
+
+
+                        } else {
+                            console.log(res);
+                            swal("Échec du Sauvegarde   ajax !", "", "error");
+                        }
+                        //if (clients != null && clients != false) {
                         //alert(res.clients);
                         //debugger
                         // window.location.href = urls.GetFonds;
                         //on doit vider les inputs
-                        $("#idNomClient").val("");
-                        $("#idAdresseClient").val("");
-                        //$("#idIdFamilleClient").val("");
-                        //$("#idIdVilleClient").val("");
-                        //$("#idIDContactClient").val("");
-                        $("#idMailClient").val("");
-                        $("#idtelephone1Client").val("");
-                        $("#idGsmClient").val("");
-                        $("#addClientModal").model("hide");
-                        //$("#addClientModal").remove();
-                         //debugger
-                        //ReloadClientTable(res.clients);
-                        //ReloadClientTable();
-                        swal("Enregistrement effectué avec succès !", "", "success");
+
                     },
                     error: function (res) {
-                            //alert(response);
-                            //console.log(res);
-                            swal("Échec du Sauvegardeajax !", "", "error");
-                     }
-                    
-                });*@
-                //}
+                        //alert(res);
+                        console.log(res);
+                        //swal("Échec du Sauvegarde_ajax !", "", "error");
+                    }
+
+                });
+            
             //} else {
             //    swal("Échec du Sauvegarde !", "", "error");
             //}
 
 
-            swal("Enregistrement effectué avec succès !", "", "success");
+           
         }
     //SaveClient
-        function ChercherClient() {
+        @*function ChercherClient() {
             //alert("ch");
             var ch = $("#Chercher").val();
             //alert(ch);
@@ -772,8 +815,9 @@
             //}
 
 
-        }
-    </script>
+        }*@
+    
+</script>
 }
 
 <div id="createCat" class="modal fade"
@@ -783,9 +827,7 @@
 </div>
 
 @*Debut Add client*@
-
     //modal fade/modal hide
-
 <div class="modal fade" id="addClientModal" role="dialog" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
@@ -798,7 +840,7 @@
                 @*@{
             Html.RenderPartial("Create");
         }*@
-                @using (Html.BeginForm())
+                @using (Html.BeginForm(new { id = "addClientForm", name = "form", role = "form" }))
                 {
                     //new { id = "addClientForm", name = "formAdd", role = "form" }
                     @*OnSuccess = "RegisterAjaxEvents();",*@
@@ -905,8 +947,8 @@
                             <div class="form-group">
                                 <div class="col-md-offset-2 col-md-10">
 
-                                    <input type="button" value="Create" class="btn btn-default" onclick="SaveAddClient()" />
-                                    @*<input type="submit" value="Create" class="btn btn-default" onclick="vidermessage()" />*@
+                                    <input type="submit" value="Valider" class="btn btn-default" onclick="SaveAddClient()" />
+                                    <input type="button" value="Annuler" class="btn btn-default" onclick="Close()" />
                                 </div>
                             </div>
                         </div>
@@ -917,8 +959,6 @@
         </div>
     </div>
 </div>
-
-
 
 @*FIN MODEL CREATE*@
 @*EmpVar.DOB = Convert.ToDateTime(Rows.DOB).ToShortDateString();

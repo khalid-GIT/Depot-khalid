@@ -21,7 +21,7 @@ namespace WebArchives.Controllers
 
     
 
-    
+    [Auth]
     public class ClientsController : Controller
     {
         // GET: Clients
@@ -231,7 +231,7 @@ namespace WebArchives.Controllers
             //}
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public JsonResult Create(VMListeClient model)
         {
             var bizF = new BusinessFamilleClients();
@@ -327,7 +327,7 @@ namespace WebArchives.Controllers
                 //ModelState.Clear();
                 return Json(new { clients, Success = true }, JsonRequestBehavior.AllowGet);
             }
-            return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
+            return Json(new { Success = false }, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Clients/Edit/5
@@ -351,7 +351,8 @@ namespace WebArchives.Controllers
                 Tbl_Famille_Clt_Id = dto.Tbl_Famille_Clt_Id,
                 Tbl_Ville_id = dto.Tbl_Ville_id,
                 IDContact = dto.IDContact
-            };
+
+        };
             var bizV = new BusinessVilles();
             var bizF = new BusinessFamilleClients();
             var bizContact = new BusinessContactClt();
