@@ -330,6 +330,17 @@ namespace WebArchives.Controllers
             return Json(new { Success = false }, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public JsonResult IsEmailExist(string Email)
+        {
+            bool isExist = false;
+            if (Email.Equals("rrr@gmail.com"))
+            {
+                isExist = true;
+            }
+            return Json(!isExist, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: Clients/Edit/5
         public JsonResult Edit(int id)
         {

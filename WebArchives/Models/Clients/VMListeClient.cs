@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
+
 namespace WebArchives.Models.Clients
 {
     public class VMListeClient
@@ -19,8 +20,9 @@ namespace WebArchives.Models.Clients
         //[StringLength(150)]
         [Display(Name = "Adresse client")]
         public string Adresse { get; set; }
-        [Required(ErrorMessage = "Please enter Email")]
+        [Required(ErrorMessage = "Le Mail est obligatoire !")]
         [RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "Email is not valid.")]
+        //[Remote("IsEmailExist", "Clients", ErrorMessage = "Email Already Exist. Please choose another email.")]
         [Display(Name = "Adresse Mail")]
         public string Mail { get; set; }
         [Display(Name = "Télèphone")]
@@ -70,5 +72,7 @@ namespace WebArchives.Models.Clients
         //[Display(Name = "Confirm Email")]
         //[Compare("Email", ErrorMessage = "The '{1}' and '{0}' fields do not match.")]
         //public string ConfirmEmail { get; set; }
+
+
     }
 }
