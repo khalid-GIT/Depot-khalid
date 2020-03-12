@@ -17,7 +17,7 @@ namespace WebArchives.Models.Clients
         [StringLength(50)]
         [Display(Name = "Nom client")]
         public string Nom { get; set; }
-        //[StringLength(150)]
+        [StringLength(150)]
         [Display(Name = "Adresse client")]
         public string Adresse { get; set; }
         [Required(ErrorMessage = "Le Mail est obligatoire !")]

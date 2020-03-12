@@ -68,9 +68,7 @@ namespace WebArchives
 
             //JAVASCRIPTS
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate.js",
-                        "~/Scripts/jquery.validate.unobtrusive.js"));
+           
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
@@ -134,6 +132,13 @@ namespace WebArchives
            "~/Scripts/Invoice.js"));
             bundles.Add(new ScriptBundle("~/bundles/Editorjs/js").Include(
            "~/Scripts/editorjs.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+                       "~/Scripts/jquery.validate.js")
+                       );
+            bundles.Add(new ScriptBundle("~/bundles/unobtrusive").Include(
+                          "~/Scripts/jquery.validate.unobtrusive.js")
+                       );
 
         }
     }

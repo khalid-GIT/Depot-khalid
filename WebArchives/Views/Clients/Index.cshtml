@@ -1,6 +1,7 @@
 ﻿@model WebArchives.Models.Clients.VMListeClient
 
 @{
+    //Layout = null;
     //Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Index";
     ViewBag.titre = "Liste des clients";
@@ -23,7 +24,7 @@
             Response.AddHeader("Pragma", "no-cache");
         }
     }
-    
+
     //We will see the validations in MVC.Validations can be performed using the below methods.
     //1 Using ModelState Object
     //2 Using Data Annotation
@@ -46,14 +47,33 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.20/cr-1.5.2/datatables.min.css" />
 @*Icons plus font*@
 @Styles.Render("~/Content/fontawesome-free/css")
-@*<link href="~/Content/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">*@
+<link href="~/Content/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 @Styles.Render("~/datatable/buttons/css")
+@*@Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/unobtrusive")*@
 
 <link href="@Url.Content("~/Content/jquery-ui.min.css")" rel="stylesheet" type="text/css" />
 <link href="@Url.Content("~/Content/jquery-ui.css")" rel="stylesheet" type="text/css" />
 <link href="~/Scripts/SweetAlert/sweetalert.css" rel="stylesheet" type="text/css" />
 <h2>Liste des clients</h2>
 @TempData["SuccessMessage"]
+
+
+<!-- Validation-->
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+@*il faut placer jquery avant le bootsrap pour reconaissance du model*@
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/SweetAlert/sweetalert.min.js" type="text/javascript"></script>
+
+@*@Scripts.Render("~/bundles/jquery")*@
+
+
+@*<script src="~/Scripts/expressive.annotations.validate.js"></script>
+    @*<script src="~/Scripts/jquery.validate.unobtrusive.bootstrap.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
 
 
 @*<a class="btn btn-success" style="margin:10px auto" onclick="@Url.Action("Create", "Clients")"><i class="fas fa-plus">Ajouter</i></a>*@
@@ -137,10 +157,11 @@
 
 </style>
 
-@*Debut Add client*@
-//modal fade/modal hide
-@using (Html.BeginForm(new { @id = "addClientForm", name = "formAdd", @class = "form-horizontal", role = "form" }))
-{
+@*Debut Add client
+    //modal fade/modal hide*@
+@*@using (Html.BeginForm(new { id = "addClientForm", FormMethod.Post, name = "addClientForm", @class = "form-horizontal", role = "form" }))
+    {*@
+<form id="addClientForm" FormMethod.Post name="addClientForm" class="form-horizontal" role="form">
     <div class="modal fade" id="addClientModal" role="dialog" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
@@ -160,13 +181,13 @@
                             @Html.AntiForgeryToken()
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             @* @Html.AntiForgeryToken()*
-                           
-                            @* @Html.ValidationSummary(false, "", new { @class = "text-danger" })*@
+
+                                @* @Html.ValidationSummary(false, "", new { @class = "text-danger" })*@
                             @* @Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Nom, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @class = "form-control", @id = "idNomClient" } })  @*, @required = "required"*@
+                                    @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @class = "form-control", name = "Nom", id = "Nom" } })  @*, @required = "required"*@
                                     @Html.ValidationMessageFor(model => model.Nom, string.Empty, new { @class = "text-danger ValidationMessage", @id = "idNomClientVal" })
                                     @*<span class="glyphicon glyphicon-lock form-control-feedback"></span>*@
                                 </div>
@@ -182,7 +203,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Mail, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Mail, new { htmlAttributes = new { @class = "form-control", @id = "idMailClient" } })  @*, @required = "required"*@
+                                    @Html.EditorFor(model => model.Mail, new { htmlAttributes = new { @class = "form-control", name = "Mail", id = "Mail" } })  @*, @required = "required"*@
                                     @Html.ValidationMessageFor(model => model.Mail, "", new { @class = "text-danger ValidationMessage" })
                                 </div>
                             </div>
@@ -259,9 +280,11 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-offset-2 col-md-10">
-                                    @*onclick="SaveAddClient()*@
+                                    @*onclick="SaveAddClient()*@  @*onclick="SaveAddClient()*@
                                     <input type="submit" value="Valider" class="btn btn-default" onclick="SaveAddClient()" />
                                     <input type="button" value="Annuler" class="btn btn-default" onclick="Close()" />
+
+
                                 </div>
                             </div>
                         </div>
@@ -272,11 +295,13 @@
             </div>
         </div>
     </div>
-}
+    @*}*@
+</form>
 @*FIN MODEL CREATE*@
 @*Debut Edit client*@
-@using (Html.BeginForm(new { id = "editClientForm", name = "form0", role = "form" }))
+@using (Html.BeginForm(new { @id = "editClientForm", name = "form0", role = "form" }))
 {
+
     <form id="editClientForm">
         <div class="modal fade" id="editClientModal" role="dialog" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -297,6 +322,7 @@
                                     <div class="col-md-10">
                                         @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @class = "form-control", @id = "idNomClientEdit", @name = "NomClientEdit", @required = "required" } })
                                         @Html.ValidationMessageFor(model => model.Nom, null, new { @class = "text-danger" })
+
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -399,10 +425,12 @@
     </form>
 }
 @*Fin Edit client*@
-<script src="@Url.Content("~/Scripts/jquery-ui.min.js")" type="text/javascript"></script>
-@Scripts.Render("~/datatable/buttons/js")
-<script src="~/Scripts/SweetAlert/sweetalert.min.js" type="text/javascript"></script>
-@Scripts.Render("~/bundles/home/js")
+@*<script src="@Url.Content("~/Scripts/jquery-ui.min.js")" type="text/javascript"></script>
+    @Scripts.Render("~/datatable/buttons/js")
+    <script src="~/Scripts/SweetAlert/sweetalert.min.js" type="text/javascript"></script>
+    @Scripts.Render("~/bundles/home/js")*@
+
+
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.20/cr-1.5.2/datatables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/3.3.0/js/dataTables.fixedColumns.min.js"></script>
@@ -410,7 +438,7 @@
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>*@
 @*//Validation*@
 @*@Scripts.Render("~/bundles/Client/js")*@
-<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+@*<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>*@
 <script>
     SetActions({
         Modify: "@Url.Action("Edit","Clients")",
@@ -421,8 +449,13 @@
         SearchFonds: "@Url.Action("SearchFonds","Fonds")"
     })
 </script>
+@*<script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>*@
+@*<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.js"></script>*@
 @section scripts{
-    @Scripts.Render("~/bundles/jqueryval")
+    @*<script src="~/Scripts/jquery-1.12.4.js"></script>*@
+
     <script type="text/javascript">
         var table = null;
         var err = false;
@@ -461,7 +494,7 @@
                             //'" + row.id + "'
                         ],
                         "searching": false,
-                        "scrollY": "300px",
+                        "scrollY": "400px",
                         "scrollX": true,
                         "scrollCollapse": true,
                         //"autoWidth": false,
@@ -484,18 +517,16 @@
                    });
         }
         $(document).ready(function () {
-           
+
        //pour annuler le load de la page index une fois je clique sur submit
         //$('form').submit(function (e) {
         //    e.preventDefault();
         //});
-       
 
         $('form').submit(function (e) {
-            
+
             e.preventDefault();
-           
-            //err = false;
+            err = false;
             //var first_name = $('#idNomClient').val();
             ////var last_name = $('#last_name').val();
             //var email = $('#idMailClient').val();
@@ -505,15 +536,12 @@
 
             //$(".error").remove();
             //$(".ValidationMessage").hide();
-
-           
-            //alert("e2 " +err);
-
+            alert("e2 ");
             //if (first_name.length < 1) {
             //    $('#idNomClient').after('<span class="error text-danger">This field is required</span>');
             //    err = true;
             //}
-            
+
 
 
             //if (email.length < 1) {
@@ -521,36 +549,38 @@
             //    err = true;
             //} else {
             //    var regEx = /^([\w-\.]+)@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-                 
+
             //      var validEmail = regEx.test(email);
             //      if (!validEmail) {
             //          $('#idMailClient').after('<span class="error text-danger">Enter a valid email</span>');
             //          err = true;
             //      }
             //}
-            
+
             //alert("e1 " + err);
             //if (err == false) { SaveAddClient(); }
             //secend Exemple
-            $('form[id="addClientForm"]').validate({
-                rules: {
-                    idNomClient: 'required',
-                    idMailClient: 'required',
-                    user_email: {
-                        required: true,
-                        email: true,
-                    }
-                },
-                messages: {
-                    idNomClient: 'This field is required',
-                    idMailClient: 'This field is required',
-                    user_email: 'Enter a valid email'
-                   
-                },
-                submitHandler: function (form) {
-                    form.submit();
-                }
-            });
+            //$("#addClientForm").validate();
+            //var validator = #("#addClientForm").validate();
+            //validator.form();
+            //$("#addClientForm").validate({
+            //    rules: {
+            //        Nom: 'required',
+            //        Mail: {
+            //            required: true,
+            //            email: true
+            //        }
+            //    },
+            //    messages: {
+            //        Nom: 'This field is required',
+            //         Mail: 'Enter a valid email'
+
+            //    },
+            //    submitHandler: function (form) {
+            //        //form.submit();
+            //        SaveAddClient();
+            //    }
+            //});
 
         });
         //$('#addClientForm').on('shown.bs.modal', function () {
@@ -558,85 +588,12 @@
         //})
         //$("#NomClientEdit").focus();
         //$("#NomClient").focus();
-        
+
 
         //-----------------------------------------------------------------------------
-        //autres exemples
-                //$("#myModal").on("submit", "#form-accountedit", function (e) {
-                //    e.preventDefault();  // prevent standard form submission
 
-                //    var form = $(this);
-                //    $.ajax({
-                //        url: form.attr("action"),
-                //        method: form.attr("method"),  // post
-                //        data: form.serialize(),
-                //        success: function (partialResult) {
-                //            $("#form-container").html(partialResult);
-                //        }
-                //    });
-                //});
         //-----------------------------------------------------------------------------
-        //$('form').click(function (e) {
-        //    debugger
-        //    e.preventDefault();
-        //});
 
-        //$('#editClientModal').modal({
-        //    //$("#NomClient").rules("add", {
-        //    //    required: true,
-        //    //    minlength: 2,
-        //    //    messages: {
-        //    //        //required: "Please insert the name, it is mandatory !",
-        //    //        //minlength: jQuery.validator.format("Please, at least {0} characters are necessary")
-        //    //    }
-        //});
-        //jQuery.extend(jQuery.validator.messages, {
-        //    required: "Please insert the name, it is mandatory !",
-        //    remote: "votre message",
-        //    email: "votre message",
-        //    url: "votre message",
-        //    date: "votre message",
-        //    dateISO: "votre message",
-        //    number: "votre message",
-        //    digits: "votre message",
-        //    creditcard: "votre message",
-        //    equalTo: "votre message",
-        //    accept: "votre message",
-        //    maxlength: jQuery.validator.format("votre message {0} caractéres."),
-        //    minlength: jQuery.validator.format("votre message {0} caractéres."),
-        //    rangelength: jQuery.validator.format("votre message  entre {0} et {1} caractéres."),
-        //    range: jQuery.validator.format("votre message  entre {0} et {1}."),
-        //    max: jQuery.validator.format("votre message  inférieur ou égal à {0}."),
-        //    min: jQuery.validator.format("votre message  supérieur ou égal à {0}.")
-        //});
-
-        //jQuery("#editClientForm").validate({
-        //    rules: {
-        //        "idMailClient": {
-        //            "required": false,
-        //            "minlength": 2,
-        //            "maxlength": 4
-        //        }
-                
-        //    }
-        //});
-        
-        //jQuery("#addClientForm").validate({
-        //    rules: {
-        //        "idMailClient": {
-        //            "required": true,
-        //            "minlength": 2,
-        //            "maxlength": 10
-        //        }
-        //    },
-        //        rules: {
-        //            "idNomClient": {
-        //                "required": true,
-        //                "minlength": 2,
-        //                "maxlength": 10
-        //            }
-        //        }
-        //});
                 //RegisterAjaxEvents();
                 //setInterval(function () {
                 //    //alert("Hello")
@@ -644,7 +601,7 @@
                 //    ;
                 //}, 3000);
                  //alert("ddddd");
-               
+
 
                 //jQuery.validator.addMethod(
                 //    "regex",
@@ -672,6 +629,102 @@
         function SetActions(actions) {
             urls = actions;
         }
+
+        function SaveAddClient() {
+            alert("save save");
+            var nom = $("#idNomClient").val();
+            var Adresse = $("#idAdresseClient").val();
+            var IdFamille = $("#idIdFamilleClient").val();
+            var Tbl_Ville_id = $("#idIdVilleClient").val();
+            var IDContact = $("#idIDContactClient").val();
+            var Mail = $("#idMailClient").val();
+            var telephone1 = $("#idtelephone1Client").val();
+            var Gsm = $("#idGsmClient").val();
+            var fax = $("#idFaxClient").val();
+            var Cnss = $("#idCnssClient").val();
+            var idf = $("#ididfClient").val();
+            var Ice = $("#idIceClient").val();
+            var Teleph = $("#idTelephClient").val();
+            debugger
+            let dataObject = JSON.stringify({
+                'Nom': nom,
+                'Adresse': Adresse,
+                'Tbl_Famille_Clt_Id': IdFamille,
+                'Tbl_Ville_id': Tbl_Ville_id,
+                'IDContact': IDContact,
+                'Mail': Mail,
+                'telephone1': telephone1,
+                'Gsm': Gsm,
+                'fax': fax,
+                'Cnss': Cnss,
+                'idf': idf,
+                'Ice': Ice,
+                'Teleph': Teleph
+            });
+            //var mydata = $("#addClientForm").serialize();
+            //Send the JSON array to Controller using AJAX.
+            //validation coté client
+             //$("#addClientForm").removeData("validator");
+             //$("#addClientForm").removeData("unobtrusiveValidation");
+             //$.validator.unobtrusive.parse("#addClientForm");
+             debugger
+             //alert($("#addClientForm").valid());
+            //$('input[name=teamName]')
+
+            //if (err == false) {
+            if ($("#addClientForm").valid()) {
+                alert("ddddd");
+                $.ajax({
+                    type: "Post",
+                    dataType: 'json',
+                     //url: './SaveClient',
+                    url: "@Url.Action("SaveClient", "Clients")",
+                    data: dataObject,   /*mydata,*/
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (res) {
+                    if (res.Success) {
+                        $("#idNomClient").val("");
+                        $("#idAdresseClient").val("");
+                        $("#idMailClient").val("");
+                        $("#idtelephone1Client").val("");
+                        $("#idGsmClient").val("");
+                        $("#idFaxClient").val("");
+                        $("#idCnssClient").val("");
+                        $("#ididfClient").val("");
+                        $("#idIceClient").val("");
+                        $("#idTelephClient").val("");
+
+                        $("#addClientModal").hide();
+                        ReloadClientTable(res.clients);
+                        console.log(res);
+                        swal("Enregistrement effectué avec succès !", "", "success");
+
+                    } else {
+                        //REPENSE DU ESRVEUR
+                        console.log(res);
+                        swal("Échec du Sauvegarde ,Veuillez verifier vos données,Merci !", "", "error");
+                    }
+                    //if (clients != null && clients != false) {
+                    //alert(res.clients);
+                    //debugger
+                    // window.location.href = urls.GetFonds;
+                    //on doit vider les inputs
+                    },
+                    error: function (res) {
+                        //alert(res);
+                        console.log(res);
+                        swal("Échec du Sauvegarde_ajax !", "", "error");
+                    }
+
+                    });
+
+             } else {
+                 //VALIDATION COTE CLIENT
+                 swal(" Veuillez verifier vos données, Merci!", "", "error");
+             }
+
+        }
+
         function Close() {
             //alert("close");
             //$("#addClientModal").removeData("validator");
@@ -679,6 +732,7 @@
             //$.validator.unobtrusive.parse("#addClientModal");
             $("#addClientModal").hide();
         }
+
     //SaveClient
         function ChercherClient() {
             var ch = $("#Chercher").val();
@@ -735,100 +789,6 @@
                            }
                              });
               }
-        }
-
-        function SaveAddClient() {
-            alert("save "+err);
-            var nom = $("#idNomClient").val();
-            var Adresse = $("#idAdresseClient").val();
-            var IdFamille = $("#idIdFamilleClient").val();
-            var Tbl_Ville_id = $("#idIdVilleClient").val();
-            var IDContact = $("#idIDContactClient").val();
-            var Mail = $("#idMailClient").val();
-            var telephone1 = $("#idtelephone1Client").val();
-            var Gsm = $("#idGsmClient").val();
-            var fax = $("#idFaxClient").val();
-            var Cnss = $("#idCnssClient").val();
-            var idf = $("#ididfClient").val();
-            var Ice = $("#idIceClient").val();
-            var Teleph = $("#idTelephClient").val();
-
-            let dataObject = JSON.stringify({
-                'Nom': nom,
-                'Adresse': Adresse,
-                'Tbl_Famille_Clt_Id': IdFamille,
-                'Tbl_Ville_id': Tbl_Ville_id,
-                'IDContact': IDContact,
-                'Mail': Mail,
-                'telephone1': telephone1,
-                'Gsm': Gsm,
-                'fax': fax,
-                'Cnss': Cnss,
-                'idf': idf,
-                'Ice': Ice,
-                'Teleph': Teleph
-            });
-            //var mydata = $("#addClientForm").serialize();
-            //Send the JSON array to Controller using AJAX.
-            //validation coté client
-             //$("#addClientForm").removeData("validator");
-             //$("#addClientForm").removeData("unobtrusiveValidation");
-             //$.validator.unobtrusive.parse("#addClientForm");
-             debugger
-             //alert($("#addClientForm").valid());
-
-            //if (err == false) {
-                if (form.valid()) {
-                //alert("ddddd");
-                $.ajax({
-                    type: "Post",
-                    dataType: 'json',
-                     //url: './SaveClient',
-                    url: "@Url.Action("SaveClient", "Clients")",
-                    data: dataObject,   /*mydata,*/
-                    contentType: 'application/json; charset=utf-8',
-                    success: function (res) {
-                    if (res.Success) {
-                        $("#idNomClient").val("");
-                        $("#idAdresseClient").val("");
-                        $("#idMailClient").val("");
-                        $("#idtelephone1Client").val("");
-                        $("#idGsmClient").val("");
-                        $("#idFaxClient").val("");
-                        $("#idCnssClient").val("");
-                        $("#ididfClient").val("");
-                        $("#idIceClient").val("");
-                        $("#idTelephClient").val("");
-
-                        $("#addClientModal").hide();
-                        ReloadClientTable(res.clients);
-                        console.log(res);
-                        swal("Enregistrement effectué avec succès !", "", "success");
-
-                    } else {
-                        //REPENSE DU ESRVEUR
-                        console.log(res);
-                        swal("Échec du Sauvegarde ,Veuillez verifier vos données,Merci !", "", "error");
-                    }
-                    //if (clients != null && clients != false) {
-                    //alert(res.clients);
-                    //debugger
-                    // window.location.href = urls.GetFonds;
-                    //on doit vider les inputs
-                    },
-                    error: function (res) {
-                        //alert(res);
-                        console.log(res);
-                        swal("Échec du Sauvegarde_ajax !", "", "error");
-                    }
-
-                    });
-
-             } else {
-                 //VALIDATION COTE CLIENT
-                 swal(" Veuillez verifier vos données, Merci!", "", "error");
-             }
-
         }
 
         function EditClients(id) {
@@ -932,7 +892,7 @@
         //}
 
         function AddClient() {
-            //VIDER LES ERREURS 
+            //VIDER LES ERREURS
             $(".error").remove();
             $(".ValidationMessage").hide();
             //alert("Create0q");
