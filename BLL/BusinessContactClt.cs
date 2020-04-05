@@ -14,7 +14,7 @@ namespace BLL
         ModelData contexts = new ModelData();
         public List<Dto_liste_Contact> ListContact()
         {
-            var Entity = contexts.Tbl_Contact_clt.ToList();
+           var Entity = contexts.Tbl_Contact_clt.ToList();
             var dtoContact = Mapper.Map<List<Dto_liste_Contact>>(Entity);
             return dtoContact;
 

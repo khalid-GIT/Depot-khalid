@@ -82,7 +82,6 @@ namespace WebArchives.Controllers
                 Teleph = dto.Teleph,
             };
 
-
             return View(model);
         }
 
@@ -115,24 +114,53 @@ namespace WebArchives.Controllers
             //}
         }
 
-        public ActionResult Report(string repotType)
+        /// <summary>
+        /// Enregistrer les filtres
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult SaveFiltre(string searchValue)
         {
+            Session["SearchData"] = searchValue;
+            return Json("ok", JsonRequestBehavior.AllowGet);
+        }
+        //, string ch
+
+
+        public FileResult Report(string searchValue,string repotType)
+        {
+           
+                //repotType = "PDF";
             LocalReport Lr = new LocalReport();
             String path = Path.Combine(Server.MapPath("~/Reports"), "Report1.rdlc");
 
             if (System.IO.File.Exists(path))
             {
-                Lr.ReportPath = path;
+                Lr.ReportPath = path; 
 
-            }
-            else
-            {
-                return RedirectToAction("index");
+            //}
+            //else
+            //{
+            //    return RedirectToAction("index");
 
             }
             var bis = new BusinessClients();
             var model = new VMListeClient();
+
             var list = bis.BusinessliseViewClient();
+
+            //Condition sur la valeure de recherche
+            //filtre à faire
+            //if(Session["SearchData"] != null)
+            //{
+            //    string searchValue = (string)Session["SearchData"];
+            //    list = list.Where(y => y.Nom.Contains(searchValue)).ToList();
+            //}
+            if (searchValue != null)
+            {
+                                list = list.Where(y => y.Nom.Contains(searchValue)).ToList();
+            }
+            //var list = bis.ChercherClient(ch);
             //var list = model.listeclients;
 
             ReportDataSource rd = new ReportDataSource("DataSet1", list);
@@ -175,7 +203,7 @@ namespace WebArchives.Controllers
             byte[] renderBytes;
 
             renderBytes = Lr.Render(
-                repotType,
+               repotType,
                 "",
                 out mimeType,
                 out encoding,
@@ -183,8 +211,24 @@ namespace WebArchives.Controllers
                 out streams,
                 out warnings
                 );
+                var fileName = File(renderBytes, mimeType);
+            Session["SearchData"] = null;
             return File(renderBytes, mimeType);
+            //ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/RPTReports/rptCustomer.rdlc");
+            //ReportViewer1.LocalReport.DataSources.Clear();
+            //ReportDataSource rdc = new ReportDataSource("MyDataset", customers);
+            //ReportViewer1.LocalReport.DataSources.Add(rdc);
+            //ReportViewer1.LocalReport.Refresh();
+
+            //var errorMessage = "you can return the errors in here!";
+            //return Json(new { fileName = fileName, errorMessage = "" }, JsonRequestBehavior.AllowGet);
         }
+
+            //return Json(new { Success = true, errorMessage }, JsonRequestBehavior.AllowGet);
+
+
+            
+        
         // POST: Clients/Create Ancienne méthode avec formulaire
         //[HttpPost]
         //public ActionResult Create(VMListeClient model)

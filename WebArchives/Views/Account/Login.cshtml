@@ -6,6 +6,12 @@
     //Layout = null;text-align: center;
 }
 <link href="~/Content/CSS/Login.css" rel="stylesheet" />
+<style>
+    p {
+        display: block;
+        text-align: center;
+    }
+</style>
 
 @{ var imagePath = "";
     if (Request["photoChoice"] != null)
@@ -44,7 +50,10 @@
     <hr />
     <div class="row form-group">
         <div class=" col-md-3">
-            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+            <p>
+                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+            </p>
+            
         </div>
         <div class="row col-md-6">
             @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })

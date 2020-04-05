@@ -69,14 +69,79 @@ namespace BLL
             context.SaveChanges();
             return Entity.id;
         }
-
+        //string chercher
         public List<DtoListeClients> BusinessliseViewClient()
         {
+            //string chercher
 
-            //var list = context.Tbl_Client.ToList();
-            //var list = context.Tbl_Client.Where(c => c.CodePostal == "82000").Select(x => new DtoListeClients
+            //if (chercher != null && chercher != "")
+            //{
+            //    var list = context.Tbl_Client.Select(x => new DtoListeClients
+            //    {
+            //        id = x.id,
+            //        Nom = x.Nom,
+            //        telephone1 = x.telephone1,
+            //        Adresse = x.Adresse,
+            //        fax = x.fax,
+            //        Mail = x.Mail,
+            //        Cnss = x.Cnss,
+            //        idf = x.idf,
+            //        Ice = x.Ice,
+            //        Gsm = x.Gsm,
+            //        Teleph = x.Teleph,
 
-           var list = context.Tbl_Client.Select(x => new DtoListeClients
+            //        DataColumn1 = x.Tbl_Ville.libelle,
+            //        VilleName = x.Tbl_Ville.libelle,
+            //        FamilleName = x.Tbl_Famille_Clt.Libelle,
+            //        ContactName = x.Tbl_Contact_Clt.Nom + ", " + x.Tbl_Contact_Clt.Prenom,
+            //        ContactGsm = x.Tbl_Contact_Clt.Gsm
+            //    }).ToList();
+            //    var DtoClients = Mapper.Map<List<DtoListeClients>>(list);
+            //    return DtoClients;
+            //}
+            //else
+            //{
+
+
+
+            ////var list = context.Tbl_Client.ToList();
+            ////var list = context.Tbl_Client.Where(c => c.CodePostal == "82000").Select(x => new DtoListeClients
+
+            //var list = context.Tbl_Client.Select(x => new DtoListeClients
+            //{
+            //    id = x.id,
+            //    Nom = x.Nom,
+            //    telephone1 = x.telephone1,
+            //    Adresse = x.Adresse,
+            //    fax = x.fax,
+            //    Mail = x.Mail,
+            //    Cnss = x.Cnss,
+            //    idf = x.idf,
+            //    Ice = x.Ice,
+            //    Gsm = x.Gsm,
+            //    Teleph = x.Teleph,
+
+            //    DataColumn1 = x.Tbl_Ville.libelle,
+            //    VilleName = x.Tbl_Ville.libelle,
+            //    FamilleName = x.Tbl_Famille_Clt.Libelle,
+            //    ContactName = x.Tbl_Contact_Clt.Nom + ", " + x.Tbl_Contact_Clt.Prenom,
+            //    ContactGsm = x.Tbl_Contact_Clt.Gsm
+            //}).Where(y => y.Nom.Contains(chercher)).ToList();
+            //    var DtoClients = Mapper.Map<List<DtoListeClients>>(list);
+            //    return DtoClients;
+            //}
+            //.Where(y => y.Nom.Contains(chercher))
+            //list.Add(new DtoListeClients { Adresse = "hhhhhh"});
+            //var c = list.FirstOrDefault();
+            //foreach(var item in list)
+            //{
+            //    item.Adresse = "bbb";
+            //}
+            //}).ToList().OrderByDescending(c=>c.Adresse);
+            //list = list.ToList();
+            //context.Tbl_Clients.ToList();
+            //var ch = chercher;
+            var list = context.Tbl_Client.Select(x => new DtoListeClients
             {
                 id = x.id,
                 Nom = x.Nom,
@@ -96,18 +161,10 @@ namespace BLL
                 ContactName = x.Tbl_Contact_Clt.Nom + ", " + x.Tbl_Contact_Clt.Prenom,
                 ContactGsm = x.Tbl_Contact_Clt.Gsm
             }).ToList();
-            //list.Add(new DtoListeClients { Adresse = "hhhhhh"});
-            //var c = list.FirstOrDefault();
-            //foreach(var item in list)
-            //{
-            //    item.Adresse = "bbb";
-            //}
-        //}).ToList().OrderByDescending(c=>c.Adresse);
-        //list = list.ToList();
-        //context.Tbl_Clients.ToList();
-        var DtoClients = Mapper.Map<List<DtoListeClients>>(list);
+            var DtoClients = Mapper.Map<List<DtoListeClients>>(list);
             return DtoClients;
-        }
+        
+    }
 
 
         public List<DtoListeClients> BusinessliseClient()
