@@ -1,191 +1,186 @@
 ﻿<!DOCTYPE html>
+@*<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title - Mon application ASP.NET</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+
+
+
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    @RenderPage("~/Views/Shared/_LayoutNavbar.cshtml", new { AvailableUser = Model })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Accueil", "Index", "Home")</li>
+                        <li>@Html.ActionLink("À propos de", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
+        </div>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </body>
+    </html>*@
+
 <html>
 <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title</title>
-    <!--CSS-->
-    @Styles.Render("~/Content/bootstrap/css")
-    @Styles.Render("~/Content/metisMenu/css")
-    @Styles.Render("~/Content/timeline/css")
-    @Styles.Render("~/Content/startmin/css")
-    @Styles.Render("~/Content/morris/css")
-    @Styles.Render("~/Content/fontawesome/css")
-    <!--JS-->
-    @Scripts.Render("~/bundles/jquery")
+    <title>Webarch - Responsive Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <!-- BEGIN PLUGIN CSS -->
+    <link href="~/assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/plugins/jquery-metrojs/MetroJs.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/plugins/shape-hover/css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/plugins/shape-hover/css/component.css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/plugins/owl-carousel/owl.carousel.css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/plugins/owl-carousel/owl.theme.css" />
+    <link href="~/assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="~/assets/plugins/jquery-slider/css/jquery.sidr.light.css" rel="stylesheet" type="text/css" media="screen" />
+    <link rel="stylesheet" href="~/assets/plugins/jquery-ricksaw-chart/css/rickshaw.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="~/assets/plugins/Mapplic/mapplic/mapplic.css" type="text/css" media="screen">
 
-    @Scripts.Render("~/bundles/raphael/js")
-    @Scripts.Render("~/bundles/metisMenu/js")
-    @Scripts.Render("~/bundles/jqueryval")
+    <!-- END PLUGIN CSS -->
+    <!-- BEGIN PLUGIN CSS -->
+    <link href="~/assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="~/assets/plugins/bootstrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/plugins/bootstrapv3/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="~/assets/plugins/animate.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/plugins/jquery-scrollbar/jquery.scrollbar.css" rel="stylesheet" type="text/css" />
+    <!-- END PLUGIN CSS -->
+    <!-- BEGIN CORE CSS FRAMEWORK -->
+    <link href="~/webarch/css/webarch.css" rel="stylesheet" type="text/css" />
+
+
+    <!-- END CORE CSS FRAMEWORK -->
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+
+<body>
+    <!-- BEGIN HEADER -->
+    <div class="header navbar navbar-inverse ">
+        <!-- BEGIN TOP NAVIGATION BAR -->
+        @RenderPage("~/Views/Shared/_NavBarLayout.cshtml", new { AvailableUser = Model })
+        <!-- END TOP NAVIGATION BAR -->
+    </div>
+    <!-- END HEADER -->
+    <!-- BEGIN CONTAINER -->
+    <div class="row-fluid">
+        <!-- BEGIN SIDEBAR -->
+        <div class="page-sidebar" id="main-menu">
+            <!-- BEGIN MINI-PROFILE -->
+            @RenderPage("~/Views/Shared/_SidBarLayout.cshtml", new { AvailableUser = Model })
+            <!-- END SIDEBAR MENU -->
+        </div>
+    </div>
+    <a href="#" class="scrollup">Scroll</a>
+    <div class="footer-widget">
+        <div class="progress transparent progress-small no-radius no-margin">
+            <div class="progress-bar progress-bar-success animate-progress-bar" data-percentage="79%" style="width: 79%;"></div>
+        </div>
+        <div class="pull-right">
+            <div class="details-status"> <span class="animate-number" data-value="86" data-animation-duration="560">86</span>% </div>
+            <a href="lockscreen.html"><i class="material-icons">power_settings_new</i></a>
+        </div>
+    </div>
+    <!-- END SIDEBAR -->
+    <!-- BEGIN PAGE CONTAINER-->
+    <div class="page-content">
+        <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+
+    <!-- START ONLY VISIBLE FOR 1600 AND ABOVE -->
+    <!-- BEGIN CORE JS FRAMEWORK-->
+    <script src="~/assets/plugins/pace/pace.min.js" type="text/javascript"></script>
+    <!-- BEGIN JS DEPENDECENCIES-->
+
+    <!-- DATATABLES-->
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jquery")
+    <!-- DATATABLES-->
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.20/cr-1.5.2/datatables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/3.3.0/js/dataTables.fixedColumns.min.js"></script>
+    <!-- il faut placer jquery avant le bootsrap pour reconaissance du model-->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/SweetAlert/sweetalert.min.js" type="text/javascript"></script>
+    <!-- Validation-->
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    
+    @* <script src="~/assets/plugins/jquery/jquery-1.11.3.min.js" type="text/javascript"></script>*@
+    @*<script src="~/assets/plugins/bootstrapv3/js/bootstrap.min.js" type="text/javascript"></script>*@
+    <script src="~/assets/plugins/jquery-block-ui/jqueryblockui.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/jquery-unveil/jquery.unveil.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/jquery-numberAnimate/jquery.animateNumbers.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/bootstrap-select2/select2.min.js" type="text/javascript"></script>
+    <!-- END CORE JS DEPENDECENCIES-->
+    <!-- BEGIN CORE TEMPLATE JS -->
+    <script src="~/webarch/js/webarch.js" type="text/javascript"></script>
+    <script src="~/assets/js/chat.js" type="text/javascript"></script>
+    <!-- END CORE TEMPLATE JS -->
+    <!-- BEGIN PAGE LEVEL JS -->
+    @*<script src="~/assets/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>*@
+    <script src="~/assets/plugins/jquery-ricksaw-chart/js/raphael-min.js"></script>
+    <script src="~/assets/plugins/jquery-ricksaw-chart/js/d3.v2.js"></script>
+    <script src="~/assets/plugins/jquery-ricksaw-chart/js/rickshaw.min.js"></script>
+    <script src="~/assets/plugins/jquery-sparkline/jquery-sparkline.js"></script>
+    <script src="~/assets/plugins/skycons/skycons.js"></script>
+    <script src="~/assets/plugins/owl-carousel/owl.carousel.min.js" type="text/javascript"></script>
 
-    @*@Scripts.Render("~/bundles/startmin/js")*@
+    <script src="~/assets/plugins/jquery-gmap/gmaps.js" type="text/javascript"></script>
+    @*<script src="~/assets/plugins/Mapplic/js/jquery.easing.js" type="text/javascript"></script>
+        <script src="~/assets/plugins/Mapplic/js/jquery.mousewheel.js" type="text/javascript"></script>*@
+    <script src="~/assets/plugins/Mapplic/js/hammer.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/Mapplic/mapplic/mapplic.js" type="text/javascript"></script>
+    @*<script src="~/assets/plugins/jquery-flot/jquery.flot.js" type="text/javascript"></script>*@
+    <script src="~/assets/plugins/jquery-metrojs/MetroJs.min.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN CORE TEMPLATE JS -->
+    <script src="~/assets/js/dashboard_v2.js" type="text/javascript"></script>
+
+
+    @*@Scripts.Render("~/bundles/bootstrap")*@
     @if (IsSectionDefined("scripts"))
     {
         @RenderSection("scripts", required: false);
     }
-
-    @* @RenderSection("scripts", required: false)*@
-</head>
-<body>
-    <div id="wrapper">
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">@*<i class="fa fa-truck"></i>*@Gestion Commerciale</a>
-            </div>
-
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-
-            <!-- Top Navigation: Left Menu -->
-            @Html.AntiForgeryToken()
-            <!--<ul class="nav navbar-nav navbar-right navbar-top-links">
-        <li>
-            <a href="" data-form-method="post"> <i class="fa fa-sign-out fa-fw"></i> Deconnexion
-            </a>
-        </li>
-        <li>
-                <div>
+    @*@RenderSection("scripts", required: false)*@
 
 
-        </li>
-      </ul>
-    <!-- Top Navigation: Right Menu -->
-            <!--  <ul class="nav navbar-right navbar-top-links">-->
-            <!--   <li class="dropdown navbar-inverse">
-         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-             <i class="fa fa-bell fa-fw"></i> <b class="caret"></b>
-         </a>
-         <ul class="dropdown-menu dropdown-alerts">
-             <li>
-                 <a href="#">
-                     <div>
-                         <i class="fa fa-comment fa-fw"></i> New Comment
-                         <span class="pull-right text-muted small">4 minutes ago</span>
-                     </div>
-                 </a>
-             </li>
-             <li class="divider"></li>
-             <li>
-                 <a class="text-center" href="#">
-                     <strong>See All Alerts</strong>
-                     <i class="fa fa-angle-right"></i>
-                 </a>
-             </li>
-         </ul>
-     </li>
-     <ul class="nav navbar-right navbar-top-links">
-         <li class="dropdown">
-             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                 <i class="fa fa-user fa-fw"></i> Compte <b class="caret"></b>
-             </a>
-             <ul class="dropdown-menu dropdown-user">
-                 <li>
-                     <a href="#"><i class="fa fa-user fa-fw"></i>Profile Utilisateur</a>
-                 </li>
-                 <li>
-                     <a href="#"><i class="fa fa-gear fa-fw"></i> Paramétres</a>
-                 </li>
-                 <li class="divider"></li>
-                 <li>
-                     <a href="#"><i class="fa fa-sign-out fa-fw"></i> Se déconnecterss</a>
-                 </li>
-             </ul>
-         </li>
-     </ul>-->
-            <div class="container body-content ">
-                @Html.Partial("_Login-Partial")
-            </div>
-           
-    <!-- Sidebar -->
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Rechercher...">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-primary" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
-
-                        <li>
-                            <a href="#"><i class="fa fas fa-database"></i> Gestion de base de données<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li class="navigation__active"><a href="@Url.Action("CreateEntite", "Risk") "> Décrire l'entité</a></li>
-                                <li><a href="@Url.Action("ListerSites", "Risk") "> Décrire les sites</a></li>
-                                <li><a href="@Url.Action("CreateNiveau", "Risk") "> Niveaux de responsabilité</a></li>
-                                @*<li><a href="@Url.Action("Area", "ChartTypes") "> Traiter les risques</a></li>*@
-
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fas fa-sitemap"></i> Gestion des clients<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li class="navigation__active"><a href="@Url.Action("Index", "Clients") "> Liste des clients</a></li>
-                                <li><a href="@Url.Action("ListerActeurs", "Risk") "> Liste des contacts</a></li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fas fa-exclamation-circle"></i> Gestion des risques<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li class="navigation__active"><a href="@Url.Action("Cartographie", "Risk") "> Cartographie des processus</a></li>
-                                <li class="navigation__active"><a href="@Url.Action("ListerRisques", "Risk") "> Description des risques</a></li>
-                                <li><a href="@Url.Action("Historique", "Risk") "> Historique</a></li>
-                                @*<li><a href="@Url.Action("Historique", "Risk") "> Statistiques</a></li>*@
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fas fa-list"></i> Tableau indicatif des codes<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li class="navigation__active"><a href="@Url.Action("IndicatifCodesProcessus", "Risk") "> Tableau des processus</a></li>
-                                <li class="navigation__active"><a href="@Url.Action("IndicatifCodesSousProcessus", "Risk") "> Tableau des sous processus</a></li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-
-                        <li>
-                            <a href="#"><i class="fa fas fa-print"></i> Edition des états<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li class="navigation__active"><a href="@Url.Action("FicheSousProcessus", "Risk") "> Fiche Sous Processus</a></li>
-                                <li class="navigation__active"><a href="@Url.Action("FicheRisque", "Risk") "> Fiche Risque</a></li>
-                                <li class="navigation__active"><a href="@Url.Action("PlanActions", "Risk") "> Plan d'actions</a></li>
-                                <li class="navigation__active"><a href="@Url.Action("RisquesParProcessus", "Risk") "> Risques par processus</a></li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-
-                        <li>
-                            @*<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Edition des états<span class="fa arrow"></span></a>*@
-                            <ul class="nav nav-second-level">
-                                @*<li class="navigation__active"><a href="@Url.Action("Cartographie", "Risk") "> Fiche de risques</a></li>
-                            <li class="navigation__active"><a href="@Url.Action("ListerRisques", "Risk") "> Fiche sous processus</a></li>
-                            <li><a href="@Url.Action("Historique", "Risk") "> Liste des risques par processus</a></li>
-                            <li><a href="@Url.Action("Historique", "Risk") "> Plan d'action</a></li>*@
-                                @*<li><a href="@Url.Action("Historique", "Risk") "> Statistiques</a></li>*@
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <div id="page-wrapper">
-            <div class="container-fluid">
-                @RenderBody()
-            </div>
-        </div>
-    </div>
 </body>
+
 </html>

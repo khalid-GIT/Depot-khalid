@@ -48,25 +48,38 @@
 @*Icons plus font*@
 @Styles.Render("~/Content/fontawesome-free/css")
 <link href="~/Content/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-@Styles.Render("~/datatable/buttons/css")
-@*@Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/unobtrusive")*@
+@*@Styles.Render("~/datatable/buttons/css")
+    @Scripts.Render("~/bundles/jqueryval")
+        @Scripts.Render("~/bundles/unobtrusive")*@
 
 <link href="@Url.Content("~/Content/jquery-ui.min.css")" rel="stylesheet" type="text/css" />
 <link href="@Url.Content("~/Content/jquery-ui.css")" rel="stylesheet" type="text/css" />
 <link href="~/Scripts/SweetAlert/sweetalert.css" rel="stylesheet" type="text/css" />
-<h2 class="Htitre">Liste des clients</h2>
+
+
 @TempData["SuccessMessage"]
 
 
+@*@Scripts.Render("~/bundles/jquery")*@
+@*@Scripts.Render("~/bundles/raphael/js")
+    @Scripts.Render("~/bundles/metisMenu/js")*@
+@*@Scripts.Render("~/bundles/jqueryval")*@
+
+@*@Scripts.Render("~/bundles/unobtrusive")*@
+@*@Scripts.Render("~/bundles/jquery")*@
+@*@Scripts.Render("~/bundles/bootstrap")*@
+
+@*@Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jquery")*@
 <!-- Validation-->
-<script src="~/Scripts/jquery.validate.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+@*<script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>*@
 
 @*il faut placer jquery avant le bootsrap pour reconaissance du model*@
-<script src="~/Scripts/bootstrap.min.js"></script>
-<script src="~/Scripts/bootstrap.js"></script>
-<script src="~/Scripts/SweetAlert/sweetalert.min.js" type="text/javascript"></script>
+@*<script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/SweetAlert/sweetalert.min.js" type="text/javascript"></script>*@
+
 
 @*@Scripts.Render("~/bundles/jquery")*@
 
@@ -86,14 +99,14 @@
 
     .GetActions {
         width: 35%;
-        margin: 0px;
+        margin-left: 30px;
         padding: 0px;
     }
 
         .GetActions p {
             /*display: block;*/
             display: inline-block;
-            margin: 30px;
+            margin-left: 20px;
             float: left;
             display: inline-block;
         }
@@ -116,99 +129,99 @@
 
 </style>
 
-
 @*<a class="btn btn-success" style="margin:10px auto" onclick="@Url.Action("Create", "Clients")"><i class="fas fa-plus">Ajouter</i></a>*@
 @*@using (Html.BeginForm("", "", new { @style = "align:right margin-right:100px margin-top:50px", @class = "pull-right" }))
     {*@
 
 
-<div class="col-sm-12">
-    @*align="left"*@
-    <div class="col-sm-6">
-        <a class="btn btn-success" style="margin:10px auto" onclick="AddClient()"><i class="fas fa-plus">Ajouter</i></a>
+<div class="content">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="grid simple ">
+                <div class="grid-title">
+                    <h3>Liste <span class="semi-bold">des clients</span></h3>
+
+                    <div class="col-sm-12">
+                    @*align="left"*@
+                    <div class="col-sm-6">
+                        <a class="btn btn-success" style="margin:10px auto" onclick="AddClient()"><i class="fas fa-plus">Ajouter</i></a>
+                    </div>
+                    </div>  
+                    <div class="input-group custom-search-form ncol-md pull-right col-sm-3">
+                        <input type="text" class="form-control" id="Chercher" placeholder="Rechercher...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button" onclick="ChercherClient()" aria-label="Chercher">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                    @*<div class="input-group custom-search-form ncol-md pull-right">
+            <div class="input-group custom-search-form">
+        </div>
+            <b> Chercher </b>@Html.TextBox("Chercherx")
+            <input type="button" onclick="ChercherClient()" value="Chercherx" placeholder="Chercher" />
+
+        </div>*@
+
+                    @*@Html.DropDownList("Categorie", (IEnumerable<SelectListItem>)ViewBag.categorie, "Veuillez choisir une catégorie")*@
+                    <table id="idTableClients" class="table grid-body no-border no-more-tables" cellspacing="0">
+                        <thead>
+                            <tr role="row">
+                                <th>
+                                    @Html.DisplayNameFor(model => model.id)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Nom)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Adresse)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FamilleName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Tbl_Ville_id)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IDContact)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Mail)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.telephone1)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Gsm)
+                                </th>
+                                <th style="text-align: center">
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="row-fluid">
+    <div class="GetActions">
+        <h4><span class="semi-bold">Actions</span></h4>
+        <p><b><a href="#" runat="server" target="_top" onclick=ReportChercher('PDF') style='width:180px' class='aLigne'><i class='fas fa-file-pdf' style='font-size:20px;color:red'></i><span style="text-decoration: underline;"> PDF</span></a></b></p>
+        <p><b><a href="#" runat="server" target="_top" onclick=ReportChercher('Excel') style='width:180px' class='aLigne '><i class='fas fa-file-excel' style='font-size:20px;color:seagreen'></i><span style="text-decoration: underline;"> Excel</span></a></b></p>
+        <p><b><a href="#" runat="server" onclick=ReportChercher('Word') style='width:180px' class='aLigne'><i class='fas fa-file-word' style='font-size:20px;color:cornflowerblue'></i><span style="text-decoration: underline;"> WORD</span></a></b></p>
+        @*<a value="PDF" onclick=ReportChercher('PDF') style='width:180px' class='btn-block btn btn-toolbar'><i class='fas fa-file-pdf' style='font-size:20px;color:red'></i><span style="text-decoration: underline;">PDF</span></a>*@
+        @*<a value="Excel" onclick=ReportChercher('Excel') style='width:180px' class='btn-block btn btn-toolbar'><i class='fas fa-file-excel' style='font-size:20px;color:seagreen'></i><span style="text-decoration: underline;">Excel</span></a>*@
     </div>
 </div>
-<div class="input-group custom-search-form ncol-md pull-right col-sm-3">
-    <input type="text" class="form-control" id="Chercher" placeholder="Rechercher...">
-    <span class="input-group-btn">
-        <button class="btn btn-primary" type="button" onclick="ChercherClient()" aria-label="Chercher">
-            <i class="fa fa-search"></i>
-        </button>
-    </span>
-</div>
-@*<div class="input-group custom-search-form ncol-md pull-right">
-        <div class="input-group custom-search-form">
-    </div>
-        <b> Chercher </b>@Html.TextBox("Chercherx")
-        <input type="button" onclick="ChercherClient()" value="Chercherx" placeholder="Chercher" />
-
-    </div>*@
-
-@*@Html.DropDownList("Categorie", (IEnumerable<SelectListItem>)ViewBag.categorie, "Veuillez choisir une catégorie")*@
-<table id="idTableClients" class="table table-bordered" cellspacing="0">
-    <thead>
-        <tr role="row">
-            <th>
-                @Html.DisplayNameFor(model => model.id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nom)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Adresse)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FamilleName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tbl_Ville_id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IDContact)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Mail)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.telephone1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Gsm)
-            </th>
-            <th style="text-align: center">
-                Action
-            </th>
-        </tr>
-    </thead>
-
-
-
-
-</table>
-
-
-<div class="GetActions">
-    <h1>Actions</h1>
-    <p><b><a href="#" runat="server" target="_top" onclick=ReportChercher('PDF') style='width:180px' class='aLigne'><i class='fas fa-file-pdf' style='font-size:20px;color:red'></i><span style="text-decoration: underline;"> PDF</span></a></b></p>
-    <p><b><a href="#" runat="server" target="_top" onclick=ReportChercher('Excel') style='width:180px' class='aLigne '><i class='fas fa-file-excel' style='font-size:20px;color:seagreen'></i><span style="text-decoration: underline;"> Excel</span></a></b></p>
-    <p><b><a href="#" runat="server"  onclick=ReportChercher('Word') style='width:180px' class='aLigne'><i class='fas fa-file-word' style='font-size:20px;color:cornflowerblue'></i><span style="text-decoration: underline;"> WORD</span></a></b></p>
-    @*<a value="PDF" onclick=ReportChercher('PDF') style='width:180px' class='btn-block btn btn-toolbar'><i class='fas fa-file-pdf' style='font-size:20px;color:red'></i><span style="text-decoration: underline;">PDF</span></a>*@
-    @*<a value="Excel" onclick=ReportChercher('Excel') style='width:180px' class='btn-block btn btn-toolbar'><i class='fas fa-file-excel' style='font-size:20px;color:seagreen'></i><span style="text-decoration: underline;">Excel</span></a>*@
-</div>
-
-
 
 @* <a value="Word" onclick=ReportChercher('Word') style='width:180px' class='btn-block btn btn-toolbar'><i class='fas fa-file-word' style='font-size:20px;color:cornflowerblue'></i><span style="text-decoration: underline;">WORD</span></a>*@
-
-
-
-
-
 @*}*@
 <!-- Modal -->
 @*MODEL ADD*@
-
-
 @*Debut Add client
     //modal fade/modal hide*@
 @*@using (Html.BeginForm(new { id = "addClientForm", FormMethod.Post, name = "addClientForm", @class = "form-horizontal", role = "form" }))
@@ -232,10 +245,7 @@
                         <div class="form-horizontal">
                             @Html.AntiForgeryToken()
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            @* @Html.AntiForgeryToken()*
 
-                                @* @Html.ValidationSummary(false, "", new { @class = "text-danger" })*@
-                            @* @Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Nom, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
@@ -474,13 +484,18 @@
     </form>
 }
 @*Fin Edit client*@
+
+
 @*<script src="@Url.Content("~/Scripts/jquery-ui.min.js")" type="text/javascript"></script>
     @Scripts.Render("~/datatable/buttons/js")
     <script src="~/Scripts/SweetAlert/sweetalert.min.js" type="text/javascript"></script>
     @Scripts.Render("~/bundles/home/js")*@
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.20/cr-1.5.2/datatables.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/3.3.0/js/dataTables.fixedColumns.min.js"></script>
+@*@Scripts.Render("~/bundles/bootstrap")*@
+@*@Scripts.Render("~/bundles/jquery")*@
+
+@*<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.20/cr-1.5.2/datatables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/3.3.0/js/dataTables.fixedColumns.min.js"></script>*@
 @*//Validation*@
 @*@Scripts.Render("~/bundles/Client/js")*@
 <script>
@@ -494,8 +509,9 @@
        //reportUrl: @Url.Action("Report", new { repotType = "PDF" })
     })
 </script>
-
 @section scripts{
+
+    @*  @Scripts.Render("~/bundles/bootstrap")*@
     @*<script src="~/Scripts/jquery-1.12.4.js"></script>*@
     <script type="text/javascript">
         var table = null;
@@ -512,7 +528,7 @@
                         "columns": [
                             { "data": "id", "title": "id", "width": "20px"},
                             { "data": "Nom", "title": "Nom", "width": "30px"},
-                            { "data": "Adresse", "title": "Adresse", "width": "40%" },
+                            { "data": "Adresse", "title": "Adresse", "width": "30%" },
                             { "data": "FamilleName", "title": "Famille", "width": "30px" },
                             //{ "data": "Tbl_Ville_id", "title": "Ville" },
                             { "data": "VilleName", "title": "Ville", "width": "30px" },
@@ -535,7 +551,7 @@
                             //'" + row.id + "'
                         ],
                         "searching": false,
-                        "scrollY": "400px",
+                        "scrollY": "420px",
                         "scrollX": true,
                         "scrollCollapse": true,
                         "autoWidth": false,
@@ -557,7 +573,8 @@
                         }
                    });
         }
-            $(document).ready(function () {
+        $(document).ready(function () {
+                alert("Hello");
                 $("#addClientForm").validate({
                     errorClass: 'help-block animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
                     errorElement: 'div',
@@ -978,9 +995,9 @@
 
         function AddClient() {
             //VIDER LES ERREURS
-            $(".error").remove();
-            $(".ValidationMessage").hide();
-            //alert("Create0q");
+            //$(".error").remove();
+            //$(".ValidationMessage").hide();
+            alert("Create0q");
             //pour ne pas afficher les
             $('#idIdClient').val("");
             $('#idNomClient').val("");
@@ -1000,9 +1017,9 @@
             //$("addClientForm").removeData("unobtrusiveValidation");
                 //$.validator.unobtrusive.parse("addClientModal");
             $.ajax({
-                cache: false,
-                modal: true,
-                autoOpen: true,
+                //cache: false,
+                //modal: true,
+                //autoOpen: true,
                 type: "GET",
                 dataType: 'json',
                 url: '@Url.Action("AddCreate", "Clients")',
@@ -1013,7 +1030,7 @@
 
                     if (res != null && res != false) {
                         $("#addClientModal").modal({
-                            autoOpen: true,
+                            //autoOpen: true,
                             height: 550,
                             width: 700,
                             resizable: false,
@@ -1024,7 +1041,7 @@
                                 //Popup.dialog('destory').remove();
                             }
                         });
-                        $("#addClientModal").show();
+                        $("#addClientModal").open();
                     }
                 }
             });
@@ -1126,5 +1143,5 @@
 
 
 @*$( "#other" ).click(function() {
-  $( "#target" ).focus();
-});*@
+      $( "#target" ).focus();
+    });*@
