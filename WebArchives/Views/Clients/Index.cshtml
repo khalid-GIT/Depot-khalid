@@ -167,9 +167,9 @@
                     <table id="idTableClients" class="table grid-body no-border no-more-tables" cellspacing="0">
                         <thead>
                             <tr role="row">
-                                <th>
+                                @*<th>
                                     @Html.DisplayNameFor(model => model.id)
-                                </th>
+                                </th>*@
                                 <th>
                                     @Html.DisplayNameFor(model => model.Nom)
                                 </th>
@@ -191,10 +191,10 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.telephone1)
                                 </th>
-                                <th>
+                                @*<th>
                                     @Html.DisplayNameFor(model => model.Gsm)
-                                </th>
-                                <th style="text-align: center">
+                                </th>*@
+                                <th>
                                     Action
                                 </th>
                             </tr>
@@ -499,7 +499,7 @@
 @*//Validation*@
 @*@Scripts.Render("~/bundles/Client/js")*@
 <script>
-    SetActions({
+    @*SetActions({
         Modify: "@Url.Action("Edit","Clients")",
         SaveGlobal: "@Url.Action("SaveGlobal","Fonds")",
         GetFonds: "@Url.Action("GetFonds","Fonds")",
@@ -507,12 +507,10 @@
         AddChoice: "@Url.Action("AddChoice","Fonds")",
         SearchFonds: "@Url.Action("SearchFonds","Fonds")",
        //reportUrl: @Url.Action("Report", new { repotType = "PDF" })
-    })
+    })*@
 </script>
 @section scripts{
 
-    @*  @Scripts.Render("~/bundles/bootstrap")*@
-    @*<script src="~/Scripts/jquery-1.12.4.js"></script>*@
     <script type="text/javascript">
         var table = null;
         var err = false;
@@ -526,7 +524,7 @@
                     table = $('#idTableClients').DataTable({
                         data,
                         "columns": [
-                            { "data": "id", "title": "id", "width": "20px"},
+                            //{ "data": "id", "title": "id", "width": "20px"},
                             { "data": "Nom", "title": "Nom", "width": "30px"},
                             { "data": "Adresse", "title": "Adresse", "width": "30%" },
                             { "data": "FamilleName", "title": "Famille", "width": "30px" },
@@ -537,11 +535,11 @@
                             { "data": "Mail", "title": "Mail", "width": "20px"},
                             { "data": "telephone1", "title": "Téléphone", "width": "20px"},
                             //{ "title": "DatedeCreation" },
-                            { "data": "Gsm", "title": "GSM", "width": "30px"},
+                            //{ "data": "Gsm", "title": "GSM", "width": "30px"},
                             {
                                 "data": "id",
                                 "title": "Actions",
-                                "width": "130px",
+                                "width": "25%",
                                 "orderable": false,
                                 "class": "center",
                                 "render": function (data, type, full, meta) {
@@ -574,7 +572,7 @@
                    });
         }
         $(document).ready(function () {
-                alert("Hello");
+                //alert("Hello");
                 $("#addClientForm").validate({
                     errorClass: 'help-block animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
                     errorElement: 'div',
