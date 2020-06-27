@@ -112,11 +112,11 @@
         }
 
 
-    .modal-dialog {
+    /*.modal-dialog {
         display: inline-block;
         text-align: left;
         vertical-align: middle;
-    }
+    }*/
     /*.ValidationMessage {
             display: none;
         }
@@ -142,11 +142,11 @@
                     <h3>Liste <span class="semi-bold">des clients</span></h3>
 
                     <div class="col-sm-12">
-                    @*align="left"*@
-                    <div class="col-sm-6">
-                        <a class="btn btn-success" style="margin:10px auto" onclick="AddClient()"><i class="fas fa-plus">Ajouter</i></a>
+                        @*align="left"*@
+                        <div class="col-sm-6">
+                            <a class="btn btn-success" style="margin:10px auto" onclick="AddClient()"><i class="fas fa-plus">Ajouter</i></a>
+                        </div>
                     </div>
-                    </div>  
                     <div class="input-group custom-search-form ncol-md pull-right col-sm-3">
                         <input type="text" class="form-control" id="Chercher" placeholder="Rechercher...">
                         <span class="input-group-btn">
@@ -156,20 +156,20 @@
                         </span>
                     </div>
                     @*<div class="input-group custom-search-form ncol-md pull-right">
-            <div class="input-group custom-search-form">
-        </div>
-            <b> Chercher </b>@Html.TextBox("Chercherx")
-            <input type="button" onclick="ChercherClient()" value="Chercherx" placeholder="Chercher" />
+                            <div class="input-group custom-search-form">
+                        </div>
+                            <b> Chercher </b>@Html.TextBox("Chercherx")
+                            <input type="button" onclick="ChercherClient()" value="Chercherx" placeholder="Chercher" />
 
-        </div>*@
+                        </div>*@
 
                     @*@Html.DropDownList("Categorie", (IEnumerable<SelectListItem>)ViewBag.categorie, "Veuillez choisir une catégorie")*@
                     <table id="idTableClients" class="table grid-body no-border no-more-tables" cellspacing="0">
                         <thead>
                             <tr role="row">
                                 @*<th>
-                                    @Html.DisplayNameFor(model => model.id)
-                                </th>*@
+                                        @Html.DisplayNameFor(model => model.id)
+                                    </th>*@
                                 <th>
                                     @Html.DisplayNameFor(model => model.Nom)
                                 </th>
@@ -192,8 +192,8 @@
                                     @Html.DisplayNameFor(model => model.telephone1)
                                 </th>
                                 @*<th>
-                                    @Html.DisplayNameFor(model => model.Gsm)
-                                </th>*@
+                                        @Html.DisplayNameFor(model => model.Gsm)
+                                    </th>*@
                                 <th>
                                     Action
                                 </th>
@@ -359,12 +359,14 @@
 </form>
 @*FIN MODEL CREATE*@
 @*Debut Edit client*@
-@using (Html.BeginForm(new { @id = "editClientForm", name = "form0", role = "form" }))
-{
-    <form id="editClientForm">
-        <div class="modal fade" id="editClientModal" role="dialog" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
+@*@using (Html.BeginForm(new { @id = "editClientForm", name = "form0", role = "form" }))
+{*@
+    @*<form id="editClientForm">*@
+        <div class="modal fade" role="dialog" id="editClientModal" tabindex="-1"  >
+            <div class="modal-dialog" role="form">
+                <!-- Modal content-->
                 <div class="modal-content">
+                    <!-- Modal header-->
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">Modifier un client</h4>
@@ -372,6 +374,7 @@
                         @* @Html.LabelFor(model => model.id, new { htmlAttributes = new { @class = "form-control", @id = "idIdClientEdit" } })*@
                         @Html.EditorFor(model => model.id, new { htmlAttributes = new { type = "hidden", @id = "idIdClientEdit" } })
                     </div>
+                    <!-- Modal body-->
                     <div class="modal-body">
                         <div id="displayArea">
                             <div class="form-horizontal">
@@ -478,27 +481,32 @@
 
                         </div>
                     </div>
+                    <!-- Modal footer-->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <input type="button" value="Save" class="btn btn-default" onclick="SaveEditClients()" />
+                    </div>
                 </div>
             </div>
         </div>
-    </form>
-}
-@*Fin Edit client*@
+    @*</form>*@
+    @*  }*@
+    @*Fin Edit client*@
 
 
-@*<script src="@Url.Content("~/Scripts/jquery-ui.min.js")" type="text/javascript"></script>
-    @Scripts.Render("~/datatable/buttons/js")
-    <script src="~/Scripts/SweetAlert/sweetalert.min.js" type="text/javascript"></script>
-    @Scripts.Render("~/bundles/home/js")*@
-@*@Scripts.Render("~/bundles/bootstrap")*@
-@*@Scripts.Render("~/bundles/jquery")*@
+    @*<script src="@Url.Content("~/Scripts/jquery-ui.min.js")" type="text/javascript"></script>
+        @Scripts.Render("~/datatable/buttons/js")
+        <script src="~/Scripts/SweetAlert/sweetalert.min.js" type="text/javascript"></script>
+        @Scripts.Render("~/bundles/home/js")*@
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+    @*@Scripts.Render("~/bundles/jquery")*@
 
-@*<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.20/cr-1.5.2/datatables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/3.3.0/js/dataTables.fixedColumns.min.js"></script>*@
-@*//Validation*@
-@*@Scripts.Render("~/bundles/Client/js")*@
-<script>
+    @*<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.20/cr-1.5.2/datatables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/3.3.0/js/dataTables.fixedColumns.min.js"></script>*@
+    @*//Validation*@
+    @*@Scripts.Render("~/bundles/Client/js")*@
+    <script>
     @*SetActions({
         Modify: "@Url.Action("Edit","Clients")",
         SaveGlobal: "@Url.Action("SaveGlobal","Fonds")",
@@ -508,10 +516,10 @@
         SearchFonds: "@Url.Action("SearchFonds","Fonds")",
        //reportUrl: @Url.Action("Report", new { repotType = "PDF" })
     })*@
-</script>
-@section scripts{
+    </script>
+    @section scripts{
 
-    <script type="text/javascript">
+        <script type="text/javascript">
         var table = null;
         var err = false;
         function ReloadClientTable(data) {
@@ -913,20 +921,29 @@
                             $('#idGsmClientEdit').val(model.Gsm);
                             //affiche le modal
                             //pour ne pas afficher les messages au chargement du modal
-                            var $el = $('#editClientModal');
-                            $el.data('validator', null);
-                            $.validator.unobtrusive.parse($el);
-                            $('#editClientModal').modal({
-                            autoOpen: true,
-                            height: 550,
-                            width: 700,
-                            resizable: false,
-                            title: 'Modifier le  client',
-                            close: function () {
-                                //alert("close");
-                                $("#editClientModal").hide();
-                             }
-                            });
+                            //var $el = $('#editClientModal');
+                            //$el.data('validator', null);
+                            //$.validator.unobtrusive.parse($el);
+                            $('#editClientModal').modal('show')
+
+                            //$('#editClientModal').modal({
+
+                            //    draggable: true,
+                            //    autoOpen: false,
+                            //    resizable: true,
+                            //    model: true,  
+
+                              
+                          
+                            //height: 350,
+                            //width: 200,
+                           
+                            //title: 'Modifier le  client SDSDFDF',
+                            //close: function () {
+                            //    //alert("close");
+                            //    $("#editClientModal").hide();
+                            // }
+                            //});
                     }
                 });
         }
@@ -1047,99 +1064,99 @@
         }
 
 
-    </script>
-}
+        </script>
+    }
 
 
-<div id="createCat" class="modal fade"
-     tabindex="-1" role="dialog">
-    <div class="modal-content">
+    <div id="createCat" class="modal fade"
+         tabindex="-1" role="dialog">
+        <div class="modal-content">
+        </div>
     </div>
-</div>
 
 
-@*EmpVar.DOB = Convert.ToDateTime(Rows.DOB).ToShortDateString();
+    @*EmpVar.DOB = Convert.ToDateTime(Rows.DOB).ToShortDateString();
 
-    EmpVar.MobileNo =Convert.ToInt16(Rows.MobileNo);
+        EmpVar.MobileNo =Convert.ToInt16(Rows.MobileNo);
 
-    EmpVar.Age = Convert.ToInt16(Rows.Age);
+        EmpVar.Age = Convert.ToInt16(Rows.Age);
 
-    EmpVar.EmailId = Rows.EmailId;*@
-@*$(".addClientModal").click(function (e) {
-        e.preventDefault();
-        $.ajax({
-            cache: false,
-            type: "GET",
-            url: '@Url.Action("AddCreate", "Clients")',
-            success: function () {
-                    $(this).attr('data-target', '#createCat');
-                    $(this).attr('data-toggle', 'modal');
-                // Attach listener to .modal-close-btn's so that when the button is pressed the modal dialog disappears
-                $('body').on('click', '.modal-close-btn', function () {
-                    $('#createCat').modal('hide');
-                });
-                //clear modal cache, so that new content can be loaded
-                $('#createCat').on('hidden.bs.modal', function () {
-                    $(this).removeData('bs.modal');
-                });
-                $('#CancelModal').on('click', function () {
-                    return false;
-                });
+        EmpVar.EmailId = Rows.EmailId;*@
+    @*$(".addClientModal").click(function (e) {
+            e.preventDefault();
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: '@Url.Action("AddCreate", "Clients")',
+                success: function () {
+                        $(this).attr('data-target', '#createCat');
+                        $(this).attr('data-toggle', 'modal');
+                    // Attach listener to .modal-close-btn's so that when the button is pressed the modal dialog disappears
+                    $('body').on('click', '.modal-close-btn', function () {
+                        $('#createCat').modal('hide');
+                    });
+                    //clear modal cache, so that new content can be loaded
+                    $('#createCat').on('hidden.bs.modal', function () {
+                        $(this).removeData('bs.modal');
+                    });
+                    $('#CancelModal').on('click', function () {
+                        return false;
+                    });
 
-                // Init JQuery Validation for view
-                $("form").removeData("validator");
-                $("form").removeData("unobtrusiveValidation");
-                $.validator.unobtrusive.parse("form");
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                displayAjaxError(thrownError);
-            }
-        });
-    });*@
-
-@*function AddClient() {
-        alert("Create0");
-        $('#addClientModal').dialog({
-            autoOpen: true,
-            width: 400,
-            resizable: false,
-            title: 'My Table',
-            modal: true,
-            open: function (event, ui) {
-
-                $(this).load('@Url.Action("AddCreate", "Clients")');
-            },
-
-            buttons: {
-                "Close": function () {
-                    $(this).dialog("close");
+                    // Init JQuery Validation for view
+                    $("form").removeData("validator");
+                    $("form").removeData("unobtrusiveValidation");
+                    $.validator.unobtrusive.parse("form");
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    displayAjaxError(thrownError);
                 }
-            }
-        });
-    }*@
-
-@*EXEMPLE DE SAVE*@
-@*<script type="text/javascript">
-        $('#Save').click(function () {
-            var form = $("#subscriptionForm");
-            var url = form.attr("action");
-            var formData = form.serialize();
-            $.post(url, formData, function (data) {
-                $("#msg").html(data);
             });
-        })
-    </script>*@
+        });*@
 
-@*exemple href*@
-@*window.location.href = "@Url.Action("index", "Survey")?languageName="
-    + selectedValue + "&id=@Model.CampaignGuid";*@
+    @*function AddClient() {
+            alert("Create0");
+            $('#addClientModal').dialog({
+                autoOpen: true,
+                width: 400,
+                resizable: false,
+                title: 'My Table',
+                modal: true,
+                open: function (event, ui) {
 
-@*pass a parametre*@
-@*var firstname="abc";
-    var username = "abcd";
-    location.href = '@Html.Raw(@Url.Action("Display", "Customer", new { uname = firstname, name = username }))';*@
+                    $(this).load('@Url.Action("AddCreate", "Clients")');
+                },
+
+                buttons: {
+                    "Close": function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+        }*@
+
+    @*EXEMPLE DE SAVE*@
+    @*<script type="text/javascript">
+            $('#Save').click(function () {
+                var form = $("#subscriptionForm");
+                var url = form.attr("action");
+                var formData = form.serialize();
+                $.post(url, formData, function (data) {
+                    $("#msg").html(data);
+                });
+            })
+        </script>*@
+
+    @*exemple href*@
+    @*window.location.href = "@Url.Action("index", "Survey")?languageName="
+        + selectedValue + "&id=@Model.CampaignGuid";*@
+
+    @*pass a parametre*@
+    @*var firstname="abc";
+        var username = "abcd";
+        location.href = '@Html.Raw(@Url.Action("Display", "Customer", new { uname = firstname, name = username }))';*@
 
 
-@*$( "#other" ).click(function() {
-      $( "#target" ).focus();
-    });*@
+    @*$( "#other" ).click(function() {
+          $( "#target" ).focus();
+        });*@

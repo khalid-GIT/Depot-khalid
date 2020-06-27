@@ -74,7 +74,8 @@ namespace WebArchives
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"
+                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/bootstrap.min.js"
                       ));
 
             bundles.Add(new ScriptBundle("~/datatable/buttons/js").Include(
