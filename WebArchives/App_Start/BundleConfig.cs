@@ -1,146 +1,86 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace WebArchives
+namespace adminlte
 {
     public class BundleConfig
     {
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            //CSS
-            bundles.Add(new StyleBundle("~/Content/bootstrap/css").Include(
-                      "~/Content/bootstrap.css",
-                      //"~/Content/bootstrap-social.css",
-                      "~/Content/bootstrap.min.css"));
+            string ltecomponents = "~/Scripts/adminlte/components/";
+            string lteplugins = "~/Scripts/adminlte/plugins/";
+            string lte = "~/Scripts/adminlte/";
+            string ltecontenent = "~/Content/LoginTlE/plugins";
 
-            bundles.Add(new StyleBundle("~/Content/metisMenu/css").Include(
-                      "~/Content/metisMenu.css"));
-            bundles.Add(new StyleBundle("~/Content/sweetalert/css").Include(
-                      "~/Content/sweetalert.css"));
+            bundles.Add(new ScriptBundle("~/bundles/jquery")
+                .Include(ltecomponents + "jquery/dist/jquery.min.js"));
 
-            bundles.Add(new StyleBundle("~/Content/timeline/css").Include(
-                      "~/Content/timeline.css"));
+            bundles.Add(new ScriptBundle("~/bundles/lib")
+                .Include(ltecomponents + "jquery-ui/jquery-ui.min.js")
+                .Include(ltecomponents + "bootstrap/dist/js/bootstrap.min.js")
+                  .Include(ltecomponents + "bootstrap/dist/js/bootstrap.min.js")
+                  .Include(ltecontenent+ "bootstrap/dist/js/jquery-validation/jquery.validate.min.js")
 
-            bundles.Add(new StyleBundle("~/Content/startmin/css").Include(
-                      "~/Content/startmin.css"));
+                .Include(ltecomponents + "raphael/raphael.min.js")
+                .Include(ltecomponents + "morris.js/morris.min.js")
+                .Include(ltecomponents + "chart.js/Chart.min.js")
+                .Include(ltecomponents + "Flot/jquery.flot.js")
+                .Include(ltecomponents + "Flot/jquery.flot.resize.js")
+                .Include(ltecomponents + "Flot/jquery.flot.pie.js")
+                .Include(ltecomponents + "Flot/jquery.flot.categories.js")
+                .Include(ltecomponents + "jquery-sparkline/dist/jquery.sparkline.min.js")
+                .Include(lteplugins + "jvectormap/jquery-jvectormap-1.2.2.min.js")
+                .Include(lteplugins + "jvectormap/jquery-jvectormap-world-mill-en.js")                
+                .Include(ltecomponents + "jquery-knob/dist/jquery.knob.min.js")
+                .Include(ltecomponents + "moment/moment.js")
+                .Include(ltecomponents + "PACE/pace.min.js")
+                .Include(ltecomponents + "ckeditor/ckeditor.js")
+                .Include(ltecomponents + "datatables.net/js/jquery.dataTables.min.js")
+                .Include(ltecomponents + "datatables.net-bs/js/dataTables.bootstrap.min.js")
+                .Include(ltecomponents + "bootstrap-daterangepicker/daterangepicker.js")
+                .Include(ltecomponents + "bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js")
+                .Include(ltecomponents + "bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js")
+                .Include(lteplugins + "bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js")
+                .Include(ltecomponents + "jquery-slimscroll/jquery.slimscroll.min.js")
+                .Include(ltecomponents + "fastclick/lib/fastclick.js")
+                .Include(lte + "js/adminlte.min.js")
+                .Include(lte + "js/demo.js")
+                .Include(lteplugins + "bootstrap-slider/bootstrap-slider.js")
+                .Include(ltecomponents + "select2/dist/js/select2.full.min.js")
+                .Include(lteplugins + "input-mask/jquery.inputmask.js")
+                .Include(lteplugins + "input-mask/jquery.inputmask.date.extensions.js")
+                .Include(lteplugins + "input-mask/jquery.inputmask.extensions.js")
+                .Include(lteplugins + "timepicker/bootstrap-timepicker.min.js")
+                .Include(lteplugins + "iCheck/icheck.min.js")
+                .Include(ltecomponents + "fullcalendar/dist/fullcalendar.min.js"));
+            
+            bundles.Add(new ScriptBundle("~/bundles/dashboard1")
+                .Include(lte + "js/pages/dashboard.js"));
 
-            bundles.Add(new StyleBundle("~/Content/morris/css").Include(
-                      "~/Content/morris.css"));
+            bundles.Add(new ScriptBundle("~/bundles/dashboard2")
+                .Include(lte + "js/pages/dashboard2.js"));            
 
-            bundles.Add(new StyleBundle("~/datatable/css").Include(
-                     "~/Content/dataTables/datatables.min.css",
-                     "~/Content/dataTables/jquery.dataTables.min.css"));
-
-            bundles.Add(new StyleBundle("~/datatable/buttons/css").Include(
-                      "~/Content/dataTables/Buttons-1.5.1/css/buttons.bootstrap.css",
-                      "~/Content/dataTables/Buttons-1.5.1/css/buttons.bootstrap4.css",
-                      "~/Content/dataTables/Buttons-1.5.1/css/buttons.foundation.css",
-                      "~/Content/dataTables/Buttons-1.5.1/css/buttons.jqueryui.css",
-                      "~/Content/dataTables/Buttons-1.5.1/css/buttons.semanticui.css",
-                      "~/Content/dataTables/Buttons-1.5.1/css/buttons.bootstrap.min.css",
-                      "~/Content/dataTables/Buttons-1.5.1/css/buttons.dataTables.css"));
-
-            bundles.Add(new StyleBundle("~/Content/fontawesome/css").Include(
-                "~/Content/font-awesome.min.css"
-                ));
-
-            bundles.Add(new StyleBundle("~/Content/Fonds/css").Include(
-                "~/Content/Fonds-Style.css"
-                ));
-
-
-
-            bundles.Add(new StyleBundle("~/Content/jquery-ui.min/css").Include(
-               "~/Content/jquery-ui.min.css"
-               ));
-
-            bundles.Add(new StyleBundle("~/Content/jquery-ui/css").Include(
-               "~/Content/jquery-ui.css"
-               ));
-
-            bundles.Add(new StyleBundle("~/Content/datetimepicker/css").Include(
-               "~/Content/bootstrap-datetimepicker.css"
-               ));
-            bundles.Add(new StyleBundle("~/Content/fontawesome-free/css").Include(
-              "~/Content/fontawesome-free/css/all.min.css"
-              ));
-
-            //JAVASCRIPTS
-
-           
-
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/bootstrap.min.js"
-                      ));
-
-            bundles.Add(new ScriptBundle("~/datatable/buttons/js").Include(
-                "~/Scripts/dataTables/Buttons-1.5.1/js/dataTables.buttons.js",
-                "~/Scripts/dataTables/Buttons-1.5.1/js/buttons.flash.js",
-                "~/Scripts/dataTables/Buttons-1.5.1/js/buttons.colVis.js",
-                "~/Scripts/dataTables/Buttons-1.5.1/js/buttons.html5.js",
-                "~/Scripts/dataTables/Buttons-1.5.1/js/buttons.bootstrap.js",
-                "~/Scripts/dataTables/Buttons-1.5.1/js/buttons.bootstrap4.js",
-                "~/Scripts/dataTables/Buttons-1.5.1/js/buttons.foundation.js",
-                "~/Scripts/dataTables/Buttons-1.5.1/js/buttons.jqueryui.js",
-                "~/Scripts/dataTables/Buttons-1.5.1/js/buttons.semanticui.js",
-                "~/Scripts/dataTables/Buttons-1.5.1/js/buttons.print.js"));
-
-            bundles.Add(new ScriptBundle("~/datatable/js").Include(
-                "~/Scripts/dataTables/datatables.min.js",
-                "~/Scripts/dataTables/jquery.dataTables.min.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/raphael/js").Include(
-                "~/Scripts/raphael.min.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/metisMenu/js").Include(
-                "~/Scripts/metisMenu.min.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/morris/js").Include(
-                "~/Scripts/morris.min.js",
-                "~/Scripts/morris-data.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/startmin/js").Include(
-                "~/Scripts/startmin.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/home/js").Include(
-                "~/Scripts/home.js"));
-            bundles.Add(new ScriptBundle("~/bundles/Fonds/js").Include(
-                "~/Scripts/Fonds.js"));
-            bundles.Add(new ScriptBundle("~/bundles/Sgps/js").Include(
-                "~/Scripts/Sgps.js"));
-            bundles.Add(new ScriptBundle("~/bundles/Client/js").Include(
-                "~/Scripts/Client.js"));
-            bundles.Add(new ScriptBundle("~/bundles/Filtres/js").Include(
-                "~/Scripts/Filtres.js"));
-            bundles.Add(new ScriptBundle("~/bundles/sweetalert/js").Include(
-                "~/Scripts/sweetalert.min.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/bootstrapfd/js").Include(
-                "~/Scripts/bootstrap.fd.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/jquery-ui.min/js").Include(
-            "~/Scripts/jquery-ui.min.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/datetimepicker/js").Include(
-            "~/Scripts/bootstrap-datetimepicker.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/Invoice/js").Include(
-           "~/Scripts/Invoice.js"));
-            bundles.Add(new ScriptBundle("~/bundles/Editorjs/js").Include(
-           "~/Scripts/editorjs.min.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                       "~/Scripts/jquery.validate.js")
-                       );
-            bundles.Add(new ScriptBundle("~/bundles/unobtrusive").Include(
-                          "~/Scripts/jquery.validate.unobtrusive.js")
-                       );
-
+            bundles.Add(new StyleBundle("~/Content/css")
+                .Include("~/Content/bootstrap.css")
+                .Include(ltecomponents + "bootstrap/dist/css/bootstrap.min.css")
+                .Include(ltecomponents + "font-awesome/css/font-awesome.min.css")
+                .Include(ltecomponents + "Ionicons/css/ionicons.min.css")
+                .Include(ltecomponents + "datatables.net-bs/css/dataTables.bootstrap.min.css")
+                .Include("~/Content/adminlte/css/AdminLTE.min.css")
+                .Include("~/Content/adminlte/css/skins/_all-skins.min.css")
+                .Include(ltecomponents + "morris.js/morris.css")
+                .Include(ltecomponents + "jvectormap/jquery-jvectormap.css")
+                .Include(ltecomponents + "bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css")
+                .Include(ltecomponents + "bootstrap-daterangepicker/daterangepicker.css")
+                .Include(lteplugins + "bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css")
+                .Include(lteplugins + "bootstrap-slider/slider.css")
+                .Include(ltecomponents + "select2/dist/css/select2.min.css")
+                .Include(ltecomponents + "bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css")
+                .Include(lteplugins + "timepicker/bootstrap-timepicker.min.css")
+                .Include(lteplugins + "iCheck/all.css")
+                .Include(lteplugins + "pace/pace.min.css")
+                .Include(ltecomponents + "fullcalendar/dist/fullcalendar.min.css"));
         }
     }
 }

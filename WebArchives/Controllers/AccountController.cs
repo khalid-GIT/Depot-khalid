@@ -74,11 +74,11 @@ namespace WebArchives.Controllers
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
-            {
-               
+            {      
                 return View(model);
             }
             Session["UserName"] = model.Email;
+            //Session["UserId"] = model.id;
 
             //var userStore = new UserStore<ApplicationUser>();
             //var _userManager = new UserManager<ApplicationUser>(userStore);
