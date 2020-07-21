@@ -19,8 +19,8 @@ namespace adminlte
             bundles.Add(new ScriptBundle("~/bundles/lib")
                 .Include(ltecomponents + "jquery-ui/jquery-ui.min.js")
                 .Include(ltecomponents + "bootstrap/dist/js/bootstrap.min.js")
-                  .Include(ltecomponents + "bootstrap/dist/js/bootstrap.min.js")
-                  .Include(ltecontenent+ "bootstrap/dist/js/jquery-validation/jquery.validate.min.js")
+                .Include(ltecomponents + "bootstrap/dist/js/bootstrap.min.js")
+                  .Include(ltecontenent + "jquery-validation/jquery.validate.min.js")
 
                 .Include(ltecomponents + "raphael/raphael.min.js")
                 .Include(ltecomponents + "morris.js/morris.min.js")
@@ -80,6 +80,7 @@ namespace adminlte
                 .Include(lteplugins + "timepicker/bootstrap-timepicker.min.css")
                 .Include(lteplugins + "iCheck/all.css")
                 .Include(lteplugins + "pace/pace.min.css")
+                .Include(ltecomponents + "font-awesome/css/font-awesome.min.css")
                 .Include(ltecomponents + "fullcalendar/dist/fullcalendar.min.css"));
         }
     }
