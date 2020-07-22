@@ -8,6 +8,9 @@ namespace adminlte
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+
+             
+
             string ltecomponents = "~/Scripts/adminlte/components/";
             string lteplugins = "~/Scripts/adminlte/plugins/";
             string lte = "~/Scripts/adminlte/";
@@ -53,6 +56,8 @@ namespace adminlte
                 .Include(lteplugins + "input-mask/jquery.inputmask.extensions.js")
                 .Include(lteplugins + "timepicker/bootstrap-timepicker.min.js")
                 .Include(lteplugins + "iCheck/icheck.min.js")
+                .Include("~/Scripts/SweetAlert/sweetalert.min.js")
+
                 .Include(ltecomponents + "fullcalendar/dist/fullcalendar.min.js"));
             
             bundles.Add(new ScriptBundle("~/bundles/dashboard1")
@@ -80,7 +85,9 @@ namespace adminlte
                 .Include(lteplugins + "timepicker/bootstrap-timepicker.min.css")
                 .Include(lteplugins + "iCheck/all.css")
                 .Include(lteplugins + "pace/pace.min.css")
-                .Include(ltecomponents + "font-awesome/css/font-awesome.min.css")
+                .Include(ltecontenent + "font-awesome/css/fontawesome.min.css")
+                .Include("~/Scripts/SweetAlert/sweetalert.css")
+
                 .Include(ltecomponents + "fullcalendar/dist/fullcalendar.min.css"));
         }
     }

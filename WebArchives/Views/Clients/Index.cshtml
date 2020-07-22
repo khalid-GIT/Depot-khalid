@@ -1,107 +1,448 @@
 ﻿@model WebArchives.Models.Clients.VMListeClient
 
 
+
 @{
-    ViewBag.Title = "Data";
+    //Layout = null;
+
+
+    ViewBag.titre = "Liste des clients";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Html.EnableClientValidation(true);
+    //ActivationContext de validation
+    //HtmlHelper.ClientValidationEnabled = false;
+    //HtmlHelper.UnobtrusiveJavaScriptEnabled = false;
+    if (!Request.IsAuthenticated)
+    {
+        if (Session["UserName"] == null)
+        {
+            Response.Redirect("~/Views/Account/Login.cshtml");
+        }
+
+        else
+        {
+            Response.ClearHeaders();
+            Response.AddHeader("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate");
+            Response.AddHeader("Pragma", "no-cache");
+        }
+    }
+
+    //We will see the validations in MVC.Validations can be performed using the below methods.
+    //1 Using ModelState Object
+    //2 Using Data Annotation
+    //3 Using Jquery
+    //4 Custom validations can be applied to input fields using classes of MVC framework.
 }
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <h1>
-            Data Tables
-            <small>advanced tables</small>
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Tables</a></li>
-            <li class="active">Data tables</li>
-        </ol>
-    </section>
-    <!-- Main content -->
-    <section class="content">
-        <div class="row">
-            <div class="col-xs-12">
 
-                <!-- /.box -->
-                <div class="box">
-                    <div class="box-header">
-                        <h3 class="box-title">Data Table With Full Features</h3>
-                    </div>
-
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        <table id="idTableClients" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Nom)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Adresse)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.FamilleName)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Tbl_Ville_id)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.IDContact)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Mail)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.telephone1)
-                                    </th>
-                                    <th>
-                                        Action
-                                    </th>
-                                </tr>
-                            </thead>
-
-                            @*<tfoot>
-                                    <tr>
-                                        <th>Rendering engine</th>
-                                        <th>Browser</th>
-                                        <th>Platform(s)</th>
-                                        <th>Engine version</th>
-                                        <th>CSS grade</th>
-                                    </tr>
-                                </tfoot>*@
-                        </table>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-                <!-- /.box -->
-            </div>
-            <!-- /.col -->
-        </div>
-        <!-- /.row -->
-    </section>
-    <!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
-
-@section Scripts
+<link href="~/Scripts/SweetAlert/sweetalert.css" rel="stylesheet" />
+@section Styles
 {
-<script src="~/Content/LoginTlE/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <style>
+        .modal {
+            /*position: relative;*/
+            /*top: auto;
+            bottom: auto;
+            right: auto;
+            left: auto;*/
+            /*display: block;*/
+            /*z-index: 1;*/
+            /*text-align: center;
+            width: auto;*/
+            background: transparent !important;
+        }
 
-    @*<script type="text/javascript">$(document).ready(function () {
-          $('#example1').DataTable()
-          $('#example2').DataTable({
-            'paging'      : true,
-            'lengthChange': false,
-            'searching'   : false,
-            'ordering'    : true,
-            'info'        : true,
-            'autoWidth'   : false
-          })
-        })</script>*@
+        .Htitre {
+            margin-top: 50px;
+        }
 
-    <script type="text/javascript">
+        /*.centrage {
+            text-align: center;
+        }
+
+        .GetActions {
+            width: 35%;
+            margin-left: 30px;
+            padding: 0px;
+        }
+
+            .GetActions p {
+                /*display: block;*/
+                display: inline-block;
+                margin-left: 20px;
+                float: left;
+                display: inline-block;
+            }*/
+    </style>
+}
+    @TempData["SuccessMessage"]
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Parametrages
+                <small>Fiche Client</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="#">Tables</a></li>
+                <li class="active">Data tables</li>
+            </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- /.box -->
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">Liste des clients</h3><br />
+                            <div class="panel-content">
+                                <div class="col-sm-6">
+                                    <a class="btn btn-success" style="margin:10px auto" onclick="AddClient()"><i class="fa fa-plus">Ajouter</i></a>
+                                </div>
+                                <div class="input-group custom-search-form  pull-right col-sm-3">
+                                    <input type="text" class="form-control" id="Chercher" placeholder="Rechercher...">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-primary" type="button" onclick="ChercherClient()" aria-label="Chercher">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="idTableClients" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Nom)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Adresse)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.FamilleName)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Tbl_Ville_id)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.IDContact)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Mail)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.telephone1)
+                                        </th>
+                                        <th style="text-align:center">
+                                            Action
+                                        </th>
+                                    </tr>
+                                </thead>
+
+                                @*<tfoot>
+                                        <tr>
+                                            <th>Rendering engine</th>
+                                            <th>Browser</th>
+                                            <th>Platform(s)</th>
+                                            <th>Engine version</th>
+                                            <th>CSS grade</th>
+                                        </tr>
+                                    </tfoot>*@
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+
+    <!-- /.content-wrapper -->
+    <!--Modal-->
+    <!--Add-->
+    @*@using (Html.BeginForm(new { id = "addClientForm", FormMethod.Post, name = "addClientForm", @class = "form-horizontal", role = "form" }))
+        {*@
+    <form id="addClientForm" name="addClientForm" class="form-horizontal" role="form">
+        <div class="modal fade" id="addClientModal" role="dialog" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Ajouter un client</h4>
+                    </div>
+                    <div class="modal-body">
+                        @*@{
+                                Html.RenderPartial("Create");
+                            }*@
+
+                        @*new { id = "addClientForm", name = "formAdd", role = "form" }*@
+                        @*OnSuccess = "RegisterAjaxEvents();",*@
+                        <div id="displayArea">
+                            <div class="form-horizontal">
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Nom, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @class = "form-control", name = "Nom", id = "idNomClient" } })  @*, @required = "required"*@
+                                        @Html.ValidationMessageFor(model => model.Nom, string.Empty, new { @class = "text-danger ValidationMessage", @id = "idNomClientVal" })
+                                        @*<span class="glyphicon glyphicon-lock form-control-feedback"></span>*@
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Adresse, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Adresse, new { htmlAttributes = new { @class = "form-control", @id = "idAdresseClient" } })
+                                        @Html.ValidationMessageFor(model => model.Adresse, "", new { @class = "text-danger  ValidationMessage" })
+                                        @*<span class="glyphicon glyphicon-lock form-control-feedback"></span>*@
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Mail, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Mail, new { htmlAttributes = new { @class = "form-control", name = "Mail", id = "idMailClient" } })  @*, @required = "required"*@
+                                        @Html.ValidationMessageFor(model => model.Mail, "", new { @class = "text-danger ValidationMessage" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.telephone1, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.telephone1, new { htmlAttributes = new { @class = "form-control", @id = "idtelephone1Client" } })
+                                        @Html.ValidationMessageFor(model => model.telephone1, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.fax, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.fax, new { htmlAttributes = new { @class = "form-control", @id = "idFaxClient" } })
+                                        @Html.ValidationMessageFor(model => model.fax, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Tbl_Famille_Clt_Id, "Famille", new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.DropDownListFor(model => model.Tbl_Famille_Clt_Id, new SelectList(Model.listeFamille, "IdFamille", "Libelle"), new { @class = "form-control select2", @id = "idIdFamilleClient", @style = "width: 100%;", @required = "required" })
+                                        @Html.ValidationMessageFor(model => model.Tbl_Famille_Clt_Id, "", new { @class = "text-danger ValidationMessage" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Tbl_Ville_id, "Ville", new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.DropDownListFor(model => model.Tbl_Ville_id, new SelectList(Model.listeVilles, "IdVille", "Libelle"), new { @class = "form-control select2", @id = "idIdVilleClient", @style = "width: 100%;", @required = "required" })
+                                        @Html.ValidationMessageFor(model => model.Tbl_Ville_id, "", new { @class = "text-danger ValidationMessage" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.IDContact, "Contact", new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.DropDownListFor(model => model.IDContact, new SelectList(Model.ListeContact, "IDContact", "FullName"), new { @class = "form-control select2", @id = "idIDContactClient", @style = "width: 100%;", @required = "required" })
+                                        @Html.ValidationMessageFor(model => model.IDContact, "", new { @class = "text-danger ValidationMessage" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.idf, htmlAttributes: new { @class = "control-label col-md-2", @id = "ididfClient" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.idf, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.idf, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Cnss, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Cnss, new { htmlAttributes = new { @class = "form-control", @id = "idCnssClient" } })
+                                        @Html.ValidationMessageFor(model => model.Cnss, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Ice, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Ice, new { htmlAttributes = new { @class = "form-control", @id = "idIceClient" } })
+                                        @Html.ValidationMessageFor(model => model.Ice, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Gsm, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Gsm, new { htmlAttributes = new { @class = "form-control", @id = "idGsmClient" } })
+                                        @Html.ValidationMessageFor(model => model.Gsm, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Teleph, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Teleph, new { htmlAttributes = new { @class = "form-control", @id = "idTelephClient" } })
+                                        @Html.ValidationMessageFor(model => model.Teleph, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        @*onclick="SaveAddClient()*@  @*onclick="SaveAddClient()*@
+                                        <input type="submit" value="Valider" class="btn btn-default " />
+                                        <input type="button" value="Annuler" class="btn btn-default " data-dismiss="modal" />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*}*@
+    </form>
+    <!--FIN ADD-->
+    <!--Debut Edit client-->
+    @*@using (Html.BeginForm(new { @id = "editClientForm", name = "form0", role = "form" }))
+        {*@
+    @*<form id="editClientForm">*@
+    <div class="modal fade" role="dialog" id="editClientModal" tabindex="-1">
+        <div class="modal-dialog" role="form">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <!-- Modal header-->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modifier un client</h4>
+                    @*  <input type="hidden" name="UserID" id="UserID" value="@Model.UserID" />*@
+                    @* @Html.LabelFor(model => model.id, new { htmlAttributes = new { @class = "form-control", @id = "idIdClientEdit" } })*@
+                    @Html.EditorFor(model => model.id, new { htmlAttributes = new { type = "hidden", @id = "idIdClientEdit" } })
+                </div>
+                <!-- Modal body-->
+                <div class="modal-body">
+                    <div id="displayArea">
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Nom, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @class = "form-control", @id = "idNomClientEdit", @name = "NomClientEdit", @required = "required" } })
+                                    @Html.ValidationMessageFor(model => model.Nom, null, new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Adresse, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Adresse, new { htmlAttributes = new { @class = "form-control", @id = "idAdresseClientEdit" } })
+                                    @Html.ValidationMessageFor(model => model.Adresse, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Mail, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Mail, new { htmlAttributes = new { @class = "form-control", @id = "idMailClientEdit" } })
+                                    @Html.ValidationMessageFor(model => model.Mail, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.telephone1, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.telephone1, new { htmlAttributes = new { @class = "form-control", @id = "idtelephone1ClientEdit" } })
+                                    @Html.ValidationMessageFor(model => model.telephone1, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.fax, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.fax, new { htmlAttributes = new { @class = "form-control", @id = "idFaxClientEdit" } })
+                                    @Html.ValidationMessageFor(model => model.fax, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Tbl_Famille_Clt_Id, "Famille", new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownListFor(model => model.Tbl_Famille_Clt_Id, new SelectList(Model.listeFamille, "IdFamille", "Libelle"), new { @class = "form-control", @id = "idIdFamilleClientEdit" })
+                                    @Html.ValidationMessageFor(model => model.Tbl_Famille_Clt_Id, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Tbl_Ville_id, "Ville", new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownListFor(model => model.Tbl_Ville_id, new SelectList(Model.listeVilles, "IdVille", "Libelle"), new { @class = "form-control", @id = "idIdVilleClientEdit" })
+                                    @Html.ValidationMessageFor(model => model.Tbl_Ville_id, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.IDContact, "Contact", new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownListFor(model => model.IDContact, new SelectList(Model.ListeContact, "IDContact", "FullName"), new { @class = "form-control", @id = "idIDContactClientEdit" })
+                                    @Html.ValidationMessageFor(model => model.IDContact, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.idf, htmlAttributes: new { @class = "control-label col-md-2", @id = "ididfClientEdit" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.idf, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.idf, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Cnss, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Cnss, new { htmlAttributes = new { @class = "form-control", @id = "idCnssClientEdit" } })
+                                    @Html.ValidationMessageFor(model => model.Cnss, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Ice, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Ice, new { htmlAttributes = new { @class = "form-control", @id = "idIceClientEdit" } })
+                                    @Html.ValidationMessageFor(model => model.Ice, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Gsm, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Gsm, new { htmlAttributes = new { @class = "form-control", @id = "idGsmClientEdit" } })
+                                    @Html.ValidationMessageFor(model => model.Gsm, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Teleph, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Teleph, new { htmlAttributes = new { @class = "form-control", @id = "idTelephClientEdit" } })
+                                    @Html.ValidationMessageFor(model => model.Teleph, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            @*<div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="button" value="Save" class="btn btn-default" onclick="SaveEditClients()" />
+
+                                    </div>
+                                </div>*@
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Modal footer-->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="button" value="Save" class="btn btn-default" onclick="SaveEditClients()" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Fin Modal-->
+
+    @section Scripts
+{
+        <script src="~/Content/LoginTlE/plugins/jquery-validation/jquery.validate.min.js"></script>
+
+
+        <script src="~/Scripts/SweetAlert/sweetalert.min.js"></script>
+
+        <script type="text/javascript">
 var table = null;
 var err = false;
 function ReloadClientTable(data) {
@@ -129,11 +470,16 @@ function ReloadClientTable(data) {
                 {
                     "data": "id",
                     "title": "Actions",
-                    "width": "25%",
+                    "width": "90px",
                     "orderable": false,
                     "class": "center",
+                    "autoWidth": false,
+                    //"vertical-align": "bottom",
+                    //"text-align": "center",
+                    //"display": "inline-block",
+                    //"float": "none",
                     "render": function (data, type, full, meta) {
-                        return "<div class='status-block'><a onclick='EditClients(" + data + ")'  style='width:30px' class='btn btn-block btn-success btn-sm' ><i class='fa-edit'></i></a><a onclick='Delete(" + data + ")' style= 'width:30px' class='btn btn-block btn-danger btn-sm'><i class='fa-remove'></i></a><a  style= 'width:30px' class='btn btn-block btn-info'><i class='fa-info'></i></a></div>";
+                        return "<p 'text-align':'center'><a onclick='EditClients(" + data + ")'  style='width:30px;margin:1px' class='btn btn-success btn-sm' ><i class='fa fa-edit'></i></a><a onclick='Delete(" + data + ")' style= 'width:30px;margin:1px' class='btn btn-danger btn-sm'><i class='fa fa-remove'></i></a><a  style= 'width:30px;margin:1px' class='btn btn-info  btn-sm'><i class='fa fa-info'></i></a></p>";
                     }
                 }
                 //'" + row.id + "'
@@ -143,6 +489,7 @@ function ReloadClientTable(data) {
             "scrollX": true,
             "scrollCollapse": false,
             "autoWidth": false,
+
             //"colReorder": true,
             "language": {
                 "info": "Afficher _END_ sur _TOTAL_ ",
@@ -161,8 +508,8 @@ function ReloadClientTable(data) {
             }
         });
 }
-$(document).ready(function () {
-
+    $(document).ready(function () {
+        $('.select2').select2();
     $("#addClientForm").validate({
         errorClass: 'help-block animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
         errorElement: 'div',
@@ -269,15 +616,15 @@ $('form').submit(function (e) {
 });
 var urls = null;
 function SetActions(actions) {
-urls = actions;
+        urls = actions;
 }
 function valuesSharch() {
-var ch = $("#Chercher").val();
-alert(ch);
-return ch;
+        var ch = $("#Chercher").val();
+        alert(ch);
+        return ch;
 }
 function ReportChercher(repotType) {
-alert(repotType);
+
 //debugger
     searchValue = $("#Chercher").val();
     //std.repotType = $("#idPdf").val();
@@ -459,27 +806,52 @@ alert("dddd"+ ch);
 
 }
 
-function Delete(id) {
-    if (confirm("Etes-vous sur de vouloir supprimer ce client")) {
-            $.ajax({
-                type: "Post",
-                dataType: 'json',
-                url: "@Url.Action("Delete", "Clients")/" + id,
-                success: function (data) {
-                    if (data.IsDeleted) {
-                        //debugger
-                        //  table.ajax.reload();
-                            ReloadClientTable(data.clients);
-                        //ReloadClientTable();
-                            swal("Suppression effectuée avec succès !", "", "success");
-                            }
-                },
-                error: function (data) {
-                    swal("Impossible d'effectué la supression !", "", "error");
+        function Delete(id) {
+            //confirm(
+
+            swal({
+                title: 'Confirmation',
+                text: 'Voulez-vous supprimer ce cient?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Oui',
+                cancelButtonText: 'Annulé',
+            },
+                function (isConfirm) {
+                    if (isConfirm) {
+                              $.ajax({
+                                        type: "Post",
+                                        dataType: 'json',
+                                        url: "@Url.Action("Delete", "Clients")/" + id,
+                                        success: function (data) {
+                                            if (data.IsDeleted) {
+                                                //debugger
+                                                //  table.ajax.reload();
+                                                ReloadClientTable(data.clients);
+                                                //ReloadClientTable();
+                                                swal("Félicitation", "Suppression effectuée avec succès !", "", "success");
+                                            }
+                                        },
+                                        error: function (data) {
+                                            swal("Atention","Impossible d'effectué la supression !", "", "error");
+                                        }
+                                    });
+                        //swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                    } else {
+                        //alert("annulee");
+                        //swal("Cancelled", "Opération annulée :)", "error");
+                    }
+
+                 });
+
+
+
+
+
                 }
-                    });
-    }
-}
+
+
+
 
 function EditClients(id) {
 //var url = $(this).data("url");
@@ -642,6 +1014,6 @@ $.ajax({
 });
 //$("#addClientModal").modal();
 }
-    </script>
+        </script>
 
-}
+    }
