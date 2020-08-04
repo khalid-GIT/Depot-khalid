@@ -61,6 +61,7 @@ namespace WebArchives.Controllers
 
         }
         // GET: Clients/Details/5
+        [HttpGet]
         public ActionResult Details(int id)
         {
             var biz = new BusinessClients();
@@ -82,7 +83,8 @@ namespace WebArchives.Controllers
                 Teleph = dto.Teleph,
             };
 
-            return View(model);
+            //return View(model);
+            return Json(new { model, Success = true }, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Clients/Create
@@ -446,7 +448,7 @@ namespace WebArchives.Controllers
                     dto.Tbl_Famille_Clt_Id = model.Tbl_Famille_Clt_Id;
                     dto.Tbl_Ville_id = model.Tbl_Ville_id;
                     dto.IDContact = model.IDContact;
-                  
+
                     biz.MdifierClient(dto);
 
                 }

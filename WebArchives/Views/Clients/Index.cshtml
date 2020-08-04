@@ -4,8 +4,6 @@
 
 @{
     //Layout = null;
-
-
     ViewBag.titre = "Liste des clients";
     Layout = "~/Views/Shared/_Layout.cshtml";
     Html.EnableClientValidation(true);
@@ -41,14 +39,14 @@
         .modal {
             /*position: relative;*/
             /*top: auto;
-            bottom: auto;
-            right: auto;
-            left: auto;*/
+            bottom: auto;*/
+            /*right: auto;*/
+            /*left: auto;*/
             /*display: block;*/
             /*z-index: 1;*/
-            /*text-align: center;
-            width: auto;*/
-            background: transparent !important;
+            /*text-align: center;*/
+            /*width: 500px;*/
+            /*background: transparent !important;*/
         }
 
         .Htitre {
@@ -67,321 +65,183 @@
 
             .GetActions p {
                 /*display: block;*/
-                display: inline-block;
+        /*display: inline-block;
                 margin-left: 20px;
                 float: left;
                 display: inline-block;
             }*/
     </style>
 }
-    @TempData["SuccessMessage"]
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>
-                Parametrages
-                <small>Fiche Client</small>
-            </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#">Tables</a></li>
-                <li class="active">Data tables</li>
-            </ol>
-        </section>
-        <!-- Main content -->
-        <section class="content">
-            <div class="row">
-                <div class="col-xs-12">
-                    <!-- /.box -->
-                    <div class="box">
-                        <div class="box-header">
-                            <h3 class="box-title">Liste des clients</h3><br />
-                            <div class="panel-content">
-                                <div class="col-sm-6">
-                                    <a class="btn btn-success" style="margin:10px auto" onclick="AddClient()"><i class="fa fa-plus">Ajouter</i></a>
-                                </div>
-                                <div class="input-group custom-search-form  pull-right col-sm-3">
-                                    <input type="text" class="form-control" id="Chercher" placeholder="Rechercher...">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-primary" type="button" onclick="ChercherClient()" aria-label="Chercher">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </span>
-                                </div>
+@TempData["SuccessMessage"]
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Parametrages
+            <small>Fiche Client</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#">Tables</a></li>
+            <li class="active">Data tables</li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12  col-md-12 col-lg-12">
+                <!-- /.box -->
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Liste des clients</h3><br />
+                        <div class="panel-content">
+                            <div class="col-sm-6">
+                                <a class="btn btn-success" style="margin:10px auto" onclick="AddClient()"><i class="fa fa-plus">Ajouter</i></a>
+                            </div>
+                            <div class="input-group custom-search-form  pull-right col-sm-3">
+                                <input type="text" class="form-control" id="Chercher" placeholder="Rechercher...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="button" onclick="ChercherClient()" aria-label="Chercher">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
                             </div>
                         </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <table id="idTableClients" class="table table-bordered table-striped">
-                                <thead>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table id="idTableClients" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Nom)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Adresse)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.FamilleName)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Tbl_Ville_id)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.IDContact)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Mail)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.telephone1)
+                                    </th>
+                                    <th style="text-align:center">
+                                        Action
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            @*<tfoot>
                                     <tr>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.Nom)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.Adresse)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.FamilleName)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.Tbl_Ville_id)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.IDContact)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.Mail)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.telephone1)
-                                        </th>
-                                        <th style="text-align:center">
-                                            Action
-                                        </th>
+                                        <th>Rendering engine</th>
+                                        <th>Browser</th>
+                                        <th>Platform(s)</th>
+                                        <th>Engine version</th>
+                                        <th>CSS grade</th>
                                     </tr>
-                                </thead>
-
-                                @*<tfoot>
-                                        <tr>
-                                            <th>Rendering engine</th>
-                                            <th>Browser</th>
-                                            <th>Platform(s)</th>
-                                            <th>Engine version</th>
-                                            <th>CSS grade</th>
-                                        </tr>
-                                    </tfoot>*@
-                            </table>
-                        </div>
-                        <!-- /.box-body -->
+                                </tfoot>*@
+                        </table>
                     </div>
-                    <!-- /.box -->
+                    <!-- /.box-body -->
                 </div>
-                <!-- /.col -->
+                <!-- /.box -->
             </div>
-            <!-- /.row -->
-        </section>
-        <!-- /.content -->
-    </div>
-
-    <!-- /.content-wrapper -->
-    <!--Modal-->
-    <!--Add-->
-    @*@using (Html.BeginForm(new { id = "addClientForm", FormMethod.Post, name = "addClientForm", @class = "form-horizontal", role = "form" }))
-        {*@
-    <form id="addClientForm" name="addClientForm" class="form-horizontal" role="form">
-        <div class="modal fade" id="addClientModal" role="dialog" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Ajouter un client</h4>
-                    </div>
-                    <div class="modal-body">
-                        @*@{
-                                Html.RenderPartial("Create");
-                            }*@
-
-                        @*new { id = "addClientForm", name = "formAdd", role = "form" }*@
-                        @*OnSuccess = "RegisterAjaxEvents();",*@
-                        <div id="displayArea">
-                            <div class="form-horizontal">
-                                @Html.AntiForgeryToken()
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.Nom, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @class = "form-control", name = "Nom", id = "idNomClient" } })  @*, @required = "required"*@
-                                        @Html.ValidationMessageFor(model => model.Nom, string.Empty, new { @class = "text-danger ValidationMessage", @id = "idNomClientVal" })
-                                        @*<span class="glyphicon glyphicon-lock form-control-feedback"></span>*@
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.Adresse, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        @Html.EditorFor(model => model.Adresse, new { htmlAttributes = new { @class = "form-control", @id = "idAdresseClient" } })
-                                        @Html.ValidationMessageFor(model => model.Adresse, "", new { @class = "text-danger  ValidationMessage" })
-                                        @*<span class="glyphicon glyphicon-lock form-control-feedback"></span>*@
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.Mail, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        @Html.EditorFor(model => model.Mail, new { htmlAttributes = new { @class = "form-control", name = "Mail", id = "idMailClient" } })  @*, @required = "required"*@
-                                        @Html.ValidationMessageFor(model => model.Mail, "", new { @class = "text-danger ValidationMessage" })
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.telephone1, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        @Html.EditorFor(model => model.telephone1, new { htmlAttributes = new { @class = "form-control", @id = "idtelephone1Client" } })
-                                        @Html.ValidationMessageFor(model => model.telephone1, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.fax, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        @Html.EditorFor(model => model.fax, new { htmlAttributes = new { @class = "form-control", @id = "idFaxClient" } })
-                                        @Html.ValidationMessageFor(model => model.fax, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.Tbl_Famille_Clt_Id, "Famille", new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        @Html.DropDownListFor(model => model.Tbl_Famille_Clt_Id, new SelectList(Model.listeFamille, "IdFamille", "Libelle"), new { @class = "form-control select2", @id = "idIdFamilleClient", @style = "width: 100%;", @required = "required" })
-                                        @Html.ValidationMessageFor(model => model.Tbl_Famille_Clt_Id, "", new { @class = "text-danger ValidationMessage" })
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.Tbl_Ville_id, "Ville", new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        @Html.DropDownListFor(model => model.Tbl_Ville_id, new SelectList(Model.listeVilles, "IdVille", "Libelle"), new { @class = "form-control select2", @id = "idIdVilleClient", @style = "width: 100%;", @required = "required" })
-                                        @Html.ValidationMessageFor(model => model.Tbl_Ville_id, "", new { @class = "text-danger ValidationMessage" })
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.IDContact, "Contact", new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        @Html.DropDownListFor(model => model.IDContact, new SelectList(Model.ListeContact, "IDContact", "FullName"), new { @class = "form-control select2", @id = "idIDContactClient", @style = "width: 100%;", @required = "required" })
-                                        @Html.ValidationMessageFor(model => model.IDContact, "", new { @class = "text-danger ValidationMessage" })
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.idf, htmlAttributes: new { @class = "control-label col-md-2", @id = "ididfClient" })
-                                    <div class="col-md-10">
-                                        @Html.EditorFor(model => model.idf, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.idf, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.Cnss, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        @Html.EditorFor(model => model.Cnss, new { htmlAttributes = new { @class = "form-control", @id = "idCnssClient" } })
-                                        @Html.ValidationMessageFor(model => model.Cnss, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.Ice, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        @Html.EditorFor(model => model.Ice, new { htmlAttributes = new { @class = "form-control", @id = "idIceClient" } })
-                                        @Html.ValidationMessageFor(model => model.Ice, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.Gsm, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        @Html.EditorFor(model => model.Gsm, new { htmlAttributes = new { @class = "form-control", @id = "idGsmClient" } })
-                                        @Html.ValidationMessageFor(model => model.Gsm, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.Teleph, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        @Html.EditorFor(model => model.Teleph, new { htmlAttributes = new { @class = "form-control", @id = "idTelephClient" } })
-                                        @Html.ValidationMessageFor(model => model.Teleph, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-offset-2 col-md-10">
-                                        @*onclick="SaveAddClient()*@  @*onclick="SaveAddClient()*@
-                                        <input type="submit" value="Valider" class="btn btn-default " />
-                                        <input type="button" value="Annuler" class="btn btn-default " data-dismiss="modal" />
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+            <!-- /.col -->
         </div>
-        @*}*@
-    </form>
-    <!--FIN ADD-->
-    <!--Debut Edit client-->
-    @*@using (Html.BeginForm(new { @id = "editClientForm", name = "form0", role = "form" }))
-        {*@
-    @*<form id="editClientForm">*@
-    <div class="modal fade" role="dialog" id="editClientModal" tabindex="-1">
-        <div class="modal-dialog" role="form">
-            <!-- Modal content-->
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<!--Modal-->
+<!--Add-->
+@*@using (Html.BeginForm(new { id = "addClientForm", FormMethod.Post, name = "addClientForm", @class = "form-horizontal", role = "form" }))
+    {*@
+<form id="addClientForm" name="addClientForm" class="form-horizontal" role="form">
+    <div class="modal fade" id="addClientModal" role="dialog" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
-                <!-- Modal header-->
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modifier un client</h4>
-                    @*  <input type="hidden" name="UserID" id="UserID" value="@Model.UserID" />*@
-                    @* @Html.LabelFor(model => model.id, new { htmlAttributes = new { @class = "form-control", @id = "idIdClientEdit" } })*@
-                    @Html.EditorFor(model => model.id, new { htmlAttributes = new { type = "hidden", @id = "idIdClientEdit" } })
+                    <h4 class="modal-title">Ajouter un client</h4>
                 </div>
-                <!-- Modal body-->
                 <div class="modal-body">
+
                     <div id="displayArea">
                         <div class="form-horizontal">
+                            @Html.AntiForgeryToken()
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Nom, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @class = "form-control", @id = "idNomClientEdit", @name = "NomClientEdit", @required = "required" } })
-                                    @Html.ValidationMessageFor(model => model.Nom, null, new { @class = "text-danger" })
-
+                                    @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @class = "form-control", name = "Nom", id = "idNomClient" } })  @*, @required = "required"*@
+                                    @Html.ValidationMessageFor(model => model.Nom, string.Empty, new { @class = "text-danger ValidationMessage", @id = "idNomClientVal" })
+                                    @*<span class="glyphicon glyphicon-lock form-control-feedback"></span>*@
                                 </div>
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Adresse, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Adresse, new { htmlAttributes = new { @class = "form-control", @id = "idAdresseClientEdit" } })
-                                    @Html.ValidationMessageFor(model => model.Adresse, null, new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.Adresse, new { htmlAttributes = new { @class = "form-control", @id = "idAdresseClient" } })
+                                    @Html.ValidationMessageFor(model => model.Adresse, "", new { @class = "text-danger  ValidationMessage" })
+                                    @*<span class="glyphicon glyphicon-lock form-control-feedback"></span>*@
                                 </div>
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Mail, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Mail, new { htmlAttributes = new { @class = "form-control", @id = "idMailClientEdit" } })
-                                    @Html.ValidationMessageFor(model => model.Mail, null, new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.Mail, new { htmlAttributes = new { @class = "form-control", name = "Mail", id = "idMailClient" } })  @*, @required = "required"*@
+                                    @Html.ValidationMessageFor(model => model.Mail, "", new { @class = "text-danger ValidationMessage" })
                                 </div>
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.telephone1, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.telephone1, new { htmlAttributes = new { @class = "form-control", @id = "idtelephone1ClientEdit" } })
+                                    @Html.EditorFor(model => model.telephone1, new { htmlAttributes = new { @class = "form-control", @id = "idtelephone1Client" } })
                                     @Html.ValidationMessageFor(model => model.telephone1, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.fax, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.fax, new { htmlAttributes = new { @class = "form-control", @id = "idFaxClientEdit" } })
+                                    @Html.EditorFor(model => model.fax, new { htmlAttributes = new { @class = "form-control", @id = "idFaxClient" } })
                                     @Html.ValidationMessageFor(model => model.fax, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Tbl_Famille_Clt_Id, "Famille", new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.DropDownListFor(model => model.Tbl_Famille_Clt_Id, new SelectList(Model.listeFamille, "IdFamille", "Libelle"), new { @class = "form-control", @id = "idIdFamilleClientEdit" })
-                                    @Html.ValidationMessageFor(model => model.Tbl_Famille_Clt_Id, "", new { @class = "text-danger" })
+                                    @Html.DropDownListFor(model => model.Tbl_Famille_Clt_Id, new SelectList(Model.listeFamille, "IdFamille", "Libelle"), new { @class = "form-control select2", @id = "idIdFamilleClient", @style = "width: 100%;", @required = "required" })
+                                    @Html.ValidationMessageFor(model => model.Tbl_Famille_Clt_Id, "", new { @class = "text-danger ValidationMessage" })
                                 </div>
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Tbl_Ville_id, "Ville", new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.DropDownListFor(model => model.Tbl_Ville_id, new SelectList(Model.listeVilles, "IdVille", "Libelle"), new { @class = "form-control", @id = "idIdVilleClientEdit" })
-                                    @Html.ValidationMessageFor(model => model.Tbl_Ville_id, "", new { @class = "text-danger" })
+                                    @Html.DropDownListFor(model => model.Tbl_Ville_id, new SelectList(Model.listeVilles, "IdVille", "Libelle"), new { @class = "form-control select2", @id = "idIdVilleClient", @style = "width: 100%;", @required = "required" })
+                                    @Html.ValidationMessageFor(model => model.Tbl_Ville_id, "", new { @class = "text-danger ValidationMessage" })
                                 </div>
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.IDContact, "Contact", new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.DropDownListFor(model => model.IDContact, new SelectList(Model.ListeContact, "IDContact", "FullName"), new { @class = "form-control", @id = "idIDContactClientEdit" })
-                                    @Html.ValidationMessageFor(model => model.IDContact, "", new { @class = "text-danger" })
+                                    @Html.DropDownListFor(model => model.IDContact, new SelectList(Model.ListeContact, "IDContact", "FullName"), new { @class = "form-control select2", @id = "idIDContactClient", @style = "width: 100%;", @required = "required" })
+                                    @Html.ValidationMessageFor(model => model.IDContact, "", new { @class = "text-danger ValidationMessage" })
                                 </div>
                             </div>
                             <div class="form-group">
-                                @Html.LabelFor(model => model.idf, htmlAttributes: new { @class = "control-label col-md-2", @id = "ididfClientEdit" })
+                                @Html.LabelFor(model => model.idf, htmlAttributes: new { @class = "control-label col-md-2", @id = "ididfClient" })
                                 <div class="col-md-10">
                                     @Html.EditorFor(model => model.idf, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.idf, "", new { @class = "text-danger" })
@@ -390,58 +250,436 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Cnss, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Cnss, new { htmlAttributes = new { @class = "form-control", @id = "idCnssClientEdit" } })
+                                    @Html.EditorFor(model => model.Cnss, new { htmlAttributes = new { @class = "form-control", @id = "idCnssClient" } })
                                     @Html.ValidationMessageFor(model => model.Cnss, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Ice, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Ice, new { htmlAttributes = new { @class = "form-control", @id = "idIceClientEdit" } })
+                                    @Html.EditorFor(model => model.Ice, new { htmlAttributes = new { @class = "form-control", @id = "idIceClient" } })
                                     @Html.ValidationMessageFor(model => model.Ice, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Gsm, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Gsm, new { htmlAttributes = new { @class = "form-control", @id = "idGsmClientEdit" } })
+                                    @Html.EditorFor(model => model.Gsm, new { htmlAttributes = new { @class = "form-control", @id = "idGsmClient" } })
                                     @Html.ValidationMessageFor(model => model.Gsm, "", new { @class = "text-danger" })
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Teleph, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Teleph, new { htmlAttributes = new { @class = "form-control", @id = "idTelephClientEdit" } })
+                                    @Html.EditorFor(model => model.Teleph, new { htmlAttributes = new { @class = "form-control", @id = "idTelephClient" } })
                                     @Html.ValidationMessageFor(model => model.Teleph, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-                            @*<div class="form-group">
-                                    <div class="col-md-offset-2 col-md-10">
-                                        <input type="button" value="Save" class="btn btn-default" onclick="SaveEditClients()" />
-
-                                    </div>
-                                </div>*@
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    @*onclick="SaveAddClient()*@  @*onclick="SaveAddClient()*@
+                                    <input type="submit" value="Valider" class="btn btn-default " />
+                                    <input type="button" value="Annuler" class="btn btn-default " data-dismiss="modal" />
+                                </div>
+                            </div>
                         </div>
 
                     </div>
-                </div>
-                <!-- Modal footer-->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <input type="button" value="Save" class="btn btn-default" onclick="SaveEditClients()" />
+
                 </div>
             </div>
         </div>
     </div>
-    <!--Fin Modal-->
+    @*}*@
+</form>
+<!--FIN ADD-->
+<!--Debut Edit client-->
+@*@using (Html.BeginForm(new { @id = "editClientForm", name = "form0", role = "form" }))
+    {*@
 
+@*<form id="editClientForm" name="editClientForm" class="form-horizontal" role="form">*@
+<div class="modal fade" id="editClientModal" role="dialog" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <!-- Modal header-->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modifier un client</h4>
+                @*  <input type="hidden" name="UserID" id="UserID" value="@Model.UserID" />*@
+                @* @Html.LabelFor(model => model.id, new { htmlAttributes = new { @class = "form-control", @id = "idIdClientEdit" } })*@
+                @Html.EditorFor(model => model.id, new { htmlAttributes = new { type = "hidden", @id = "idIdClientEdit" } })
+                @Html.HiddenFor(model => model.id)
+            </div>
+
+            <!-- Modal body-->
+            <div class="modal-body">
+                <!-- Modal content-->
+                <div id="displayArea">
+
+                    <!--On doit mettre le form a l interieur du model-->
+                    <div class="form-horizontal" role="form">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Nom, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @class = "form-control", @id = "idNomClientEdit", @name = "NomClientEdit", @required = "required" } })
+                                @Html.ValidationMessageFor(model => model.Nom, null, new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Adresse, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Adresse, new { htmlAttributes = new { @class = "form-control", @id = "idAdresseClientEdit" } })
+                                @Html.ValidationMessageFor(model => model.Adresse, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Mail, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Mail, new { htmlAttributes = new { @class = "form-control", @id = "idMailClientEdit" } })
+                                @Html.ValidationMessageFor(model => model.Mail, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.telephone1, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.telephone1, new { htmlAttributes = new { @class = "form-control", @id = "idtelephone1ClientEdit" } })
+                                @Html.ValidationMessageFor(model => model.telephone1, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.fax, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.fax, new { htmlAttributes = new { @class = "form-control", @id = "idFaxClientEdit" } })
+                                @Html.ValidationMessageFor(model => model.fax, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Tbl_Famille_Clt_Id, "Famille", new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.Tbl_Famille_Clt_Id, new SelectList(Model.listeFamille, "IdFamille", "Libelle"), new { @class = "form-control select2", @id = "idIdFamilleClientEdit" })
+                                @Html.ValidationMessageFor(model => model.Tbl_Famille_Clt_Id, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Tbl_Ville_id, "Ville", new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.Tbl_Ville_id, new SelectList(Model.listeVilles, "IdVille", "Libelle"), new { @class = "form-control select2", @id = "idIdVilleClientEdit" })
+                                @Html.ValidationMessageFor(model => model.Tbl_Ville_id, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.IDContact, "Contact", new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.IDContact, new SelectList(Model.ListeContact, "IDContact", "FullName"), new { @class = "form-control select2", @id = "idIDContactClientEdit" })
+                                @Html.ValidationMessageFor(model => model.IDContact, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.idf, htmlAttributes: new { @class = "control-label col-md-2", @id = "ididfClientEdit" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.idf, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.idf, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Cnss, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Cnss, new { htmlAttributes = new { @class = "form-control", @id = "idCnssClientEdit" } })
+                                @Html.ValidationMessageFor(model => model.Cnss, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Ice, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Ice, new { htmlAttributes = new { @class = "form-control", @id = "idIceClientEdit" } })
+                                @Html.ValidationMessageFor(model => model.Ice, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Gsm, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Gsm, new { htmlAttributes = new { @class = "form-control", @id = "idGsmClientEdit" } })
+                                @Html.ValidationMessageFor(model => model.Gsm, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Teleph, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Teleph, new { htmlAttributes = new { @class = "form-control", @id = "idTelephClientEdit" } })
+                                @Html.ValidationMessageFor(model => model.Teleph, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        @*<div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="button" value="Save" class="btn btn-default" onclick="SaveEditClients()" />
+
+                                </div>
+                            </div>*@
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Modal footer-->
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <input type="button" value="Save" class="btn btn-default" onclick="SaveEditClients()" />
+            </div>
+        </div>
+    </div>
+</div>
+@*</form>*@
+<!--Fin ModalEdit-->
+@*}*@
+
+<div id='detailsClientModal' class='modal fade' tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-dialog modal-dialog-centered" role="form">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Informations</h4>
+                </div>
+                <div class="modal-body">
+                 
+                    <!-- /.INFORMATION -->
+                    <ul class="timeline">
+                        <!-- timeline time label -->
+                        <li class="time-label">
+                            <span class="bg-red">
+                                Informations
+                            </span>
+                        </li>
+                        <!-- /.timeline-label -->
+                        <!-- timeline item -->
+                        <li>
+                            <!-- timeline icon -->
+                            <i class="fa fa-info-circle bg-blue"></i>
+                            <div class="timeline-item">
+                                @*<span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
+                    <h3 class="timeline-header"><a href="#">Support Team</a> ...</h3>*@
+                                <div class="timeline-body">
+                                    <ul class="list-group list-group-unbordered">
+                                        <li class="list-group-item">
+                                            <b>@Html.DisplayNameFor(model => model.Nom)</b> <a class="pull-right">@Html.EditorFor(model => model.Nom, new { htmlAttributes = new {  @id = "idNomClientdetails" } })</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Famille</b> <a class="pull-right">543</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Contact</b> <a class="pull-right">13,287</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Gsm Contact</b> <a class="pull-right">13,287</a>
+                                        </li>
+                                    </ul>
+                                    @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @class = "form-control", @id = "idNomClientdetail", @name = "NomClientEdit", @required = "required" } })
+
+
+
+                                    @Html.DropDownListFor(model => model.Tbl_Famille_Clt_Id, new SelectList(Model.listeFamille, "IdFamille", "Libelle"), new { @class = "form-control select2", @id = "idIdFamilleClientdetail" })
+
+
+                                    @Html.DropDownListFor(model => model.IDContact, new SelectList(Model.ListeContact, "IDContact", "FullName"), new { @class = "form-control select2", @id = "idIDContactClientdetail" })
+
+
+
+                                    @Html.LabelFor(model => model.Gsm, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    @Html.EditorFor(model => model.Gsm, new { htmlAttributes = new { @class = "form-control", @id = "idGsmClientdetail" } })
+
+
+
+
+                                </div>
+                                <div class="timeline-footer">
+                                    @*<a class="btn btn-primary btn-xs">...</a>*@
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Details-->
+<form id = "detailsClientForm" name="detailsClientForm" class="form-horizontal" role="form">
+    <div class="modal fade" id="detailsClientModal1" role="dialog" tabindex="-1" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-dialog modal-dialog-centered" role="form">
+                <div class="modal-header">
+                    <button type = "button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Informations</h4>
+                </div>
+                <div class="modal-body">
+
+
+                    <!-- END INFORMATION -->
+                    <!-- ädresses -->
+                    <ul class="timeline">
+                        <!-- timeline time label -->
+                        <li class="time-label">
+                            <span class="bg-red">
+                                Adresse
+                            </span>
+                        </li>
+                        <!-- /.timeline-label -->
+                        <!-- timeline item -->
+                        <li>
+                            <!-- timeline icon -->
+                            <i class="fa fa-home bg-blue"></i>
+                            <div class="timeline-item">
+@*<span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
+    <h3 class="timeline-header"><a href="#">Support Team</a> ...</h3>*@
+                                <div class="timeline-body">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Adresse, new { htmlAttributes = new { @class = "form-control", @id = "idAdresseClientdetail" } })
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            @Html.DropDownListFor(model => model.Tbl_Ville_id, new SelectList(Model.listeVilles, "IdVille", "Libelle"), new { @class = "form-control select2", @id = "idIdVilleClientdetail" })
+                                        </div>
+                                    </div>
+                                </div>
+@*<div class="timeline-footer">
+        <a class="btn btn-primary btn-xs">...</a>
+    </div>*@
+                            </div>
+                        </li>
+
+                    </ul>
+                    <!-- End Aresses -->
+                    <!-- Mail -->
+                    <ul class="timeline">
+                        <!-- timeline time label -->
+                        <li class="time-label">
+                            <span class="bg-red">
+                                Contact
+                            </span>
+                        </li>
+                        <!-- /.timeline-label -->
+                        <!-- timeline item -->
+                        <li>
+                            <!-- timeline icon -->
+                            <i class="fa fa-fax bg-blue"></i>
+                            <div class="timeline-item">
+@*<span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
+    <h3 class="timeline-header"><a href="#">Support Team</a> ...</h3>*@
+                                <div class="timeline-body">
+
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.telephone1, new { htmlAttributes = new { @class = "form-control", @id = "idtelephone1Clientdetail" } })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.fax, new { htmlAttributes = new { @class = "form-control", @id = "idFaxClientdetail" } })
+                                        </div>
+                                    </div>
+
+@*<div class="timeline-footer">
+        <a class="btn btn-primary btn-xs">...</a>
+    </div>*@
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                    <!-- End MAIL -->
+                    <!-- Mail -->
+                    <ul class="timeline">
+                        <!-- timeline time label -->
+                        <li class="time-label">
+                            <span class="bg-red">
+                                Mail
+                            </span>
+                        </li>
+                        <!-- /.timeline-label -->
+                        <!-- timeline item -->
+                        <li>
+                            <!-- timeline icon -->
+                            <i class="fa fa-at bg-blue"></i>
+                            <div class="timeline-item">
+@*<span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
+    <h3 class="timeline-header"><a href="#">Support Team</a> ...</h3>*@
+                                <div class="timeline-body">
+
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Mail, new { htmlAttributes = new { @class = "form-control", @id = "idMailClientdetail" } })
+                                        </div>
+                                    </div>
+
+@*<div class="timeline-footer">
+        <a class="btn btn-primary btn-xs">...</a>
+    </div>*@
+</div>
+                            </div>
+                        </li>
+
+                    </ul>
+                    <!-- End MAIL -->
+                    <!-- COMPTABLE -->
+                    <ul class="timeline">
+                        <!-- timeline time label -->
+                        <li class="time-label">
+                            <span class="bg-red">
+                                Comptable
+                            </span>
+                        </li>
+                        <!-- /.timeline-label -->
+                        <!-- timeline item -->
+                        <li>
+                            <!-- timeline icon -->
+                            <i class="fa fa-balance-scale bg-blue"></i>
+                            <div class="timeline-item">
+
+                                <div class="timeline-body">
+
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.idf, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Cnss, new { htmlAttributes = new { @class = "form-control", @id = "idCnssClientdetail" } })
+                                            @Html.ValidationMessageFor(model => model.Cnss, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Ice, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Ice, new { htmlAttributes = new { @class = "form-control", @id = "idIceClientdetail" } })
+                                            @Html.ValidationMessageFor(model => model.Ice, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <!-- End MAIL -->
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+    <!--Fin Details-->
     @section Scripts
 {
         <script src="~/Content/LoginTlE/plugins/jquery-validation/jquery.validate.min.js"></script>
-
-
         <script src="~/Scripts/SweetAlert/sweetalert.min.js"></script>
-
         <script type="text/javascript">
 var table = null;
 var err = false;
@@ -479,7 +717,7 @@ function ReloadClientTable(data) {
                     //"display": "inline-block",
                     //"float": "none",
                     "render": function (data, type, full, meta) {
-                        return "<p 'text-align':'center'><a onclick='EditClients(" + data + ")'  style='width:30px;margin:1px' class='btn btn-success btn-sm' ><i class='fa fa-edit'></i></a><a onclick='Delete(" + data + ")' style= 'width:30px;margin:1px' class='btn btn-danger btn-sm'><i class='fa fa-remove'></i></a><a  style= 'width:30px;margin:1px' class='btn btn-info  btn-sm'><i class='fa fa-info'></i></a></p>";
+                        return "<p 'text-align':'center'><a onclick='EditClients(" + data + ")'  style='width:30px;margin:1px' class='btn btn-success btn-sm' ><i class='fa fa-edit'></i></a><a onclick='Delete(" + data + ")' style= 'width:30px;margin:1px' class='btn btn-danger btn-sm'><i class='fa fa-remove'></i></a><a  onclick='Details(" + data + ")' style= 'width:30px;margin:1px' class='btn btn-info  btn-sm'><i class='fa fa-info'></i></a></p>";
                     }
                 }
                 //'" + row.id + "'
@@ -509,98 +747,98 @@ function ReloadClientTable(data) {
         });
 }
     $(document).ready(function () {
-        $('.select2').select2();
-    $("#addClientForm").validate({
-        errorClass: 'help-block animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
-        errorElement: 'div',
-        errorPlacement: function (error, e) {
-            e.parents('.form-group > div').append(error);
-        },
-        highlight: function (e) {
+                $('.select2').select2();
+                $("#addClientForm").validate({
+                    errorClass: 'help-block animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
+                    errorElement: 'div',
+                    errorPlacement: function (error, e) {
+                        e.parents('.form-group > div').append(error);
+                    },
+                    highlight: function (e) {
 
-            $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
-            $(e).closest('.help-block').remove();
-        },
-        success: function (e) {
-            e.closest('.form-group').removeClass('has-success has-error');
-            e.closest('.help-block').remove();
-        },
-        rules: {
-            Nom: 'required',
-            Mail: {
-                required: true,
-                email: true,
+                        $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                        $(e).closest('.help-block').remove();
+                    },
+                    success: function (e) {
+                        e.closest('.form-group').removeClass('has-success has-error');
+                        e.closest('.help-block').remove();
+                    },
+                    rules: {
+                        Nom: 'required',
+                        Mail: {
+                            required: true,
+                            email: true,
 
-            },
-            //highlight: false,
-        },
-        messages: {
-            Nom: 'This field is required',
-            Mail: 'Enter a valid email'
-        },
-        submitHandler: function (form) {
-            //form.submit();si on active le submit cela va recharger la page index
-            SaveAddClient();
-        }
-    });
+                        },
+                        //highlight: false,
+                    },
+                    messages: {
+                        Nom: 'This field is required',
+                        Mail: 'Enter a valid email'
+                    },
+                    submitHandler: function (form) {
+                        //form.submit();si on active le submit cela va recharger la page index
+                        SaveAddClient();
+                    }
+                });
 
 //pour annuler le load de la page index une fois je clique sur submit
 //$('form').submit(function (e) {
 //    e.preventDefault();
 //});
 
-$('form').submit(function (e) {
-        e.preventDefault();
-            //Exemple des testes niveau javascript
-            err = false;
-            //var first_name = $('#idNomClient').val();
-            ////var last_name = $('#last_name').val();
-            //var email = $('#idMailClient').val();
-            //var ville = $('#idVille').val();
-            //var famille = $('#idFamille').val();
-            //var contact = $('#iDContact').val();
+    $('form').submit(function (e) {
+                    e.preventDefault();
+                        //Exemple des testes niveau javascript
+                        err = false;
+                        //var first_name = $('#idNomClient').val();
+                        ////var last_name = $('#last_name').val();
+                        //var email = $('#idMailClient').val();
+                        //var ville = $('#idVille').val();
+                        //var famille = $('#idFamille').val();
+                        //var contact = $('#iDContact').val();
+                alert("form");
+                        //$(".error").remove();
+                        //$(".ValidationMessage").hide();
+                        //alert("e2 ");
+                        //if (first_name.length < 1) {
+                        //    $('#idNomClient').after('<span class="error text-danger">This field is required</span>');
+                        //    err = true;
+                        //}
 
-            //$(".error").remove();
-            //$(".ValidationMessage").hide();
-            //alert("e2 ");
-            //if (first_name.length < 1) {
-            //    $('#idNomClient').after('<span class="error text-danger">This field is required</span>');
-            //    err = true;
-            //}
 
 
+                        //if (email.length < 1) {
+                        //    $('#idMailClient').after('<span class="error text-danger">This field is required</span>');
+                        //    err = true;
+                        //} else {
+                        //    var regEx = /^([\w-\.]+)@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 
-            //if (email.length < 1) {
-            //    $('#idMailClient').after('<span class="error text-danger">This field is required</span>');
-            //    err = true;
-            //} else {
-            //    var regEx = /^([\w-\.]+)@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+                        //      var validEmail = regEx.test(email);
+                        //      if (!validEmail) {
+                        //          $('#idMailClient').after('<span class="error text-danger">Enter a valid email</span>');
+                        //          err = true;
+                        //      }
+                        //}
 
-            //      var validEmail = regEx.test(email);
-            //      if (!validEmail) {
-            //          $('#idMailClient').after('<span class="error text-danger">Enter a valid email</span>');
-            //          err = true;
-            //      }
-            //}
+                        //alert("e1 " + err);
+                        //if (err == false) { SaveAddClient(); }
 
-            //alert("e1 " + err);
-            //if (err == false) { SaveAddClient(); }
+            //secend Exemple
+                    //$("#addClientForm").validate();
+                    //var validator = #("#addClientForm").validate();
+                    //validator.form();
 
-//secend Exemple
-        //$("#addClientForm").validate();
-        //var validator = #("#addClientForm").validate();
-        //validator.form();
-
-});
-//-----------------------------------------------------------------------------
-    //RegisterAjaxEvents();
-    //setInterval(function () {
-    //    //alert("Hello")
-    //    Window.location = "./Login";
-    //    ;
-    //}, 3000);
-        //alert("ddddd");
-    //debugger
+            });
+            //-----------------------------------------------------------------------------
+                //RegisterAjaxEvents();
+                //setInterval(function () {
+                //    //alert("Hello")
+                //    Window.location = "./Login";
+                //    ;
+                //}, 3000);
+                    //alert("ddddd");
+                //debugger
     $.ajax({
         type: "Get",
         dataType: 'json',
@@ -624,8 +862,6 @@ function valuesSharch() {
         return ch;
 }
 function ReportChercher(repotType) {
-
-//debugger
     searchValue = $("#Chercher").val();
     //std.repotType = $("#idPdf").val();
             $.ajax({
@@ -651,100 +887,100 @@ function ReportChercher(repotType) {
 
 
 function SaveAddClient() {
-//alert("save save");
-var nom = $("#idNomClient").val();
-var Adresse = $("#idAdresseClient").val();
-var IdFamille = $("#idIdFamilleClient").val();
-var Tbl_Ville_id = $("#idIdVilleClient").val();
-var IDContact = $("#idIDContactClient").val();
-var Mail = $("#idMailClient").val();
-var telephone1 = $("#idtelephone1Client").val();
-var Gsm = $("#idGsmClient").val();
-var fax = $("#idFaxClient").val();
-var Cnss = $("#idCnssClient").val();
-var idf = $("#ididfClient").val();
-var Ice = $("#idIceClient").val();
-var Teleph = $("#idTelephClient").val();
-debugger
-let dataObject = JSON.stringify({
-    'Nom': nom,
-    'Adresse': Adresse,
-    'Tbl_Famille_Clt_Id': IdFamille,
-    'Tbl_Ville_id': Tbl_Ville_id,
-    'IDContact': IDContact,
-    'Mail': Mail,
-    'telephone1': telephone1,
-    'Gsm': Gsm,
-    'fax': fax,
-    'Cnss': Cnss,
-    'idf': idf,
-    'Ice': Ice,
-    'Teleph': Teleph
-});
-//var mydata = $("#addClientForm").serialize();
-//Send the JSON array to Controller using AJAX.
-//validation coté client
-    //$("#addClientForm").removeData("validator");
-    //$("#addClientForm").removeData("unobtrusiveValidation");
-    //$.validator.unobtrusive.parse("#addClientForm");
-    //debugger
-    //alert($("#addClientForm").valid());
-//$('input[name=teamName]')
-
-//if (err == false) {
-if ($("#addClientForm").valid()) {
-    //alert("ddddd");
-    $.ajax({
-        type: "Post",
-        dataType: 'json',
-            //url: './SaveClient',
-        url: "@Url.Action("SaveClient", "Clients")",
-        data: dataObject,   /*mydata,*/
-        contentType: 'application/json; charset=utf-8',
-        success: function (res) {
-        if (res.Success) {
-            $("#idNomClient").val("");
-            $("#idAdresseClient").val("");
-            $("#idMailClient").val("");
-            $("#idtelephone1Client").val("");
-            $("#idGsmClient").val("");
-            $("#idFaxClient").val("");
-            $("#idCnssClient").val("");
-            $("#ididfClient").val("");
-            $("#idIceClient").val("");
-            $("#idTelephClient").val("");
-            //$("#addClientModal").hide();
-            $('#addClientModal').modal('hide');
-            //console.log(res);
-            swal("Enregistrement effectué avec succès !", "", "success");
-            ReloadClientTable(res.clients);
-        } else {
-            //REPENSE DU ESRVEUR
-            console.log(res);
-            swal("Échec du Sauvegarde ,Veuillez verifier vos données,Merci !", "", "error");
-        }
-        //if (clients != null && clients != false) {
-        //alert(res.clients);
+    //alert("save save");
+    var nom = $("#idNomClient").val();
+    var Adresse = $("#idAdresseClient").val();
+    var IdFamille = $("#idIdFamilleClient").val();
+    var Tbl_Ville_id = $("#idIdVilleClient").val();
+    var IDContact = $("#idIDContactClient").val();
+    var Mail = $("#idMailClient").val();
+    var telephone1 = $("#idtelephone1Client").val();
+    var Gsm = $("#idGsmClient").val();
+    var fax = $("#idFaxClient").val();
+    var Cnss = $("#idCnssClient").val();
+    var idf = $("#ididfClient").val();
+    var Ice = $("#idIceClient").val();
+    var Teleph = $("#idTelephClient").val();
+    debugger
+    let dataObject = JSON.stringify({
+        'Nom': nom,
+        'Adresse': Adresse,
+        'Tbl_Famille_Clt_Id': IdFamille,
+        'Tbl_Ville_id': Tbl_Ville_id,
+        'IDContact': IDContact,
+        'Mail': Mail,
+        'telephone1': telephone1,
+        'Gsm': Gsm,
+        'fax': fax,
+        'Cnss': Cnss,
+        'idf': idf,
+        'Ice': Ice,
+        'Teleph': Teleph
+    });
+    //var mydata = $("#addClientForm").serialize();
+    //Send the JSON array to Controller using AJAX.
+    //validation coté client
+        //$("#addClientForm").removeData("validator");
+        //$("#addClientForm").removeData("unobtrusiveValidation");
+        //$.validator.unobtrusive.parse("#addClientForm");
         //debugger
-        // window.location.href = urls.GetFonds;
-        //on doit vider les inputs
-        },
-        error: function (res) {
-            //alert(res);
-            console.log(res);
-            swal("Échec du Sauvegarde_ajax !", "", "error");
+        //alert($("#addClientForm").valid());
+    //$('input[name=teamName]')
+
+    //if (err == false) {
+    if ($("#addClientForm").valid()) {
+        //alert("ddddd");
+        $.ajax({
+            type: "Post",
+            dataType: 'json',
+                //url: './SaveClient',
+            url: "@Url.Action("SaveClient", "Clients")",
+            data: dataObject,   /*mydata,*/
+            contentType: 'application/json; charset=utf-8',
+            success: function (res) {
+            if (res.Success) {
+                $("#idNomClient").val("");
+                $("#idAdresseClient").val("");
+                $("#idMailClient").val("");
+                $("#idtelephone1Client").val("");
+                $("#idGsmClient").val("");
+                $("#idFaxClient").val("");
+                $("#idCnssClient").val("");
+                $("#ididfClient").val("");
+                $("#idIceClient").val("");
+                $("#idTelephClient").val("");
+                //$("#addClientModal").hide();
+                $('#addClientModal').modal('hide');
+                //console.log(res);
+                swal("Enregistrement effectué avec succès !", "", "success");
+                ReloadClientTable(res.clients);
+            } else {
+                //REPENSE DU ESRVEUR
+                console.log(res);
+                swal("Échec du Sauvegarde ,Veuillez verifier vos données,Merci !", "", "error");
+            }
+            //if (clients != null && clients != false) {
+            //alert(res.clients);
+            //debugger
+            // window.location.href = urls.GetFonds;
+            //on doit vider les inputs
+            },
+            error: function (res) {
+                //alert(res);
+                console.log(res);
+                swal("Échec du Sauvegarde_ajax !", "", "error");
+            }
+
+            });
+
+        } else {
+            //VALIDATION COTE CLIENT
+            swal(" Veuillez verifier vos données, Merci!", "", "error");
         }
-
-        });
-
-    } else {
-        //VALIDATION COTE CLIENT
-        swal(" Veuillez verifier vos données, Merci!", "", "error");
-    }
 
 }
 function Annuler() {
-$("#addClientModal").hide();
+    $("#addClientModal").hide();
 }
 //function Close() {
 //    //alert("close");
@@ -773,7 +1009,7 @@ $("#addClientModal").hide();
 //SaveClient
 function ChercherClient() {
 var ch = $("#Chercher").val();
-alert("dddd"+ ch);
+//alert("dddd"+ ch);
     //if ((ch != null) && (ch != "Chercher") && (ch != "")) {
     $.ajax({
         type: "Get",
@@ -806,55 +1042,49 @@ alert("dddd"+ ch);
 
 }
 
-        function Delete(id) {
-            //confirm(
+    function Delete(id) {
+        //confirm(
 
-            swal({
-                title: 'Confirmation',
-                text: 'Voulez-vous supprimer ce cient?',
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Oui',
-                cancelButtonText: 'Annulé',
-            },
-                function (isConfirm) {
-                    if (isConfirm) {
-                              $.ajax({
-                                        type: "Post",
-                                        dataType: 'json',
-                                        url: "@Url.Action("Delete", "Clients")/" + id,
-                                        success: function (data) {
-                                            if (data.IsDeleted) {
-                                                //debugger
-                                                //  table.ajax.reload();
-                                                ReloadClientTable(data.clients);
-                                                //ReloadClientTable();
-                                                swal("Félicitation", "Suppression effectuée avec succès !", "", "success");
-                                            }
-                                        },
-                                        error: function (data) {
-                                            swal("Atention","Impossible d'effectué la supression !", "", "error");
+        swal({
+            title: 'Confirmation',
+            text: 'Voulez-vous supprimer ce cient?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Oui',
+            cancelButtonText: 'Annulé',
+        },
+            function (isConfirm) {
+                if (isConfirm) {
+                            $.ajax({
+                                    type: "Post",
+                                    dataType: 'json',
+                                    url: "@Url.Action("Delete", "Clients")/" + id,
+                                    success: function (data) {
+                                        if (data.IsDeleted) {
+                                            //debugger
+                                            //  table.ajax.reload();
+                                            ReloadClientTable(data.clients);
+                                            //ReloadClientTable();
+                                            swal("Félicitation", "Suppression effectuée avec succès !", "", "success");
                                         }
-                                    });
-                        //swal("Deleted!", "Your imaginary file has been deleted.", "success");
-                    } else {
-                        //alert("annulee");
-                        //swal("Cancelled", "Opération annulée :)", "error");
-                    }
-
-                 });
-
-
-
-
-
+                                    },
+                                    error: function (data) {
+                                        swal("Atention","Impossible d'effectué la supression !", "", "error");
+                                    }
+                                });
+                    //swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                } else {
+                    //alert("annulee");
+                    //swal("Cancelled", "Opération annulée :)", "error");
                 }
 
-
-
+                });
+            }
 
 function EditClients(id) {
 //var url = $(this).data("url");
+    //alert("ddd");
+
     $.ajax({
     type: "Get",
     dataType:'json',
@@ -879,54 +1109,65 @@ function EditClients(id) {
                 //$el.data('validator', null);
                 //$.validator.unobtrusive.parse($el);
                 //jQuery.noConflict();
-                $('#editClientModal').modal('show')
+                //$("#editClientModal").modal({
+                //    autoOpen: true,
+                //    height: 250,
+                //    width: 300,
+                //    title: 'My Table',
+                //    modal: true,
 
-                //$('#editClientModal').modal({
-
-                //    draggable: true,
-                //    autoOpen: false,
-                //    resizable: true,
-                //    model: true,
-                //height: 350,
-                //width: 200,
-
-                //title: 'Modifier le  client SDSDFDF',
-                //close: function () {
-                //    //alert("close");
-                //    $("#editClientModal").hide();
-                // }
                 //});
+                //'$('#editClientModal').open()
+                //$('#editClientModal').modal({
+                //    //draggable: true,
+                //    //autoOpen: true,
+                //    //resizable: true,
+                //    //model: true,
+                //    //height: 750,
+                //    //width: 900,
+                //    //title: 'Modifier le  client BBBBB',
+                //    //open:true
+                //    //close: function () {
+                //    //    alert("close");
+                //    //    $("#editClientModal").hide();
+                //    //}
+                //});
+                $('#editClientModal').modal('show')
+        },
+
+        error: function () {
+            alert("Dynamic content load failed.");
         }
     });
 }
 function SaveEditClients() {
-var id =  $("#idIdClientEdit").val();
-var nom = $("#idNomClientEdit").val();
-var Adresse = $("#idAdresseClientEdit").val();
-var IdFamille = $("#idIdFamilleClientEdit").val();
-var Tbl_Ville_id = $("#idIdVilleClientEdit").val();
-var IDContact = $("#idIDContactClientEdit").val();
-var Mail = $("#idMailClientEdit").val();
-var telephone1 = $("#idtelephone1ClientEdit").val();
-var Gsm = $("#idGsmClientEdit").val();
-var idf = $("#ididfClientEdit").val();
-var cnss = $("#idCnssClientEdit").val();
-var ice = $("#idIceClientEdit").val();
+    var id =  $("#idIdClientEdit").val();
+    var nom = $("#idNomClientEdit").val();
+    var Adresse = $("#idAdresseClientEdit").val();
+    var IdFamille = $("#idIdFamilleClientEdit").val();
+    var Tbl_Ville_id = $("#idIdVilleClientEdit").val();
+    var IDContact = $("#idIDContactClientEdit").val();
+    var Mail = $("#idMailClientEdit").val();
+    var telephone1 = $("#idtelephone1ClientEdit").val();
+    var Gsm = $("#idGsmClientEdit").val();
+    var idf = $("#ididfClientEdit").val();
+    var cnss = $("#idCnssClientEdit").val();
+    var ice = $("#idIceClientEdit").val();
 
-let dataObject = JSON.stringify({
-    'Id':id,
-    'Nom': nom,
-    'Adresse': Adresse,
-    'Tbl_Famille_Clt_Id': IdFamille,
-    'Tbl_Ville_id': Tbl_Ville_id,
-    'IDContact': IDContact,
-    'Mail': Mail,
-    'telephone1': telephone1,
-    'Gsm': Gsm,
-    'cnss': cnss,
-    'ice': ice,
+    let dataObject = JSON.stringify({
+        'Id':id,
+        'Nom': nom,
+        'Adresse': Adresse,
+        'Tbl_Famille_Clt_Id': IdFamille,
+        'Tbl_Ville_id': Tbl_Ville_id,
+        'IDContact': IDContact,
+        'Mail': Mail,
+        'telephone1': telephone1,
+        'Gsm': Gsm,
+        'cnss': cnss,
+        'ice': ice,
 
-});
+    });
 //if ($("#editClientForm").valid()) {
     //debugger
     //var url = $(this).data("url");
@@ -938,11 +1179,28 @@ let dataObject = JSON.stringify({
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 if (data.IsUpdate) {
+                    $("#idNomClient").val("");
+                    $("#idAdresseClient").val("");
+                    $("#idMailClient").val("");
+                    $("#idtelephone1Client").val("");
+                    $("#idGsmClient").val("");
+                    $("#idFaxClient").val("");
+                    $("#idCnssClient").val("");
+                    $("#ididfClient").val("");
+                    $("#idIceClient").val("");
+                    $("#idTelephClient").val("");
+                    //$("#addClientModal").hide();
+
                     var list = data.clients;
-                    $("#editClientModal").hide();
-                    ReloadClientTable(list);
-                    //ReloadClientTable();
+                    $('#editClientModal').modal('hide');
+                    //console.log(res);
                     swal("Modification effectuée avec succès !", "", "success");
+                    ReloadClientTable(list);
+
+
+                    console.log("data");
+                    //ReloadClientTable();
+
                 }
                 if (!data.IsUpdate) {
                     swal("Échec du Sauvegarde !", "", "error");
@@ -951,7 +1209,7 @@ let dataObject = JSON.stringify({
             },
 
             error: function (data) {
-                alert("response");
+                //alert("response");
                 console.log(data);
                 swal("Échec du Sauvegarde !", "", "error");
             }
@@ -959,61 +1217,110 @@ let dataObject = JSON.stringify({
             });
 }
 //}
+//add client
+        function AddClient() {
+        //VIDER LES ERREURS
+        //$(".error").remove();
+        //$(".ValidationMessage").hide();
+        //alert("Create0q");
+        //pour ne pas afficher les
+        $('#idIdClient').val("");
+        $('#idNomClient').val("");
+        $('#idAdresseClient').val("");
+        $('#idMailClient').val("");
+        $('#idtelephone1Client').val("");
+        $('#idfaxClient').val("");
+        $('#idCnssClient').val("");
+        $('#ididfClient').val("");
+        $('#idFaxClient').val("");
+        $('#idTelephClient').val("");
+        $('#idIceClient').val("");
+        $('#idGsmClient').val("");
 
-function AddClient() {
-//VIDER LES ERREURS
-//$(".error").remove();
-//$(".ValidationMessage").hide();
-alert("Create0q");
-//pour ne pas afficher les
-$('#idIdClient').val("");
-$('#idNomClient').val("");
-$('#idAdresseClient').val("");
-$('#idMailClient').val("");
-$('#idtelephone1Client').val("");
-$('#idfaxClient').val("");
-$('#idCnssClient').val("");
-$('#ididfClient').val("");
-$('#idFaxClient').val("");
-$('#idTelephClient').val("");
-$('#idIceClient').val("");
-$('#idGsmClient').val("");
+        // Init JQuery Validation for view
+        //$("addClientForm").removeData("validator");
+        //$("addClientForm").removeData("unobtrusiveValidation");
+            //$.validator.unobtrusive.parse("addClientModal");
+        $.ajax({
+            //cache: false,
+            //modal: true,
+            //autoOpen: true,
+            type: "GET",
+            dataType: 'json',
+            url: '@Url.Action("AddCreate", "Clients")',
+            //url: '/Clients/AddCreate',
+            //data: dataObject,
+            contentType: 'application/json; charset=utf-8',
+            success: function (res) {
 
-// Init JQuery Validation for view
-//$("addClientForm").removeData("validator");
-//$("addClientForm").removeData("unobtrusiveValidation");
-    //$.validator.unobtrusive.parse("addClientModal");
-$.ajax({
-    //cache: false,
-    //modal: true,
-    //autoOpen: true,
-    type: "GET",
-    dataType: 'json',
-    url: '@Url.Action("AddCreate", "Clients")',
-    //url: '/Clients/AddCreate',
-    //data: dataObject,
-    contentType: 'application/json; charset=utf-8',
-    success: function (res) {
-
-        if (res != null && res != false) {
-            $("#addClientModal").modal({
-                //autoOpen: true,
-                height: 550,
-                width: 700,
-                resizable: false,
-                title: 'Fiche client',
-                close: function () {
-                    alert("closeAA");
-                    $("#addClientModal").hide();
-                    //Popup.dialog('destory').remove();
+                if (res != null && res != false) {
+                    $("#addClientModal").modal({
+                        autoOpen: true,
+                        height: 250,
+                        width: 300,
+                        resizable: false,
+                        title: 'Fiche clientx<wxw<xx',
+                        close: function () {
+                            alert("closeAA");
+                            $("#addClientModal").hide();
+                            //Popup.dialog('destory').remove();
+                        }
+                    });
+                    $("#addClientModal").open();
                 }
-            });
-            $("#addClientModal").open();
+            }
+        });
+        //$("#addClientModal").modal();
         }
-    }
-});
-//$("#addClientModal").modal();
-}
+
+       function Details(id) {
+           //alert(id);
+           var data = {
+               Id: id,
+               CompanyId: $('#Id').val()
+           };
+        $.ajax({
+
+
+            type: "GET",
+            dataType: 'json',
+            url: "@Url.Action("Details", "Clients")/" + id,
+            //url: '/Clients/AddCreate',
+            //data: data,
+            contentType: 'application/json; charset=utf-8',
+            success: function (res) {
+            //debugger
+                if (res != null && res != false) {
+                    var model = res.model;
+                    $('#idIdClientdetails').val(model.id);
+                    $('#idNomClientdetails').val(model.Nom);
+                    $('#idAdresseClientdetails').val(model.Adresse);
+                    $('#idMailClientdetails').val(model.Mail);
+                    $('#idtelephone1Clientdetails').val(model.telephone1);
+                    $('#idfaxClientdetailst').val(model.fax);
+                    $('#idCnssClientdetails').val(model.Cnss);
+                    $('#ididfClientdetails').val(model.idf);
+                    $('#idIceClientdetails').val(model.Ice);
+                    $('#idGsmClientdetails').val(model.Gsm);
+                    $("#detailsClientModal").modal({
+                        autoOpen: true,
+                        height: 250,
+                        width: 300,
+                        resizable: false,
+                        title: 'Fiche clientx<wxw<xx',
+                        close: function () {
+                            alert("closeAA");
+                            $("#detailsClientModal").hide();
+                            //Popup.dialog('destory').remove();
+                        }
+                    });
+                    $("#detailsClientModal").open();
+                    //$("#detailsClientModal").modal("show");
+                }
+            }
+        });
+        //$("#addClientModal").modal();
+        }
         </script>
 
     }

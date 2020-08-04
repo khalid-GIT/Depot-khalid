@@ -20,10 +20,10 @@ namespace adminlte
                 .Include(ltecomponents + "jquery/dist/jquery.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/lib")
-                .Include(ltecomponents + "jquery-ui/jquery-ui.min.js")
+                .Include(ltecontenent + "jquery-ui/jquery-ui.min.js")
                 .Include(ltecomponents + "bootstrap/dist/js/bootstrap.min.js")
                 .Include(ltecomponents + "bootstrap/dist/js/bootstrap.min.js")
-                  .Include(ltecontenent + "jquery-validation/jquery.validate.min.js")
+                  .Include(ltecontenent + "plugins/jquery-ui/jquery-ui.min.js")
 
                 .Include(ltecomponents + "raphael/raphael.min.js")
                 .Include(ltecomponents + "morris.js/morris.min.js")
@@ -78,6 +78,8 @@ namespace adminlte
                 .Include(ltecomponents + "jvectormap/jquery-jvectormap.css")
                 .Include(ltecomponents + "bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css")
                 .Include(ltecomponents + "bootstrap-daterangepicker/daterangepicker.css")
+                .Include(ltecontenent + "plugins/jquery-ui/jquery-ui.min.css")
+
                 .Include(lteplugins + "bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css")
                 .Include(lteplugins + "bootstrap-slider/slider.css")
                 .Include(ltecomponents + "select2/dist/css/select2.min.css")
