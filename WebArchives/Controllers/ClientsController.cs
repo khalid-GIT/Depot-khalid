@@ -81,6 +81,10 @@ namespace WebArchives.Controllers
                 Ice = dto.Ice,
                 Gsm = dto.Gsm,
                 Teleph = dto.Teleph,
+                FamilleName = dto.FamilleName,
+                VilleName = dto.VilleName,
+                ContactName = dto.ContactName,
+                ContactGsm = dto.ContactGsm
             };
 
             //return View(model);

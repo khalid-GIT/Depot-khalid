@@ -40,7 +40,11 @@ namespace BLL
                 IDContact = x.IDContact,
 
                 //  VilleName = x.Tbl_Ville.libelle,
-                FamilleName = x.Tbl_Famille_Clt.Libelle
+                FamilleName = x.Tbl_Famille_Clt.Libelle,
+                VilleName = x.Tbl_Ville.libelle,
+                //    FamilleName = x.Tbl_Famille_Clt.Libelle,
+                    ContactName = x.Tbl_Contact_Clt.Nom + ", " + x.Tbl_Contact_Clt.Prenom,
+                 ContactGsm = x.Tbl_Contact_Clt.Gsm
             };
 
             //DtoClients = Mapper.Map<DtoListeClients>(x);

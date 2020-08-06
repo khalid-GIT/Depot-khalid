@@ -25,7 +25,7 @@ namespace WebArchives.Models.Clients
         //[Remote("IsEmailExist", "Clients", ErrorMessage = "Email Already Exist. Please choose another email.")]
         [Display(Name = "Adresse Mail")]
         public string Mail { get; set; }
-        [Display(Name = "Télèphone")]
+        [Display(Name = "Téléphone")]
         public string telephone1 { get; set; }
         [Display(Name = "Fax")]
         public string fax { get; set; }
@@ -39,7 +39,7 @@ namespace WebArchives.Models.Clients
         public string Ice { get; set; }
         [Display(Name = "GSM")]
         public string Gsm { get; set; }
-        [Display(Name = "Télèphone 2")]
+        [Display(Name = "Téléphone 2")]
         public string Teleph { get; set; }
         
         public List<DtoListeClients> listeclients { get; set; }
@@ -57,7 +57,8 @@ namespace WebArchives.Models.Clients
         public string VilleName { get; set; }
         public string FamilleName { get; set; }
         public string ContactName { get; set; }
-
+        public string ContactGsm { get; set; }
+        
         //[Compare("NewUserName", ErrorMessage = "The new password and confirmation password do not match.")]
         //public string ConfirmUserName { get; set; }
 
