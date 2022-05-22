@@ -60,7 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbContext\ModelData.cs" />
-    <Compile Include="Entity\Class1.cs" />
+    <Compile Include="Entity\pop.cs" />
     <Compile Include="Entity\Tbl_Contact_Clt.cs" />
     <Compile Include="Entity\Tbl_Famille_Clt.cs" />
     <Compile Include="Entity\Tbl_Region.cs" />

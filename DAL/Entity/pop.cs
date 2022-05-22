@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Entity
 {
-    internal class Class1
+    internal class pop
     {
     }
 }
